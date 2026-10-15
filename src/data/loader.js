@@ -51,6 +51,9 @@ export function parseInput(text, options = {}) {
   ensure(names.length > 0, 'EMPTY_SCHEMA');
   for (const [i, record] of records.entries()) for (const name of names) {
     const v = record[name]; ensure(v === null || v === undefined || ['number', 'boolean', 'string'].includes(typeof v), 'NESTED_VALUE', { row: i + 1, field: name });
+    // JSON.parse materializes IEEE-754 values before schema inference. Refuse
+    // numbers that could silently round identifiers or overflow on import.
+    if(options.format==='json'&&typeof v==='number')ensure(Number.isFinite(v)&&(!Number.isInteger(v)||Number.isSafeInteger(v)),'JSON_NUMBER',{row:i+1,field:name});
   }
   const tokens = new Set(options.nullTokens ?? []);
   records = records.map(r => Object.fromEntries(names.map(n => {

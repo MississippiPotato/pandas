@@ -5,6 +5,10 @@ import { convert, inferType } from '../../src/data/schema.js';
 import { rows, createTable, visibleIds } from '../../src/core/dataset.js';
 import { exportCSV } from '../../src/core/export.js';
 const code = expected => error => error.code === expected;
+test('JSON rejects numeric identity loss and overflow before coercing fields to text',()=>{
+  for(const token of ['9007199254740993','1e400'])assert.throws(()=>prepareImport(`[{"ID":${token}}]`,{format:'json'}),error=>error.code==='JSON_NUMBER'&&error.details.row===1&&error.details.field==='ID');
+  assert.equal(prepareImport('[{"ID":"9007199254740993"}]',{format:'json'}).records[0].ID,'9007199254740993');
+});
 test('strict CSV preserves BOM, escaped quotes, embedded newline and leading-zero ID', async () => {
   const { table } = await importText('\uFEFFid,Message,Amount,Flag\r\n001,"a,b\n""c""",0,false\r\n002,,10,true\r\n');
   assert.deepEqual(rows(table), [{ id: '001', Message: 'a,b\n"c"', Amount: 0, Flag: false }, { id: '002', Message: null, Amount: 10, Flag: true }]);
