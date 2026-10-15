@@ -1,3 +1,4 @@
+import {chartMessages} from '../i18n/charts.js';
 import * as d3 from 'd3';
 
 // These previews use full-table counts. Display limits never change calculations.
@@ -8,9 +9,9 @@ function canvas(host, height, title) {
   return svg;
 }
 export function missingFeedback(host, fields, {locale='zh-CN',onField}={}) {
-  const zh=locale==='zh-CN', shown=fields.slice(0,40), H=60+shown.length*36;
-  const svg=canvas(host,H,zh?'各字段处理前后缺失数':'Missing values by field before and after');
-  svg.append('text').attr('x',205).attr('y',18).text(zh?'处理前':'Before');svg.append('text').attr('x',455).attr('y',18).text(zh?'处理后':'After');
+  const zh=locale==='zh-CN',ct=key=>chartMessages[key][zh?0:1], shown=fields.slice(0,40), H=60+shown.length*36;
+  const svg=canvas(host,H,ct('chart020'));
+  svg.append('text').attr('x',205).attr('y',18).text(ct('chart021'));svg.append('text').attr('x',455).attr('y',18).text(ct('chart022'));
   const max=d3.max(fields,d=>Math.max(d.before,d.after??0))||1, scale=d3.scaleLinear().domain([0,max]).range([0,180]);
   const rows=svg.selectAll('g.field-missing').data(shown).join('g').attr('class','field-missing').attr('transform',(_,i)=>`translate(0,${32+i*36})`);
   rows.append('rect').attr('width',800).attr('height',34).attr('fill',(_,i)=>i%2?'#f5f8f5':'white');
@@ -24,15 +25,15 @@ export function missingFeedback(host, fields, {locale='zh-CN',onField}={}) {
   svg.append('text').attr('x',5).attr('y',H-5).text(zh?`完整统计 ${fields.length} 个字段；展示前 ${shown.length} 个。点击字段配置清洗。`:`Full counts for ${fields.length} fields; first ${shown.length} shown. Select a field to configure cleaning.`);
 }
 export function rollingFeedback(host, rolling, {locale='zh-CN'}={}) {
-  const zh=locale==='zh-CN', series=rolling.series, H=70+Math.max(1,series.length)*240;
-  const svg=canvas(host,H,zh?'原始值与滚动结果对比':'Original values versus rolling result');
-  for(const [label,color,x]of [[`${zh?'原始':'Original'} · ${rolling.field}`,'#a7825a',15],[`${rolling.fn} · ${rolling.as}`,'#168b80',380]]){
+  const zh=locale==='zh-CN',ct=key=>chartMessages[key][zh?0:1], series=rolling.series, H=70+Math.max(1,series.length)*240;
+  const svg=canvas(host,H,ct('chart023'));
+  for(const [label,color,x]of [[`${ct('chart024')} · ${rolling.field}`,'#a7825a',15],[`${rolling.fn} · ${rolling.as}`,'#168b80',380]]){
     svg.append('line').attr('x1',x).attr('x2',x+25).attr('y1',15).attr('y2',15).attr('stroke',color).attr('stroke-width',3);svg.append('text').attr('x',x+32).attr('y',19).text(label);
   }
   series.forEach((s,j)=>{
     const top=55+j*240, values=s.points.flatMap(p=>[p.original,p.value]).filter(v=>typeof v==='number'),extent=d3.extent(values), lo=extent[0]??0, hi=extent[1]??1;
     const x=d3.scaleLinear().domain([0,Math.max(1,s.points.length-1)]).range([65,765]),y=d3.scaleLinear().domain(lo===hi?[lo-1,hi+1]:[lo,hi]).nice().range([top+175,top+15]);
-    svg.append('text').attr('x',65).attr('y',top).text(`${rolling.by.length?rolling.by.join(' / ')+' = '+s.key.map(v=>v??'∅').join(' / '):(zh?'全表':'Whole table')} · ${s.points.length} / ${s.totalRows} ${zh?'行':'rows'}`);
+    svg.append('text').attr('x',65).attr('y',top).text(`${rolling.by.length?rolling.by.join(' / ')+' = '+s.key.map(v=>v??'∅').join(' / '):(ct('chart025'))} · ${s.points.length} / ${s.totalRows} ${ct('chart026')}`);
     svg.append('g').attr('transform',`translate(0,${top+175})`).call(d3.axisBottom(x).ticks(6).tickFormat(v=>v+1));svg.append('g').attr('transform','translate(65,0)').call(d3.axisLeft(y).ticks(4));
     for(const [key,color]of [['original','#a7825a'],['value','#168b80']]) {
       svg.append('path').datum(s.points).attr('class',`rolling-${key}`).attr('fill','none').attr('stroke',color).attr('stroke-width',2.5).attr('d',d3.line().defined(d=>typeof d[key]==='number').x(d=>x(d.index)).y(d=>y(d[key])));

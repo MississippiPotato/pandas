@@ -1,0 +1,5088 @@
+{
+  "source": "nba_games.csv",
+  "method": "User-authorized, explicitly labelled practice copy. Fixed SHA256(game_id|player_id|field) mod 100 removes fg_pct at threshold5, minutes at8, pts at3. Existing missingness preserved. Not an official NBA completeness claim.",
+  "removed": [
+    {
+      "row": 4,
+      "game_id": "0022500028",
+      "player_name": "Jalen Suggs",
+      "field": "minutes",
+      "original": "20.833333333333332"
+    },
+    {
+      "row": 49,
+      "game_id": "0022500030",
+      "player_name": "Kristaps Porziņģis",
+      "field": "fg_pct",
+      "original": "0.25"
+    },
+    {
+      "row": 53,
+      "game_id": "0022500030",
+      "player_name": "Mouhamed Gueye",
+      "field": "pts",
+      "original": "2"
+    },
+    {
+      "row": 54,
+      "game_id": "0022500030",
+      "player_name": "Vít Krejčí",
+      "field": "fg_pct",
+      "original": "0"
+    },
+    {
+      "row": 54,
+      "game_id": "0022500030",
+      "player_name": "Vít Krejčí",
+      "field": "pts",
+      "original": "0"
+    },
+    {
+      "row": 57,
+      "game_id": "0022500030",
+      "player_name": "Scottie Barnes",
+      "field": "pts",
+      "original": "14"
+    },
+    {
+      "row": 58,
+      "game_id": "0022500030",
+      "player_name": "Jakob Poeltl",
+      "field": "minutes",
+      "original": "25.216666666666665"
+    },
+    {
+      "row": 59,
+      "game_id": "0022500030",
+      "player_name": "RJ Barrett",
+      "field": "fg_pct",
+      "original": "0.467"
+    },
+    {
+      "row": 62,
+      "game_id": "0022500030",
+      "player_name": "Jamal Shead",
+      "field": "minutes",
+      "original": "13.766666666666667"
+    },
+    {
+      "row": 92,
+      "game_id": "0022500032",
+      "player_name": "Harrison Barnes",
+      "field": "minutes",
+      "original": "38.8"
+    },
+    {
+      "row": 96,
+      "game_id": "0022500032",
+      "player_name": "Keldon Johnson",
+      "field": "minutes",
+      "original": "27.1"
+    },
+    {
+      "row": 98,
+      "game_id": "0022500032",
+      "player_name": "Lindy Waters III",
+      "field": "fg_pct",
+      "original": "0.5"
+    },
+    {
+      "row": 99,
+      "game_id": "0022500032",
+      "player_name": "Kelly Olynyk",
+      "field": "minutes",
+      "original": "5.716666666666667"
+    },
+    {
+      "row": 101,
+      "game_id": "0022500032",
+      "player_name": "Kevin Durant",
+      "field": "minutes",
+      "original": "36.55"
+    },
+    {
+      "row": 109,
+      "game_id": "0022500032",
+      "player_name": "Jae'Sean Tate",
+      "field": "fg_pct",
+      "original": "0"
+    },
+    {
+      "row": 110,
+      "game_id": "0022500032",
+      "player_name": "Clint Capela",
+      "field": "minutes",
+      "original": "6.033333333333333"
+    },
+    {
+      "row": 117,
+      "game_id": "0022500033",
+      "player_name": "Nikola Jović",
+      "field": "minutes",
+      "original": "19.45"
+    },
+    {
+      "row": 121,
+      "game_id": "0022500033",
+      "player_name": "Miles Bridges",
+      "field": "pts",
+      "original": "14"
+    },
+    {
+      "row": 124,
+      "game_id": "0022500033",
+      "player_name": "Tre Mann",
+      "field": "fg_pct",
+      "original": "0.292"
+    },
+    {
+      "row": 132,
+      "game_id": "0022500034",
+      "player_name": "Jaylen Wells",
+      "field": "pts",
+      "original": "8"
+    },
+    {
+      "row": 133,
+      "game_id": "0022500034",
+      "player_name": "Ja Morant",
+      "field": "minutes",
+      "original": "32.2"
+    },
+    {
+      "row": 140,
+      "game_id": "0022500034",
+      "player_name": "PJ Hall",
+      "field": "minutes",
+      "original": "0.13333333333333333"
+    },
+    {
+      "row": 143,
+      "game_id": "0022500034",
+      "player_name": "Cooper Flagg",
+      "field": "fg_pct",
+      "original": "0.5"
+    },
+    {
+      "row": 144,
+      "game_id": "0022500034",
+      "player_name": "P.J. Washington",
+      "field": "fg_pct",
+      "original": "0.4"
+    },
+    {
+      "row": 154,
+      "game_id": "0022500034",
+      "player_name": "Moussa Cisse",
+      "field": "fg_pct",
+      "original": "0.8"
+    },
+    {
+      "row": 187,
+      "game_id": "0022500036",
+      "player_name": "Bones Hyland",
+      "field": "fg_pct",
+      "original": "1"
+    },
+    {
+      "row": 192,
+      "game_id": "0022500036",
+      "player_name": "Lauri Markkanen",
+      "field": "minutes",
+      "original": "21.166666666666668"
+    },
+    {
+      "row": 194,
+      "game_id": "0022500036",
+      "player_name": "Keyonte George",
+      "field": "minutes",
+      "original": "25.9"
+    },
+    {
+      "row": 200,
+      "game_id": "0022500036",
+      "player_name": "Taylor Hendricks",
+      "field": "minutes",
+      "original": "17.383333333333333"
+    },
+    {
+      "row": 217,
+      "game_id": "0022500037",
+      "player_name": "Spencer Jones",
+      "field": "minutes",
+      "original": "4.033333333333333"
+    },
+    {
+      "row": 223,
+      "game_id": "0022500037",
+      "player_name": "Brandin Podziemski",
+      "field": "fg_pct",
+      "original": "0.3"
+    },
+    {
+      "row": 232,
+      "game_id": "0022500038",
+      "player_name": "Russell Westbrook",
+      "field": "minutes",
+      "original": "35.15"
+    },
+    {
+      "row": 234,
+      "game_id": "0022500038",
+      "player_name": "Zach LaVine",
+      "field": "fg_pct",
+      "original": "0.6"
+    },
+    {
+      "row": 256,
+      "game_id": "0022500039",
+      "player_name": "Mikal Bridges",
+      "field": "minutes",
+      "original": "42.36666666666667"
+    },
+    {
+      "row": 259,
+      "game_id": "0022500039",
+      "player_name": "Josh Hart",
+      "field": "pts",
+      "original": "12"
+    },
+    {
+      "row": 261,
+      "game_id": "0022500039",
+      "player_name": "Ariel Hukporti",
+      "field": "pts",
+      "original": "0"
+    },
+    {
+      "row": 263,
+      "game_id": "0022500039",
+      "player_name": "Pelle Larsson",
+      "field": "fg_pct",
+      "original": "0.5"
+    },
+    {
+      "row": 266,
+      "game_id": "0022500039",
+      "player_name": "Davion Mitchell",
+      "field": "fg_pct",
+      "original": "0.5"
+    },
+    {
+      "row": 267,
+      "game_id": "0022500039",
+      "player_name": "Norman Powell",
+      "field": "fg_pct",
+      "original": "0.545"
+    },
+    {
+      "row": 270,
+      "game_id": "0022500039",
+      "player_name": "Simone Fontecchio",
+      "field": "pts",
+      "original": "9"
+    },
+    {
+      "row": 275,
+      "game_id": "0022500040",
+      "player_name": "Wendell Carter Jr.",
+      "field": "pts",
+      "original": "7"
+    },
+    {
+      "row": 280,
+      "game_id": "0022500040",
+      "player_name": "Tyus Jones",
+      "field": "minutes",
+      "original": "13.15"
+    },
+    {
+      "row": 289,
+      "game_id": "0022500040",
+      "player_name": "Drake Powell",
+      "field": "minutes",
+      "original": "22.333333333333332"
+    },
+    {
+      "row": 293,
+      "game_id": "0022500041",
+      "player_name": "Ronald Holland II",
+      "field": "minutes",
+      "original": "24.3"
+    },
+    {
+      "row": 309,
+      "game_id": "0022500041",
+      "player_name": "Jabari Walker",
+      "field": "fg_pct",
+      "original": "0"
+    },
+    {
+      "row": 312,
+      "game_id": "0022500041",
+      "player_name": "Justin Edwards",
+      "field": "pts",
+      "original": "13"
+    },
+    {
+      "row": 324,
+      "game_id": "0022500042",
+      "player_name": "Jae'Sean Tate",
+      "field": "fg_pct",
+      "original": "0"
+    },
+    {
+      "row": 331,
+      "game_id": "0022500042",
+      "player_name": "Jerami Grant",
+      "field": "minutes",
+      "original": "28.733333333333334"
+    },
+    {
+      "row": 332,
+      "game_id": "0022500042",
+      "player_name": "Robert Williams III",
+      "field": "minutes",
+      "original": "14.833333333333334"
+    },
+    {
+      "row": 334,
+      "game_id": "0022500042",
+      "player_name": "Duop Reath",
+      "field": "fg_pct",
+      "original": "1"
+    },
+    {
+      "row": 335,
+      "game_id": "0022500042",
+      "player_name": "Sidy Cissoko",
+      "field": "fg_pct",
+      "original": "0.667"
+    },
+    {
+      "row": 344,
+      "game_id": "0022500043",
+      "player_name": "Gary Trent Jr.",
+      "field": "fg_pct",
+      "original": "0.6"
+    },
+    {
+      "row": 349,
+      "game_id": "0022500043",
+      "player_name": "Andre Jackson Jr.",
+      "field": "fg_pct",
+      "original": "0"
+    },
+    {
+      "row": 358,
+      "game_id": "0022500043",
+      "player_name": "Mason Plumlee",
+      "field": "minutes",
+      "original": "9.733333333333333"
+    },
+    {
+      "row": 360,
+      "game_id": "0022500043",
+      "player_name": "Pat Connaughton",
+      "field": "minutes",
+      "original": "10"
+    },
+    {
+      "row": 361,
+      "game_id": "0022500044",
+      "player_name": "Jaden McDaniels",
+      "field": "fg_pct",
+      "original": "0.667"
+    },
+    {
+      "row": 362,
+      "game_id": "0022500044",
+      "player_name": "Julius Randle",
+      "field": "fg_pct",
+      "original": "0.563"
+    },
+    {
+      "row": 363,
+      "game_id": "0022500044",
+      "player_name": "Rudy Gobert",
+      "field": "fg_pct",
+      "original": "0.667"
+    },
+    {
+      "row": 367,
+      "game_id": "0022500044",
+      "player_name": "Naz Reid",
+      "field": "minutes",
+      "original": "24.983333333333334"
+    },
+    {
+      "row": 373,
+      "game_id": "0022500044",
+      "player_name": "Bones Hyland",
+      "field": "minutes",
+      "original": "0.35"
+    },
+    {
+      "row": 375,
+      "game_id": "0022500044",
+      "player_name": "Precious Achiuwa",
+      "field": "fg_pct",
+      "original": "0.5"
+    },
+    {
+      "row": 380,
+      "game_id": "0022500044",
+      "player_name": "Dennis Schröder",
+      "field": "pts",
+      "original": "14"
+    },
+    {
+      "row": 409,
+      "game_id": "0022500046",
+      "player_name": "Dereck Lively II",
+      "field": "minutes",
+      "original": "17.25"
+    },
+    {
+      "row": 425,
+      "game_id": "0022500047",
+      "player_name": "Harrison Barnes",
+      "field": "minutes",
+      "original": "28.133333333333333"
+    },
+    {
+      "row": 426,
+      "game_id": "0022500047",
+      "player_name": "Victor Wembanyama",
+      "field": "minutes",
+      "original": "38.233333333333334"
+    },
+    {
+      "row": 430,
+      "game_id": "0022500047",
+      "player_name": "Keldon Johnson",
+      "field": "minutes",
+      "original": "19.016666666666666"
+    },
+    {
+      "row": 434,
+      "game_id": "0022500047",
+      "player_name": "Jimmy Butler III",
+      "field": "fg_pct",
+      "original": "0.5"
+    },
+    {
+      "row": 434,
+      "game_id": "0022500047",
+      "player_name": "Jimmy Butler III",
+      "field": "minutes",
+      "original": "34.65"
+    },
+    {
+      "row": 436,
+      "game_id": "0022500047",
+      "player_name": "Moses Moody",
+      "field": "fg_pct",
+      "original": "0.25"
+    },
+    {
+      "row": 450,
+      "game_id": "0022500048",
+      "player_name": "Larry Nance Jr.",
+      "field": "minutes",
+      "original": "19.183333333333334"
+    },
+    {
+      "row": 452,
+      "game_id": "0022500048",
+      "player_name": "Nae'Qwan Tomlin",
+      "field": "pts",
+      "original": "2"
+    },
+    {
+      "row": 465,
+      "game_id": "0022500048",
+      "player_name": "Garrison Mathews",
+      "field": "minutes",
+      "original": "10.283333333333333"
+    },
+    {
+      "row": 478,
+      "game_id": "0022500049",
+      "player_name": "Hugo González",
+      "field": "minutes",
+      "original": "5.216666666666667"
+    },
+    {
+      "row": 491,
+      "game_id": "0022500050",
+      "player_name": "RJ Barrett",
+      "field": "fg_pct",
+      "original": "0.6"
+    },
+    {
+      "row": 495,
+      "game_id": "0022500050",
+      "player_name": "Jamal Shead",
+      "field": "minutes",
+      "original": "16.2"
+    },
+    {
+      "row": 499,
+      "game_id": "0022500050",
+      "player_name": "Jamison Battle",
+      "field": "minutes",
+      "original": "3.7"
+    },
+    {
+      "row": 505,
+      "game_id": "0022500050",
+      "player_name": "Cam Whitmore",
+      "field": "fg_pct",
+      "original": "0.556"
+    },
+    {
+      "row": 507,
+      "game_id": "0022500050",
+      "player_name": "Bub Carrington",
+      "field": "pts",
+      "original": "7"
+    },
+    {
+      "row": 512,
+      "game_id": "0022500050",
+      "player_name": "Malaki Branham",
+      "field": "pts",
+      "original": "9"
+    },
+    {
+      "row": 520,
+      "game_id": "0022500051",
+      "player_name": "Kevin Huerter",
+      "field": "minutes",
+      "original": "9.9"
+    },
+    {
+      "row": 530,
+      "game_id": "0022500051",
+      "player_name": "Davion Mitchell",
+      "field": "pts",
+      "original": "16"
+    },
+    {
+      "row": 547,
+      "game_id": "0022500052",
+      "player_name": "Dereck Lively II",
+      "field": "fg_pct",
+      "original": "1"
+    },
+    {
+      "row": 547,
+      "game_id": "0022500052",
+      "player_name": "Dereck Lively II",
+      "field": "pts",
+      "original": "4"
+    },
+    {
+      "row": 558,
+      "game_id": "0022500053",
+      "player_name": "Ryan Dunn",
+      "field": "fg_pct",
+      "original": "0.333"
+    },
+    {
+      "row": 564,
+      "game_id": "0022500053",
+      "player_name": "Jordan Goodwin",
+      "field": "minutes",
+      "original": "29.016666666666666"
+    },
+    {
+      "row": 568,
+      "game_id": "0022500053",
+      "player_name": "Jaden McDaniels",
+      "field": "fg_pct",
+      "original": "0.417"
+    },
+    {
+      "row": 571,
+      "game_id": "0022500053",
+      "player_name": "Anthony Edwards",
+      "field": "minutes",
+      "original": "40.25"
+    },
+    {
+      "row": 571,
+      "game_id": "0022500053",
+      "player_name": "Anthony Edwards",
+      "field": "pts",
+      "original": "41"
+    },
+    {
+      "row": 591,
+      "game_id": "0022500054",
+      "player_name": "Jamal Murray",
+      "field": "pts",
+      "original": "26"
+    },
+    {
+      "row": 602,
+      "game_id": "0022500055",
+      "player_name": "Cody Williams",
+      "field": "pts",
+      "original": "0"
+    },
+    {
+      "row": 606,
+      "game_id": "0022500055",
+      "player_name": "Walter Clayton Jr.",
+      "field": "minutes",
+      "original": "12"
+    },
+    {
+      "row": 610,
+      "game_id": "0022500055",
+      "player_name": "Isaiah Hartenstein",
+      "field": "minutes",
+      "original": "23.716666666666665"
+    },
+    {
+      "row": 615,
+      "game_id": "0022500055",
+      "player_name": "Branden Carlson",
+      "field": "minutes",
+      "original": "9.283333333333333"
+    },
+    {
+      "row": 621,
+      "game_id": "0022500056",
+      "player_name": "Jimmy Butler III",
+      "field": "pts",
+      "original": "20"
+    },
+    {
+      "row": 626,
+      "game_id": "0022500056",
+      "player_name": "Gary Payton II",
+      "field": "fg_pct",
+      "original": "0.75"
+    },
+    {
+      "row": 631,
+      "game_id": "0022500056",
+      "player_name": "Jerami Grant",
+      "field": "minutes",
+      "original": "30.85"
+    },
+    {
+      "row": 639,
+      "game_id": "0022500056",
+      "player_name": "Javonte Cooke",
+      "field": "minutes",
+      "original": "1.8166666666666667"
+    },
+    {
+      "row": 641,
+      "game_id": "0022500056",
+      "player_name": "Rayan Rupert",
+      "field": "pts",
+      "original": "0"
+    },
+    {
+      "row": 661,
+      "game_id": "0022500057",
+      "player_name": "Luke Kennard",
+      "field": "minutes",
+      "original": "15.15"
+    },
+    {
+      "row": 663,
+      "game_id": "0022500057",
+      "player_name": "Mouhamed Gueye",
+      "field": "minutes",
+      "original": "17.933333333333334"
+    },
+    {
+      "row": 664,
+      "game_id": "0022500057",
+      "player_name": "Keaton Wallace",
+      "field": "minutes",
+      "original": "13.633333333333333"
+    },
+    {
+      "row": 669,
+      "game_id": "0022500058",
+      "player_name": "Andre Drummond",
+      "field": "minutes",
+      "original": "22.316666666666666"
+    },
+    {
+      "row": 680,
+      "game_id": "0022500058",
+      "player_name": "Wendell Carter Jr.",
+      "field": "fg_pct",
+      "original": "0.8"
+    },
+    {
+      "row": 683,
+      "game_id": "0022500058",
+      "player_name": "Anthony Black",
+      "field": "pts",
+      "original": "31"
+    },
+    {
+      "row": 688,
+      "game_id": "0022500058",
+      "player_name": "Jase Richardson",
+      "field": "minutes",
+      "original": "10.033333333333333"
+    },
+    {
+      "row": 700,
+      "game_id": "0022500059",
+      "player_name": "Adou Thiero",
+      "field": "pts",
+      "original": "0"
+    },
+    {
+      "row": 716,
+      "game_id": "0022500060",
+      "player_name": "Jaylen Brown",
+      "field": "fg_pct",
+      "original": "0.375"
+    },
+    {
+      "row": 729,
+      "game_id": "0022500060",
+      "player_name": "Jalen Duren",
+      "field": "fg_pct",
+      "original": "0.4"
+    },
+    {
+      "row": 733,
+      "game_id": "0022500060",
+      "player_name": "Caris LeVert",
+      "field": "fg_pct",
+      "original": "0.375"
+    },
+    {
+      "row": 733,
+      "game_id": "0022500060",
+      "player_name": "Caris LeVert",
+      "field": "minutes",
+      "original": "23.966666666666665"
+    },
+    {
+      "row": 737,
+      "game_id": "0022500060",
+      "player_name": "Javonte Green",
+      "field": "fg_pct",
+      "original": "0"
+    },
+    {
+      "row": 762,
+      "game_id": "0022500062",
+      "player_name": "Bam Adebayo",
+      "field": "minutes",
+      "original": "28.616666666666667"
+    },
+    {
+      "row": 769,
+      "game_id": "0022500062",
+      "player_name": "Simone Fontecchio",
+      "field": "pts",
+      "original": "2"
+    },
+    {
+      "row": 773,
+      "game_id": "0022500062",
+      "player_name": "Gary Trent Jr.",
+      "field": "fg_pct",
+      "original": "0.357"
+    },
+    {
+      "row": 787,
+      "game_id": "0022500063",
+      "player_name": "Jamal Shead",
+      "field": "fg_pct",
+      "original": "0"
+    },
+    {
+      "row": 790,
+      "game_id": "0022500063",
+      "player_name": "Jarace Walker",
+      "field": "minutes",
+      "original": "26.666666666666668"
+    },
+    {
+      "row": 791,
+      "game_id": "0022500063",
+      "player_name": "Pascal Siakam",
+      "field": "fg_pct",
+      "original": "0.5"
+    },
+    {
+      "row": 792,
+      "game_id": "0022500063",
+      "player_name": "Isaiah Jackson",
+      "field": "minutes",
+      "original": "19.633333333333333"
+    },
+    {
+      "row": 803,
+      "game_id": "0022500064",
+      "player_name": "Cason Wallace",
+      "field": "pts",
+      "original": "9"
+    },
+    {
+      "row": 808,
+      "game_id": "0022500064",
+      "player_name": "Kenrich Williams",
+      "field": "minutes",
+      "original": "12.766666666666667"
+    },
+    {
+      "row": 815,
+      "game_id": "0022500064",
+      "player_name": "Naz Reid",
+      "field": "minutes",
+      "original": "24.083333333333332"
+    },
+    {
+      "row": 818,
+      "game_id": "0022500064",
+      "player_name": "Rob Dillingham",
+      "field": "minutes",
+      "original": "12.216666666666667"
+    },
+    {
+      "row": 823,
+      "game_id": "0022500065",
+      "player_name": "Trey Murphy III",
+      "field": "pts",
+      "original": "12"
+    },
+    {
+      "row": 828,
+      "game_id": "0022500065",
+      "player_name": "Jordan Hawkins",
+      "field": "minutes",
+      "original": "15.316666666666666"
+    },
+    {
+      "row": 829,
+      "game_id": "0022500065",
+      "player_name": "Bryce McGowens",
+      "field": "fg_pct",
+      "original": "0.667"
+    },
+    {
+      "row": 834,
+      "game_id": "0022500065",
+      "player_name": "Vince Williams Jr.",
+      "field": "minutes",
+      "original": "35.03333333333333"
+    },
+    {
+      "row": 858,
+      "game_id": "0022500066",
+      "player_name": "JD Davison",
+      "field": "fg_pct",
+      "original": "1"
+    },
+    {
+      "row": 860,
+      "game_id": "0022500067",
+      "player_name": "Toumani Camara",
+      "field": "minutes",
+      "original": "30.3"
+    },
+    {
+      "row": 865,
+      "game_id": "0022500067",
+      "player_name": "Kris Murray",
+      "field": "pts",
+      "original": "8"
+    },
+    {
+      "row": 869,
+      "game_id": "0022500067",
+      "player_name": "Rayan Rupert",
+      "field": "fg_pct",
+      "original": "0"
+    },
+    {
+      "row": 875,
+      "game_id": "0022500067",
+      "player_name": "Devin Vassell",
+      "field": "minutes",
+      "original": "35.35"
+    },
+    {
+      "row": 877,
+      "game_id": "0022500067",
+      "player_name": "Jeremy Sochan",
+      "field": "pts",
+      "original": "2"
+    },
+    {
+      "row": 883,
+      "game_id": "0022500068",
+      "player_name": "DeMar DeRozan",
+      "field": "fg_pct",
+      "original": "0.364"
+    },
+    {
+      "row": 884,
+      "game_id": "0022500068",
+      "player_name": "Keegan Murray",
+      "field": "fg_pct",
+      "original": "0.438"
+    },
+    {
+      "row": 891,
+      "game_id": "0022500068",
+      "player_name": "Keon Ellis",
+      "field": "pts",
+      "original": "6"
+    },
+    {
+      "row": 895,
+      "game_id": "0022500068",
+      "player_name": "Mark Williams",
+      "field": "fg_pct",
+      "original": "0.75"
+    },
+    {
+      "row": 898,
+      "game_id": "0022500068",
+      "player_name": "Isaiah Livers",
+      "field": "minutes",
+      "original": "9.183333333333334"
+    },
+    {
+      "row": 899,
+      "game_id": "0022500068",
+      "player_name": "Jordan Goodwin",
+      "field": "fg_pct",
+      "original": "0.375"
+    },
+    {
+      "row": 900,
+      "game_id": "0022500068",
+      "player_name": "Oso Ighodaro",
+      "field": "minutes",
+      "original": "15.4"
+    },
+    {
+      "row": 916,
+      "game_id": "0022500069",
+      "player_name": "Darius Garland",
+      "field": "fg_pct",
+      "original": "0.429"
+    },
+    {
+      "row": 925,
+      "game_id": "0022500070",
+      "player_name": "Terance Mann",
+      "field": "minutes",
+      "original": "35.95"
+    },
+    {
+      "row": 928,
+      "game_id": "0022500070",
+      "player_name": "Tyrese Martin",
+      "field": "pts",
+      "original": "16"
+    },
+    {
+      "row": 931,
+      "game_id": "0022500070",
+      "player_name": "Danny Wolf",
+      "field": "minutes",
+      "original": "12.766666666666667"
+    },
+    {
+      "row": 935,
+      "game_id": "0022500070",
+      "player_name": "Quentin Grimes",
+      "field": "minutes",
+      "original": "42.63333333333333"
+    },
+    {
+      "row": 936,
+      "game_id": "0022500070",
+      "player_name": "Tyrese Maxey",
+      "field": "minutes",
+      "original": "41.75"
+    },
+    {
+      "row": 980,
+      "game_id": "0022500072",
+      "player_name": "Jalen Suggs",
+      "field": "fg_pct",
+      "original": "0.235"
+    },
+    {
+      "row": 985,
+      "game_id": "0022500073",
+      "player_name": "Jarace Walker",
+      "field": "pts",
+      "original": "10"
+    },
+    {
+      "row": 994,
+      "game_id": "0022500073",
+      "player_name": "Garrison Mathews",
+      "field": "minutes",
+      "original": "21.833333333333332"
+    },
+    {
+      "row": 1007,
+      "game_id": "0022500073",
+      "player_name": "Malaki Branham",
+      "field": "pts",
+      "original": "0"
+    },
+    {
+      "row": 1014,
+      "game_id": "0022500074",
+      "player_name": "Miles McBride",
+      "field": "fg_pct",
+      "original": "0.625"
+    },
+    {
+      "row": 1016,
+      "game_id": "0022500074",
+      "player_name": "Jordan Clarkson",
+      "field": "minutes",
+      "original": "21.866666666666667"
+    },
+    {
+      "row": 1017,
+      "game_id": "0022500074",
+      "player_name": "Mitchell Robinson",
+      "field": "minutes",
+      "original": "18.983333333333334"
+    },
+    {
+      "row": 1024,
+      "game_id": "0022500074",
+      "player_name": "Gary Harris",
+      "field": "minutes",
+      "original": "23.5"
+    },
+    {
+      "row": 1034,
+      "game_id": "0022500075",
+      "player_name": "Ajay Mitchell",
+      "field": "fg_pct",
+      "original": "0"
+    },
+    {
+      "row": 1038,
+      "game_id": "0022500075",
+      "player_name": "Dillon Brooks",
+      "field": "pts",
+      "original": "19"
+    },
+    {
+      "row": 1046,
+      "game_id": "0022500075",
+      "player_name": "Nigel Hayes-Davis",
+      "field": "minutes",
+      "original": "12.166666666666666"
+    },
+    {
+      "row": 1053,
+      "game_id": "0022500076",
+      "player_name": "Tim Hardaway Jr.",
+      "field": "minutes",
+      "original": "28.516666666666666"
+    },
+    {
+      "row": 1056,
+      "game_id": "0022500076",
+      "player_name": "Jonas Valančiūnas",
+      "field": "fg_pct",
+      "original": "0.667"
+    },
+    {
+      "row": 1061,
+      "game_id": "0022500076",
+      "player_name": "De'Aaron Fox",
+      "field": "fg_pct",
+      "original": "0.316"
+    },
+    {
+      "row": 1068,
+      "game_id": "0022500077",
+      "player_name": "Svi Mykhailiuk",
+      "field": "pts",
+      "original": "9"
+    },
+    {
+      "row": 1077,
+      "game_id": "0022500077",
+      "player_name": "Walter Clayton Jr.",
+      "field": "pts",
+      "original": "0"
+    },
+    {
+      "row": 1094,
+      "game_id": "0022500078",
+      "player_name": "Jaxson Hayes",
+      "field": "fg_pct",
+      "original": "0.75"
+    },
+    {
+      "row": 1101,
+      "game_id": "0022500078",
+      "player_name": "Ryan Nembhard",
+      "field": "fg_pct",
+      "original": "0.636"
+    },
+    {
+      "row": 1101,
+      "game_id": "0022500078",
+      "player_name": "Ryan Nembhard",
+      "field": "pts",
+      "original": "17"
+    },
+    {
+      "row": 1107,
+      "game_id": "0022500078",
+      "player_name": "Caleb Martin",
+      "field": "fg_pct",
+      "original": "0"
+    },
+    {
+      "row": 1112,
+      "game_id": "0022500079",
+      "player_name": "Kris Dunn",
+      "field": "fg_pct",
+      "original": "0.444"
+    },
+    {
+      "row": 1142,
+      "game_id": "0022500142",
+      "player_name": "Zach LaVine",
+      "field": "pts",
+      "original": "31"
+    },
+    {
+      "row": 1158,
+      "game_id": "0022500143",
+      "player_name": "Tidjane Salaün",
+      "field": "pts",
+      "original": "2"
+    },
+    {
+      "row": 1185,
+      "game_id": "0022500144",
+      "player_name": "Draymond Green",
+      "field": "pts",
+      "original": "8"
+    },
+    {
+      "row": 1189,
+      "game_id": "0022500144",
+      "player_name": "Gary Payton II",
+      "field": "minutes",
+      "original": "8.8"
+    },
+    {
+      "row": 1204,
+      "game_id": "0022500145",
+      "player_name": "AJ Johnson",
+      "field": "fg_pct",
+      "original": "0.333"
+    },
+    {
+      "row": 1206,
+      "game_id": "0022500145",
+      "player_name": "Tristan Vukcevic",
+      "field": "fg_pct",
+      "original": "0"
+    },
+    {
+      "row": 1217,
+      "game_id": "0022500145",
+      "player_name": "Tyus Jones",
+      "field": "minutes",
+      "original": "14.733333333333333"
+    },
+    {
+      "row": 1228,
+      "game_id": "0022500146",
+      "player_name": "Anfernee Simons",
+      "field": "minutes",
+      "original": "16.833333333333332"
+    },
+    {
+      "row": 1229,
+      "game_id": "0022500146",
+      "player_name": "Luka Garza",
+      "field": "fg_pct",
+      "original": "0"
+    },
+    {
+      "row": 1233,
+      "game_id": "0022500146",
+      "player_name": "Baylor Scheierman",
+      "field": "pts",
+      "original": "17"
+    },
+    {
+      "row": 1234,
+      "game_id": "0022500146",
+      "player_name": "Jordan Walsh",
+      "field": "minutes",
+      "original": "18.7"
+    },
+    {
+      "row": 1236,
+      "game_id": "0022500146",
+      "player_name": "Amari Williams",
+      "field": "minutes",
+      "original": "6.2"
+    },
+    {
+      "row": 1240,
+      "game_id": "0022500146",
+      "player_name": "Josh Okogie",
+      "field": "minutes",
+      "original": "21.033333333333335"
+    },
+    {
+      "row": 1247,
+      "game_id": "0022500146",
+      "player_name": "Aaron Holiday",
+      "field": "minutes",
+      "original": "7.516666666666667"
+    },
+    {
+      "row": 1257,
+      "game_id": "0022500147",
+      "player_name": "Ronald Holland II",
+      "field": "pts",
+      "original": "2"
+    },
+    {
+      "row": 1265,
+      "game_id": "0022500147",
+      "player_name": "Dwight Powell",
+      "field": "minutes",
+      "original": "18.533333333333335"
+    },
+    {
+      "row": 1278,
+      "game_id": "0022500148",
+      "player_name": "Alex Caruso",
+      "field": "minutes",
+      "original": "12.166666666666666"
+    },
+    {
+      "row": 1280,
+      "game_id": "0022500148",
+      "player_name": "Chris Youngblood",
+      "field": "minutes",
+      "original": "6.85"
+    },
+    {
+      "row": 1287,
+      "game_id": "0022500148",
+      "player_name": "Kevon Looney",
+      "field": "fg_pct",
+      "original": "0.333"
+    },
+    {
+      "row": 1309,
+      "game_id": "0022500149",
+      "player_name": "Adem Bona",
+      "field": "minutes",
+      "original": "14.283333333333333"
+    },
+    {
+      "row": 1321,
+      "game_id": "0022500150",
+      "player_name": "Ryan Kalkbrenner",
+      "field": "minutes",
+      "original": "22.1"
+    },
+    {
+      "row": 1355,
+      "game_id": "0022500151",
+      "player_name": "Kristaps Porziņģis",
+      "field": "fg_pct",
+      "original": "0.455"
+    },
+    {
+      "row": 1355,
+      "game_id": "0022500151",
+      "player_name": "Kristaps Porziņģis",
+      "field": "pts",
+      "original": "15"
+    },
+    {
+      "row": 1369,
+      "game_id": "0022500152",
+      "player_name": "Ochai Agbaji",
+      "field": "minutes",
+      "original": "16.033333333333335"
+    },
+    {
+      "row": 1378,
+      "game_id": "0022500152",
+      "player_name": "Santi Aldama",
+      "field": "minutes",
+      "original": "28.416666666666668"
+    },
+    {
+      "row": 1380,
+      "game_id": "0022500152",
+      "player_name": "Vince Williams Jr.",
+      "field": "minutes",
+      "original": "21.116666666666667"
+    },
+    {
+      "row": 1387,
+      "game_id": "0022500153",
+      "player_name": "Mikal Bridges",
+      "field": "minutes",
+      "original": "34.666666666666664"
+    },
+    {
+      "row": 1393,
+      "game_id": "0022500153",
+      "player_name": "Jordan Clarkson",
+      "field": "minutes",
+      "original": "17.733333333333334"
+    },
+    {
+      "row": 1398,
+      "game_id": "0022500153",
+      "player_name": "Matas Buzelis",
+      "field": "minutes",
+      "original": "31.383333333333333"
+    },
+    {
+      "row": 1399,
+      "game_id": "0022500153",
+      "player_name": "Nikola Vučević",
+      "field": "minutes",
+      "original": "32"
+    },
+    {
+      "row": 1403,
+      "game_id": "0022500153",
+      "player_name": "Patrick Williams",
+      "field": "fg_pct",
+      "original": "0.333"
+    },
+    {
+      "row": 1406,
+      "game_id": "0022500153",
+      "player_name": "Jevon Carter",
+      "field": "minutes",
+      "original": "12.2"
+    },
+    {
+      "row": 1408,
+      "game_id": "0022500154",
+      "player_name": "Ryan Dunn",
+      "field": "minutes",
+      "original": "27.35"
+    },
+    {
+      "row": 1414,
+      "game_id": "0022500154",
+      "player_name": "Jordan Goodwin",
+      "field": "fg_pct",
+      "original": "0.6"
+    },
+    {
+      "row": 1416,
+      "game_id": "0022500154",
+      "player_name": "Nigel Hayes-Davis",
+      "field": "pts",
+      "original": "0"
+    },
+    {
+      "row": 1418,
+      "game_id": "0022500154",
+      "player_name": "Rasheer Fleming",
+      "field": "minutes",
+      "original": "4.133333333333334"
+    },
+    {
+      "row": 1422,
+      "game_id": "0022500154",
+      "player_name": "Harrison Barnes",
+      "field": "minutes",
+      "original": "27.416666666666668"
+    },
+    {
+      "row": 1426,
+      "game_id": "0022500154",
+      "player_name": "Dylan Harper",
+      "field": "minutes",
+      "original": "11.016666666666667"
+    },
+    {
+      "row": 1444,
+      "game_id": "0022500155",
+      "player_name": "Bam Adebayo",
+      "field": "fg_pct",
+      "original": "0.545"
+    },
+    {
+      "row": 1445,
+      "game_id": "0022500155",
+      "player_name": "Kel'el Ware",
+      "field": "minutes",
+      "original": "11.5"
+    },
+    {
+      "row": 1446,
+      "game_id": "0022500155",
+      "player_name": "Pelle Larsson",
+      "field": "fg_pct",
+      "original": "0.6"
+    },
+    {
+      "row": 1457,
+      "game_id": "0022500156",
+      "player_name": "Ziaire Williams",
+      "field": "minutes",
+      "original": "22.65"
+    },
+    {
+      "row": 1459,
+      "game_id": "0022500156",
+      "player_name": "Jalen Wilson",
+      "field": "fg_pct",
+      "original": "0.25"
+    },
+    {
+      "row": 1463,
+      "game_id": "0022500156",
+      "player_name": "E.J. Liddell",
+      "field": "minutes",
+      "original": "3.55"
+    },
+    {
+      "row": 1465,
+      "game_id": "0022500156",
+      "player_name": "Jaden McDaniels",
+      "field": "minutes",
+      "original": "29.35"
+    },
+    {
+      "row": 1468,
+      "game_id": "0022500156",
+      "player_name": "Donte DiVincenzo",
+      "field": "fg_pct",
+      "original": "0.471"
+    },
+    {
+      "row": 1476,
+      "game_id": "0022500156",
+      "player_name": "Leonard Miller",
+      "field": "pts",
+      "original": "2"
+    },
+    {
+      "row": 1488,
+      "game_id": "0022500157",
+      "player_name": "Taelon Peter",
+      "field": "fg_pct",
+      "original": "0.333"
+    },
+    {
+      "row": 1490,
+      "game_id": "0022500157",
+      "player_name": "Gary Trent Jr.",
+      "field": "fg_pct",
+      "original": "0.25"
+    },
+    {
+      "row": 1492,
+      "game_id": "0022500157",
+      "player_name": "Myles Turner",
+      "field": "pts",
+      "original": "9"
+    },
+    {
+      "row": 1495,
+      "game_id": "0022500157",
+      "player_name": "Taurean Prince",
+      "field": "minutes",
+      "original": "20.95"
+    },
+    {
+      "row": 1506,
+      "game_id": "0022500158",
+      "player_name": "Sam Hauser",
+      "field": "fg_pct",
+      "original": "0.125"
+    },
+    {
+      "row": 1509,
+      "game_id": "0022500158",
+      "player_name": "Xavier Tillman",
+      "field": "fg_pct",
+      "original": "0"
+    },
+    {
+      "row": 1524,
+      "game_id": "0022500159",
+      "player_name": "Mikal Bridges",
+      "field": "minutes",
+      "original": "29.483333333333334"
+    },
+    {
+      "row": 1534,
+      "game_id": "0022500159",
+      "player_name": "Pacôme Dadiet",
+      "field": "minutes",
+      "original": "3.6166666666666667"
+    },
+    {
+      "row": 1538,
+      "game_id": "0022500159",
+      "player_name": "Alex Sarr",
+      "field": "minutes",
+      "original": "29.483333333333334"
+    },
+    {
+      "row": 1538,
+      "game_id": "0022500159",
+      "player_name": "Alex Sarr",
+      "field": "pts",
+      "original": "19"
+    },
+    {
+      "row": 1541,
+      "game_id": "0022500159",
+      "player_name": "Tre Johnson",
+      "field": "fg_pct",
+      "original": "0.444"
+    },
+    {
+      "row": 1552,
+      "game_id": "0022500160",
+      "player_name": "Tari Eason",
+      "field": "minutes",
+      "original": "29.633333333333333"
+    },
+    {
+      "row": 1555,
+      "game_id": "0022500160",
+      "player_name": "Amen Thompson",
+      "field": "fg_pct",
+      "original": "0.611"
+    },
+    {
+      "row": 1558,
+      "game_id": "0022500160",
+      "player_name": "Jae'Sean Tate",
+      "field": "pts",
+      "original": "0"
+    },
+    {
+      "row": 1559,
+      "game_id": "0022500160",
+      "player_name": "Clint Capela",
+      "field": "fg_pct",
+      "original": "0.5"
+    },
+    {
+      "row": 1573,
+      "game_id": "0022500161",
+      "player_name": "Kentavious Caldwell-Pope",
+      "field": "minutes",
+      "original": "25.266666666666666"
+    },
+    {
+      "row": 1583,
+      "game_id": "0022500161",
+      "player_name": "Ausar Thompson",
+      "field": "minutes",
+      "original": "26.533333333333335"
+    },
+    {
+      "row": 1599,
+      "game_id": "0022500162",
+      "player_name": "Peyton Watson",
+      "field": "minutes",
+      "original": "16.15"
+    },
+    {
+      "row": 1599,
+      "game_id": "0022500162",
+      "player_name": "Peyton Watson",
+      "field": "pts",
+      "original": "0"
+    },
+    {
+      "row": 1601,
+      "game_id": "0022500162",
+      "player_name": "Jonas Valančiūnas",
+      "field": "fg_pct",
+      "original": "0.8"
+    },
+    {
+      "row": 1603,
+      "game_id": "0022500162",
+      "player_name": "DeMar DeRozan",
+      "field": "fg_pct",
+      "original": "0.471"
+    },
+    {
+      "row": 1622,
+      "game_id": "0022500163",
+      "player_name": "Rui Hachimura",
+      "field": "minutes",
+      "original": "37.61666666666667"
+    },
+    {
+      "row": 1631,
+      "game_id": "0022500164",
+      "player_name": "Derrick Jones Jr.",
+      "field": "pts",
+      "original": "12"
+    },
+    {
+      "row": 1646,
+      "game_id": "0022500164",
+      "player_name": "Kel'el Ware",
+      "field": "minutes",
+      "original": "17.783333333333335"
+    },
+    {
+      "row": 1649,
+      "game_id": "0022500164",
+      "player_name": "Dru Smith",
+      "field": "fg_pct",
+      "original": "0.5"
+    },
+    {
+      "row": 1651,
+      "game_id": "0022500165",
+      "player_name": "Scottie Barnes",
+      "field": "minutes",
+      "original": "27.5"
+    },
+    {
+      "row": 1658,
+      "game_id": "0022500165",
+      "player_name": "Gradey Dick",
+      "field": "fg_pct",
+      "original": "0.75"
+    },
+    {
+      "row": 1658,
+      "game_id": "0022500165",
+      "player_name": "Gradey Dick",
+      "field": "minutes",
+      "original": "21.916666666666668"
+    },
+    {
+      "row": 1668,
+      "game_id": "0022500165",
+      "player_name": "Taurean Prince",
+      "field": "minutes",
+      "original": "20.85"
+    },
+    {
+      "row": 1672,
+      "game_id": "0022500165",
+      "player_name": "Amir Coffey",
+      "field": "minutes",
+      "original": "10.166666666666666"
+    },
+    {
+      "row": 1676,
+      "game_id": "0022500165",
+      "player_name": "Mark Sears",
+      "field": "minutes",
+      "original": "4.683333333333334"
+    },
+    {
+      "row": 1677,
+      "game_id": "0022500166",
+      "player_name": "Zaccharie Risacher",
+      "field": "minutes",
+      "original": "25.5"
+    },
+    {
+      "row": 1679,
+      "game_id": "0022500166",
+      "player_name": "Kristaps Porziņģis",
+      "field": "fg_pct",
+      "original": "0.25"
+    },
+    {
+      "row": 1680,
+      "game_id": "0022500166",
+      "player_name": "Dyson Daniels",
+      "field": "minutes",
+      "original": "35.25"
+    },
+    {
+      "row": 1681,
+      "game_id": "0022500166",
+      "player_name": "Nickeil Alexander-Walker",
+      "field": "fg_pct",
+      "original": "0.545"
+    },
+    {
+      "row": 1689,
+      "game_id": "0022500166",
+      "player_name": "Franz Wagner",
+      "field": "minutes",
+      "original": "34.05"
+    },
+    {
+      "row": 1692,
+      "game_id": "0022500166",
+      "player_name": "Desmond Bane",
+      "field": "minutes",
+      "original": "22.55"
+    },
+    {
+      "row": 1695,
+      "game_id": "0022500166",
+      "player_name": "Anthony Black",
+      "field": "fg_pct",
+      "original": "0.286"
+    },
+    {
+      "row": 1703,
+      "game_id": "0022500167",
+      "player_name": "Matas Buzelis",
+      "field": "fg_pct",
+      "original": "0.364"
+    },
+    {
+      "row": 1706,
+      "game_id": "0022500167",
+      "player_name": "Josh Giddey",
+      "field": "minutes",
+      "original": "37.4"
+    },
+    {
+      "row": 1707,
+      "game_id": "0022500167",
+      "player_name": "Kevin Huerter",
+      "field": "fg_pct",
+      "original": "0.385"
+    },
+    {
+      "row": 1714,
+      "game_id": "0022500167",
+      "player_name": "Joel Embiid",
+      "field": "fg_pct",
+      "original": "0.333"
+    },
+    {
+      "row": 1726,
+      "game_id": "0022500168",
+      "player_name": "Karlo Matković",
+      "field": "minutes",
+      "original": "15.066666666666666"
+    },
+    {
+      "row": 1728,
+      "game_id": "0022500168",
+      "player_name": "Jose Alvarado",
+      "field": "pts",
+      "original": "18"
+    },
+    {
+      "row": 1731,
+      "game_id": "0022500168",
+      "player_name": "Kon Knueppel",
+      "field": "fg_pct",
+      "original": "0.438"
+    },
+    {
+      "row": 1735,
+      "game_id": "0022500168",
+      "player_name": "Collin Sexton",
+      "field": "minutes",
+      "original": "29.65"
+    },
+    {
+      "row": 1737,
+      "game_id": "0022500168",
+      "player_name": "Moussa Diabaté",
+      "field": "pts",
+      "original": "6"
+    },
+    {
+      "row": 1751,
+      "game_id": "0022500169",
+      "player_name": "Gui Santos",
+      "field": "minutes",
+      "original": "2.966666666666667"
+    },
+    {
+      "row": 1756,
+      "game_id": "0022500169",
+      "player_name": "Devin Booker",
+      "field": "minutes",
+      "original": "39.4"
+    },
+    {
+      "row": 1759,
+      "game_id": "0022500169",
+      "player_name": "Jordan Goodwin",
+      "field": "minutes",
+      "original": "24"
+    },
+    {
+      "row": 1768,
+      "game_id": "0022500170",
+      "player_name": "John Collins",
+      "field": "minutes",
+      "original": "24.933333333333334"
+    },
+    {
+      "row": 1769,
+      "game_id": "0022500170",
+      "player_name": "Bogdan Bogdanović",
+      "field": "fg_pct",
+      "original": "0.375"
+    },
+    {
+      "row": 1773,
+      "game_id": "0022500170",
+      "player_name": "Yanic Konan Niederhäuser",
+      "field": "minutes",
+      "original": "6.583333333333333"
+    },
+    {
+      "row": 1780,
+      "game_id": "0022500170",
+      "player_name": "Shai Gilgeous-Alexander",
+      "field": "minutes",
+      "original": "29.05"
+    },
+    {
+      "row": 1788,
+      "game_id": "0022500170",
+      "player_name": "Branden Carlson",
+      "field": "fg_pct",
+      "original": "0.5"
+    },
+    {
+      "row": 1794,
+      "game_id": "0022500171",
+      "player_name": "Dean Wade",
+      "field": "fg_pct",
+      "original": "0"
+    },
+    {
+      "row": 1798,
+      "game_id": "0022500171",
+      "player_name": "Craig Porter Jr.",
+      "field": "minutes",
+      "original": "18.066666666666666"
+    },
+    {
+      "row": 1802,
+      "game_id": "0022500171",
+      "player_name": "Kelly Oubre Jr.",
+      "field": "minutes",
+      "original": "37.96666666666667"
+    },
+    {
+      "row": 1831,
+      "game_id": "0022500172",
+      "player_name": "Walter Clayton Jr.",
+      "field": "fg_pct",
+      "original": "0.5"
+    },
+    {
+      "row": 1832,
+      "game_id": "0022500172",
+      "player_name": "Brice Sensabaugh",
+      "field": "minutes",
+      "original": "0.11666666666666667"
+    },
+    {
+      "row": 1837,
+      "game_id": "0022500173",
+      "player_name": "Ben Sheppard",
+      "field": "pts",
+      "original": "18"
+    },
+    {
+      "row": 1839,
+      "game_id": "0022500173",
+      "player_name": "Tony Bradley",
+      "field": "minutes",
+      "original": "13.616666666666667"
+    },
+    {
+      "row": 1848,
+      "game_id": "0022500173",
+      "player_name": "Terance Mann",
+      "field": "minutes",
+      "original": "35.11666666666667"
+    },
+    {
+      "row": 1862,
+      "game_id": "0022500174",
+      "player_name": "Hugo González",
+      "field": "minutes",
+      "original": "16.65"
+    },
+    {
+      "row": 1863,
+      "game_id": "0022500174",
+      "player_name": "Jordan Walsh",
+      "field": "minutes",
+      "original": "23.85"
+    },
+    {
+      "row": 1865,
+      "game_id": "0022500174",
+      "player_name": "Justin Champagnie",
+      "field": "minutes",
+      "original": "19.05"
+    },
+    {
+      "row": 1867,
+      "game_id": "0022500174",
+      "player_name": "Alex Sarr",
+      "field": "pts",
+      "original": "31"
+    },
+    {
+      "row": 1871,
+      "game_id": "0022500174",
+      "player_name": "Bub Carrington",
+      "field": "minutes",
+      "original": "30.633333333333333"
+    },
+    {
+      "row": 1886,
+      "game_id": "0022500175",
+      "player_name": "Guerschon Yabusele",
+      "field": "fg_pct",
+      "original": "0.667"
+    },
+    {
+      "row": 1890,
+      "game_id": "0022500175",
+      "player_name": "Mohamed Diawara",
+      "field": "minutes",
+      "original": "2.4333333333333336"
+    },
+    {
+      "row": 1901,
+      "game_id": "0022500175",
+      "player_name": "Rob Dillingham",
+      "field": "minutes",
+      "original": "11.866666666666667"
+    },
+    {
+      "row": 1907,
+      "game_id": "0022500176",
+      "player_name": "Jaren Jackson Jr.",
+      "field": "fg_pct",
+      "original": "0.333"
+    },
+    {
+      "row": 1914,
+      "game_id": "0022500176",
+      "player_name": "Charles Bassey",
+      "field": "fg_pct",
+      "original": "0.4"
+    },
+    {
+      "row": 1917,
+      "game_id": "0022500176",
+      "player_name": "PJ Hall",
+      "field": "minutes",
+      "original": "1.9833333333333334"
+    },
+    {
+      "row": 1918,
+      "game_id": "0022500176",
+      "player_name": "Olivier-Maxence Prosper",
+      "field": "minutes",
+      "original": "1.9833333333333334"
+    },
+    {
+      "row": 1926,
+      "game_id": "0022500176",
+      "player_name": "Clint Capela",
+      "field": "minutes",
+      "original": "16.016666666666666"
+    },
+    {
+      "row": 1931,
+      "game_id": "0022500176",
+      "player_name": "JD Davison",
+      "field": "fg_pct",
+      "original": "0"
+    },
+    {
+      "row": 1932,
+      "game_id": "0022500177",
+      "player_name": "Cooper Flagg",
+      "field": "fg_pct",
+      "original": "0.421"
+    },
+    {
+      "row": 1952,
+      "game_id": "0022500177",
+      "player_name": "Jose Alvarado",
+      "field": "minutes",
+      "original": "22.583333333333332"
+    },
+    {
+      "row": 1954,
+      "game_id": "0022500178",
+      "player_name": "Cameron Johnson",
+      "field": "fg_pct",
+      "original": "0.3"
+    },
+    {
+      "row": 1969,
+      "game_id": "0022500178",
+      "player_name": "Nikola Jović",
+      "field": "minutes",
+      "original": "19.566666666666666"
+    },
+    {
+      "row": 1971,
+      "game_id": "0022500178",
+      "player_name": "Dru Smith",
+      "field": "minutes",
+      "original": "16.683333333333334"
+    },
+    {
+      "row": 1977,
+      "game_id": "0022500179",
+      "player_name": "Marcus Smart",
+      "field": "pts",
+      "original": "17"
+    },
+    {
+      "row": 1992,
+      "game_id": "0022500179",
+      "player_name": "Lindy Waters III",
+      "field": "minutes",
+      "original": "13.533333333333333"
+    },
+    {
+      "row": 1996,
+      "game_id": "0022500180",
+      "player_name": "Donovan Clingan",
+      "field": "minutes",
+      "original": "25.133333333333333"
+    },
+    {
+      "row": 2001,
+      "game_id": "0022500180",
+      "player_name": "Robert Williams III",
+      "field": "fg_pct",
+      "original": "0"
+    },
+    {
+      "row": 2025,
+      "game_id": "0022500181",
+      "player_name": "Jonathan Kuminga",
+      "field": "fg_pct",
+      "original": "0.421"
+    },
+    {
+      "row": 2037,
+      "game_id": "0022500182",
+      "player_name": "Mark Williams",
+      "field": "fg_pct",
+      "original": "0.5"
+    },
+    {
+      "row": 2038,
+      "game_id": "0022500182",
+      "player_name": "Jalen Green",
+      "field": "pts",
+      "original": "29"
+    },
+    {
+      "row": 2041,
+      "game_id": "0022500182",
+      "player_name": "Collin Gillespie",
+      "field": "fg_pct",
+      "original": "0"
+    },
+    {
+      "row": 2046,
+      "game_id": "0022500182",
+      "player_name": "Rasheer Fleming",
+      "field": "fg_pct",
+      "original": "0"
+    },
+    {
+      "row": 2075,
+      "game_id": "0022500183",
+      "player_name": "Max Christie",
+      "field": "fg_pct",
+      "original": "0.286"
+    },
+    {
+      "row": 2076,
+      "game_id": "0022500183",
+      "player_name": "D'Angelo Russell",
+      "field": "minutes",
+      "original": "17.45"
+    },
+    {
+      "row": 2077,
+      "game_id": "0022500183",
+      "player_name": "Moussa Cisse",
+      "field": "pts",
+      "original": "5"
+    },
+    {
+      "row": 2091,
+      "game_id": "0022500184",
+      "player_name": "Jabari Walker",
+      "field": "fg_pct",
+      "original": "0"
+    },
+    {
+      "row": 2093,
+      "game_id": "0022500184",
+      "player_name": "Ochai Agbaji",
+      "field": "minutes",
+      "original": "15.066666666666666"
+    },
+    {
+      "row": 2095,
+      "game_id": "0022500184",
+      "player_name": "Scottie Barnes",
+      "field": "pts",
+      "original": "18"
+    },
+    {
+      "row": 2100,
+      "game_id": "0022500184",
+      "player_name": "Jamal Shead",
+      "field": "minutes",
+      "original": "24"
+    },
+    {
+      "row": 2122,
+      "game_id": "0022500185",
+      "player_name": "Nick Smith Jr.",
+      "field": "fg_pct",
+      "original": "0.125"
+    },
+    {
+      "row": 2127,
+      "game_id": "0022500186",
+      "player_name": "Jarrett Allen",
+      "field": "fg_pct",
+      "original": "0.5"
+    },
+    {
+      "row": 2128,
+      "game_id": "0022500186",
+      "player_name": "Jaylon Tyson",
+      "field": "pts",
+      "original": "17"
+    },
+    {
+      "row": 2133,
+      "game_id": "0022500186",
+      "player_name": "Craig Porter Jr.",
+      "field": "minutes",
+      "original": "4.233333333333333"
+    },
+    {
+      "row": 2136,
+      "game_id": "0022500186",
+      "player_name": "Matas Buzelis",
+      "field": "pts",
+      "original": "4"
+    },
+    {
+      "row": 2139,
+      "game_id": "0022500186",
+      "player_name": "Josh Giddey",
+      "field": "minutes",
+      "original": "32.833333333333336"
+    },
+    {
+      "row": 2142,
+      "game_id": "0022500186",
+      "player_name": "Ayo Dosunmu",
+      "field": "fg_pct",
+      "original": "0.455"
+    },
+    {
+      "row": 2147,
+      "game_id": "0022500187",
+      "player_name": "Kel'el Ware",
+      "field": "minutes",
+      "original": "22.9"
+    },
+    {
+      "row": 2149,
+      "game_id": "0022500187",
+      "player_name": "Davion Mitchell",
+      "field": "fg_pct",
+      "original": "0.571"
+    },
+    {
+      "row": 2151,
+      "game_id": "0022500187",
+      "player_name": "Jaime Jaquez Jr.",
+      "field": "minutes",
+      "original": "29.133333333333333"
+    },
+    {
+      "row": 2158,
+      "game_id": "0022500187",
+      "player_name": "Jrue Holiday",
+      "field": "minutes",
+      "original": "34.916666666666664"
+    },
+    {
+      "row": 2163,
+      "game_id": "0022500187",
+      "player_name": "Duop Reath",
+      "field": "minutes",
+      "original": "11.616666666666667"
+    },
+    {
+      "row": 2165,
+      "game_id": "0022500188",
+      "player_name": "Harrison Barnes",
+      "field": "minutes",
+      "original": "27.95"
+    },
+    {
+      "row": 2166,
+      "game_id": "0022500188",
+      "player_name": "Victor Wembanyama",
+      "field": "fg_pct",
+      "original": "0.421"
+    },
+    {
+      "row": 2168,
+      "game_id": "0022500188",
+      "player_name": "De'Aaron Fox",
+      "field": "pts",
+      "original": "24"
+    },
+    {
+      "row": 2172,
+      "game_id": "0022500188",
+      "player_name": "Keldon Johnson",
+      "field": "minutes",
+      "original": "19.5"
+    },
+    {
+      "row": 2183,
+      "game_id": "0022500188",
+      "player_name": "Micah Peavy",
+      "field": "fg_pct",
+      "original": "0"
+    },
+    {
+      "row": 2195,
+      "game_id": "0022500189",
+      "player_name": "Hunter Tyson",
+      "field": "minutes",
+      "original": "3.2333333333333334"
+    },
+    {
+      "row": 2208,
+      "game_id": "0022500190",
+      "player_name": "Kris Dunn",
+      "field": "fg_pct",
+      "original": "0.6"
+    },
+    {
+      "row": 2208,
+      "game_id": "0022500190",
+      "player_name": "Kris Dunn",
+      "field": "minutes",
+      "original": "33.21666666666667"
+    },
+    {
+      "row": 2216,
+      "game_id": "0022500190",
+      "player_name": "Nicolas Batum",
+      "field": "fg_pct",
+      "original": "0.429"
+    },
+    {
+      "row": 2216,
+      "game_id": "0022500190",
+      "player_name": "Nicolas Batum",
+      "field": "minutes",
+      "original": "25.45"
+    },
+    {
+      "row": 2220,
+      "game_id": "0022500190",
+      "player_name": "Jalen Green",
+      "field": "minutes",
+      "original": "6.8"
+    },
+    {
+      "row": 2225,
+      "game_id": "0022500190",
+      "player_name": "Oso Ighodaro",
+      "field": "minutes",
+      "original": "4.15"
+    },
+    {
+      "row": 2245,
+      "game_id": "0022500191",
+      "player_name": "Clint Capela",
+      "field": "pts",
+      "original": "4"
+    },
+    {
+      "row": 2254,
+      "game_id": "0022500192",
+      "player_name": "Jordan Clarkson",
+      "field": "minutes",
+      "original": "18.116666666666667"
+    },
+    {
+      "row": 2254,
+      "game_id": "0022500192",
+      "player_name": "Jordan Clarkson",
+      "field": "pts",
+      "original": "11"
+    },
+    {
+      "row": 2255,
+      "game_id": "0022500192",
+      "player_name": "Guerschon Yabusele",
+      "field": "minutes",
+      "original": "10.416666666666666"
+    },
+    {
+      "row": 2258,
+      "game_id": "0022500192",
+      "player_name": "Mohamed Diawara",
+      "field": "minutes",
+      "original": "5.216666666666667"
+    },
+    {
+      "row": 2267,
+      "game_id": "0022500192",
+      "player_name": "Day'Ron Sharpe",
+      "field": "minutes",
+      "original": "12.183333333333334"
+    },
+    {
+      "row": 2285,
+      "game_id": "0022500193",
+      "player_name": "Neemias Queta",
+      "field": "pts",
+      "original": "8"
+    },
+    {
+      "row": 2287,
+      "game_id": "0022500193",
+      "player_name": "Payton Pritchard",
+      "field": "fg_pct",
+      "original": "0.25"
+    },
+    {
+      "row": 2300,
+      "game_id": "0022500194",
+      "player_name": "Vince Williams Jr.",
+      "field": "minutes",
+      "original": "14.383333333333333"
+    },
+    {
+      "row": 2301,
+      "game_id": "0022500194",
+      "player_name": "Cam Spencer",
+      "field": "fg_pct",
+      "original": "0.333"
+    },
+    {
+      "row": 2311,
+      "game_id": "0022500194",
+      "player_name": "Isaiah Joe",
+      "field": "fg_pct",
+      "original": "0.3"
+    },
+    {
+      "row": 2325,
+      "game_id": "0022500195",
+      "player_name": "Adem Bona",
+      "field": "pts",
+      "original": "2"
+    },
+    {
+      "row": 2333,
+      "game_id": "0022500195",
+      "player_name": "Caris LeVert",
+      "field": "minutes",
+      "original": "20.483333333333334"
+    },
+    {
+      "row": 2344,
+      "game_id": "0022500196",
+      "player_name": "Pat Spencer",
+      "field": "minutes",
+      "original": "16.183333333333334"
+    },
+    {
+      "row": 2353,
+      "game_id": "0022500196",
+      "player_name": "Andrew Nembhard",
+      "field": "fg_pct",
+      "original": "0.313"
+    },
+    {
+      "row": 2368,
+      "game_id": "0022500197",
+      "player_name": "Drew Eubanks",
+      "field": "minutes",
+      "original": "13.383333333333333"
+    },
+    {
+      "row": 2379,
+      "game_id": "0022500197",
+      "player_name": "Mike Conley",
+      "field": "fg_pct",
+      "original": "0.667"
+    },
+    {
+      "row": 2397,
+      "game_id": "0022500198",
+      "player_name": "Deandre Ayton",
+      "field": "minutes",
+      "original": "32.93333333333333"
+    },
+    {
+      "row": 2399,
+      "game_id": "0022500198",
+      "player_name": "Luka Dončić",
+      "field": "pts",
+      "original": "38"
+    },
+    {
+      "row": 2401,
+      "game_id": "0022500198",
+      "player_name": "Dalton Knecht",
+      "field": "minutes",
+      "original": "11.116666666666667"
+    },
+    {
+      "row": 2402,
+      "game_id": "0022500198",
+      "player_name": "Jaxson Hayes",
+      "field": "minutes",
+      "original": "14.883333333333333"
+    },
+    {
+      "row": 2404,
+      "game_id": "0022500199",
+      "player_name": "Javonte Green",
+      "field": "fg_pct",
+      "original": "0.364"
+    },
+    {
+      "row": 2405,
+      "game_id": "0022500199",
+      "player_name": "Ronald Holland II",
+      "field": "fg_pct",
+      "original": "0.25"
+    },
+    {
+      "row": 2408,
+      "game_id": "0022500199",
+      "player_name": "Cade Cunningham",
+      "field": "pts",
+      "original": "46"
+    },
+    {
+      "row": 2411,
+      "game_id": "0022500199",
+      "player_name": "Daniss Jenkins",
+      "field": "fg_pct",
+      "original": "0.529"
+    },
+    {
+      "row": 2415,
+      "game_id": "0022500199",
+      "player_name": "Alex Sarr",
+      "field": "fg_pct",
+      "original": "0.438"
+    },
+    {
+      "row": 2419,
+      "game_id": "0022500199",
+      "player_name": "Corey Kispert",
+      "field": "fg_pct",
+      "original": "1"
+    },
+    {
+      "row": 2426,
+      "game_id": "0022500200",
+      "player_name": "Wendell Carter Jr.",
+      "field": "fg_pct",
+      "original": "0.667"
+    },
+    {
+      "row": 2444,
+      "game_id": "0022500201",
+      "player_name": "Pelle Larsson",
+      "field": "minutes",
+      "original": "26.483333333333334"
+    },
+    {
+      "row": 2447,
+      "game_id": "0022500201",
+      "player_name": "Norman Powell",
+      "field": "fg_pct",
+      "original": "0.421"
+    },
+    {
+      "row": 2461,
+      "game_id": "0022500201",
+      "player_name": "Dean Wade",
+      "field": "pts",
+      "original": "9"
+    },
+    {
+      "row": 2462,
+      "game_id": "0022500201",
+      "player_name": "Craig Porter Jr.",
+      "field": "fg_pct",
+      "original": "0.5"
+    },
+    {
+      "row": 2465,
+      "game_id": "0022500202",
+      "player_name": "Nikola Vučević",
+      "field": "minutes",
+      "original": "28.6"
+    },
+    {
+      "row": 2483,
+      "game_id": "0022500202",
+      "player_name": "Carter Bryant",
+      "field": "pts",
+      "original": "2"
+    },
+    {
+      "row": 2491,
+      "game_id": "0022500203",
+      "player_name": "Moussa Cisse",
+      "field": "minutes",
+      "original": "19.683333333333334"
+    },
+    {
+      "row": 2493,
+      "game_id": "0022500203",
+      "player_name": "D'Angelo Russell",
+      "field": "minutes",
+      "original": "16.283333333333335"
+    },
+    {
+      "row": 2497,
+      "game_id": "0022500203",
+      "player_name": "Caleb Martin",
+      "field": "minutes",
+      "original": "9.416666666666666"
+    },
+    {
+      "row": 2501,
+      "game_id": "0022500203",
+      "player_name": "AJ Green",
+      "field": "fg_pct",
+      "original": "0.444"
+    },
+    {
+      "row": 2502,
+      "game_id": "0022500203",
+      "player_name": "Ryan Rollins",
+      "field": "fg_pct",
+      "original": "0.385"
+    },
+    {
+      "row": 2519,
+      "game_id": "0022500204",
+      "player_name": "Rasheer Fleming",
+      "field": "fg_pct",
+      "original": "0.667"
+    },
+    {
+      "row": 2525,
+      "game_id": "0022500204",
+      "player_name": "Jeremiah Fears",
+      "field": "fg_pct",
+      "original": "0.308"
+    },
+    {
+      "row": 2526,
+      "game_id": "0022500204",
+      "player_name": "Herbert Jones",
+      "field": "pts",
+      "original": "7"
+    },
+    {
+      "row": 2529,
+      "game_id": "0022500204",
+      "player_name": "Micah Peavy",
+      "field": "minutes",
+      "original": "16.15"
+    },
+    {
+      "row": 2531,
+      "game_id": "0022500204",
+      "player_name": "Jordan Hawkins",
+      "field": "fg_pct",
+      "original": "0"
+    },
+    {
+      "row": 2536,
+      "game_id": "0022500205",
+      "player_name": "Ace Bailey",
+      "field": "pts",
+      "original": "10"
+    },
+    {
+      "row": 2538,
+      "game_id": "0022500205",
+      "player_name": "Isaiah Collier",
+      "field": "fg_pct",
+      "original": "0.667"
+    },
+    {
+      "row": 2546,
+      "game_id": "0022500205",
+      "player_name": "Anthony Edwards",
+      "field": "pts",
+      "original": "35"
+    },
+    {
+      "row": 2547,
+      "game_id": "0022500205",
+      "player_name": "Donte DiVincenzo",
+      "field": "minutes",
+      "original": "37.46666666666667"
+    },
+    {
+      "row": 2547,
+      "game_id": "0022500205",
+      "player_name": "Donte DiVincenzo",
+      "field": "pts",
+      "original": "14"
+    },
+    {
+      "row": 2550,
+      "game_id": "0022500205",
+      "player_name": "Mike Conley",
+      "field": "minutes",
+      "original": "17.55"
+    },
+    {
+      "row": 2557,
+      "game_id": "0022500206",
+      "player_name": "Brook Lopez",
+      "field": "minutes",
+      "original": "16.616666666666667"
+    },
+    {
+      "row": 2566,
+      "game_id": "0022500206",
+      "player_name": "Onyeka Okongwu",
+      "field": "pts",
+      "original": "10"
+    },
+    {
+      "row": 2573,
+      "game_id": "0022500207",
+      "player_name": "Terance Mann",
+      "field": "fg_pct",
+      "original": "0.375"
+    },
+    {
+      "row": 2573,
+      "game_id": "0022500207",
+      "player_name": "Terance Mann",
+      "field": "minutes",
+      "original": "32.46666666666667"
+    },
+    {
+      "row": 2599,
+      "game_id": "0022500208",
+      "player_name": "Guerschon Yabusele",
+      "field": "minutes",
+      "original": "14.983333333333333"
+    },
+    {
+      "row": 2624,
+      "game_id": "0022500209",
+      "player_name": "Neemias Queta",
+      "field": "fg_pct",
+      "original": "0.5"
+    },
+    {
+      "row": 2636,
+      "game_id": "0022500210",
+      "player_name": "Shai Gilgeous-Alexander",
+      "field": "fg_pct",
+      "original": "0.474"
+    },
+    {
+      "row": 2637,
+      "game_id": "0022500210",
+      "player_name": "Jaylin Williams",
+      "field": "minutes",
+      "original": "30.05"
+    },
+    {
+      "row": 2641,
+      "game_id": "0022500210",
+      "player_name": "Ousmane Dieng",
+      "field": "fg_pct",
+      "original": "0.2"
+    },
+    {
+      "row": 2642,
+      "game_id": "0022500210",
+      "player_name": "Chris Youngblood",
+      "field": "fg_pct",
+      "original": "0"
+    },
+    {
+      "row": 2645,
+      "game_id": "0022500210",
+      "player_name": "Quinten Post",
+      "field": "minutes",
+      "original": "16.583333333333332"
+    },
+    {
+      "row": 2663,
+      "game_id": "0022500211",
+      "player_name": "Cody Williams",
+      "field": "fg_pct",
+      "original": "0.25"
+    },
+    {
+      "row": 2669,
+      "game_id": "0022500211",
+      "player_name": "Tony Bradley",
+      "field": "minutes",
+      "original": "19.633333333333333"
+    },
+    {
+      "row": 2675,
+      "game_id": "0022500211",
+      "player_name": "Jarace Walker",
+      "field": "minutes",
+      "original": "22.116666666666667"
+    },
+    {
+      "row": 2676,
+      "game_id": "0022500211",
+      "player_name": "Jay Huff",
+      "field": "minutes",
+      "original": "11.133333333333333"
+    },
+    {
+      "row": 2689,
+      "game_id": "0022500212",
+      "player_name": "Cameron Johnson",
+      "field": "fg_pct",
+      "original": "0.333"
+    },
+    {
+      "row": 2691,
+      "game_id": "0022500212",
+      "player_name": "Nikola Jokić",
+      "field": "minutes",
+      "original": "32.78333333333333"
+    },
+    {
+      "row": 2718,
+      "game_id": "0022500213",
+      "player_name": "Amir Coffey",
+      "field": "minutes",
+      "original": "11.633333333333333"
+    },
+    {
+      "row": 2721,
+      "game_id": "0022500213",
+      "player_name": "Andre Jackson Jr.",
+      "field": "fg_pct",
+      "original": "0"
+    },
+    {
+      "row": 2728,
+      "game_id": "0022500214",
+      "player_name": "Daniss Jenkins",
+      "field": "minutes",
+      "original": "40.11666666666667"
+    },
+    {
+      "row": 2734,
+      "game_id": "0022500214",
+      "player_name": "Isaac Okoro",
+      "field": "fg_pct",
+      "original": "0.714"
+    },
+    {
+      "row": 2737,
+      "game_id": "0022500214",
+      "player_name": "Kevin Huerter",
+      "field": "minutes",
+      "original": "27.2"
+    },
+    {
+      "row": 2740,
+      "game_id": "0022500214",
+      "player_name": "Ayo Dosunmu",
+      "field": "fg_pct",
+      "original": "0.333"
+    },
+    {
+      "row": 2742,
+      "game_id": "0022500214",
+      "player_name": "Jevon Carter",
+      "field": "minutes",
+      "original": "17.466666666666665"
+    },
+    {
+      "row": 2750,
+      "game_id": "0022500215",
+      "player_name": "Landry Shamet",
+      "field": "fg_pct",
+      "original": "0.667"
+    },
+    {
+      "row": 2751,
+      "game_id": "0022500215",
+      "player_name": "Josh Hart",
+      "field": "fg_pct",
+      "original": "0.4"
+    },
+    {
+      "row": 2759,
+      "game_id": "0022500215",
+      "player_name": "Paolo Banchero",
+      "field": "pts",
+      "original": "4"
+    },
+    {
+      "row": 2763,
+      "game_id": "0022500215",
+      "player_name": "Jalen Suggs",
+      "field": "minutes",
+      "original": "26.383333333333333"
+    },
+    {
+      "row": 2773,
+      "game_id": "0022500216",
+      "player_name": "Jordan Walsh",
+      "field": "minutes",
+      "original": "17.833333333333332"
+    },
+    {
+      "row": 2780,
+      "game_id": "0022500216",
+      "player_name": "Josh Minott",
+      "field": "fg_pct",
+      "original": "0.5"
+    },
+    {
+      "row": 2791,
+      "game_id": "0022500216",
+      "player_name": "Santi Aldama",
+      "field": "minutes",
+      "original": "23.583333333333332"
+    },
+    {
+      "row": 2794,
+      "game_id": "0022500216",
+      "player_name": "PJ Hall",
+      "field": "minutes",
+      "original": "7.033333333333333"
+    },
+    {
+      "row": 2800,
+      "game_id": "0022500217",
+      "player_name": "Norman Powell",
+      "field": "minutes",
+      "original": "32.5"
+    },
+    {
+      "row": 2812,
+      "game_id": "0022500217",
+      "player_name": "Larry Nance Jr.",
+      "field": "minutes",
+      "original": "19.416666666666668"
+    },
+    {
+      "row": 2819,
+      "game_id": "0022500218",
+      "player_name": "Alperen Sengun",
+      "field": "minutes",
+      "original": "27.766666666666666"
+    },
+    {
+      "row": 2827,
+      "game_id": "0022500218",
+      "player_name": "Aaron Holiday",
+      "field": "fg_pct",
+      "original": "0"
+    },
+    {
+      "row": 2831,
+      "game_id": "0022500218",
+      "player_name": "Khris Middleton",
+      "field": "minutes",
+      "original": "22.633333333333333"
+    },
+    {
+      "row": 2835,
+      "game_id": "0022500218",
+      "player_name": "Bub Carrington",
+      "field": "minutes",
+      "original": "19.466666666666665"
+    },
+    {
+      "row": 2843,
+      "game_id": "0022500219",
+      "player_name": "Trey Murphy III",
+      "field": "minutes",
+      "original": "39.483333333333334"
+    },
+    {
+      "row": 2847,
+      "game_id": "0022500219",
+      "player_name": "Jeremiah Fears",
+      "field": "fg_pct",
+      "original": "0.364"
+    },
+    {
+      "row": 2859,
+      "game_id": "0022500219",
+      "player_name": "Jerami Grant",
+      "field": "fg_pct",
+      "original": "0.333"
+    },
+    {
+      "row": 2860,
+      "game_id": "0022500219",
+      "player_name": "Robert Williams III",
+      "field": "fg_pct",
+      "original": "0.6"
+    },
+    {
+      "row": 2862,
+      "game_id": "0022500219",
+      "player_name": "Sidy Cissoko",
+      "field": "pts",
+      "original": "2"
+    },
+    {
+      "row": 2863,
+      "game_id": "0022500219",
+      "player_name": "Duop Reath",
+      "field": "minutes",
+      "original": "4.216666666666667"
+    },
+    {
+      "row": 2875,
+      "game_id": "0022500220",
+      "player_name": "Will Richard",
+      "field": "minutes",
+      "original": "21.683333333333334"
+    },
+    {
+      "row": 2877,
+      "game_id": "0022500220",
+      "player_name": "Draymond Green",
+      "field": "minutes",
+      "original": "26.683333333333334"
+    },
+    {
+      "row": 2879,
+      "game_id": "0022500220",
+      "player_name": "Stephen Curry",
+      "field": "fg_pct",
+      "original": "0.52"
+    },
+    {
+      "row": 2882,
+      "game_id": "0022500220",
+      "player_name": "Buddy Hield",
+      "field": "fg_pct",
+      "original": "0.25"
+    },
+    {
+      "row": 2889,
+      "game_id": "0022500221",
+      "player_name": "Max Christie",
+      "field": "minutes",
+      "original": "34.11666666666667"
+    },
+    {
+      "row": 2890,
+      "game_id": "0022500221",
+      "player_name": "Brandon Williams",
+      "field": "pts",
+      "original": "17"
+    },
+    {
+      "row": 2891,
+      "game_id": "0022500221",
+      "player_name": "Moussa Cisse",
+      "field": "fg_pct",
+      "original": "1"
+    },
+    {
+      "row": 2896,
+      "game_id": "0022500221",
+      "player_name": "Jaden Hardy",
+      "field": "fg_pct",
+      "original": "0.75"
+    },
+    {
+      "row": 2897,
+      "game_id": "0022500221",
+      "player_name": "Dwight Powell",
+      "field": "fg_pct",
+      "original": "0"
+    },
+    {
+      "row": 2899,
+      "game_id": "0022500221",
+      "player_name": "Royce O'Neale",
+      "field": "minutes",
+      "original": "27.533333333333335"
+    },
+    {
+      "row": 2908,
+      "game_id": "0022500222",
+      "player_name": "Cason Wallace",
+      "field": "minutes",
+      "original": "24.05"
+    },
+    {
+      "row": 2911,
+      "game_id": "0022500222",
+      "player_name": "Ajay Mitchell",
+      "field": "fg_pct",
+      "original": "0.462"
+    },
+    {
+      "row": 2921,
+      "game_id": "0022500222",
+      "player_name": "Rui Hachimura",
+      "field": "fg_pct",
+      "original": "0.455"
+    },
+    {
+      "row": 2926,
+      "game_id": "0022500222",
+      "player_name": "Jarred Vanderbilt",
+      "field": "minutes",
+      "original": "18.733333333333334"
+    },
+    {
+      "row": 2943,
+      "game_id": "0022500223",
+      "player_name": "Zaccharie Risacher",
+      "field": "minutes",
+      "original": "22.216666666666665"
+    },
+    {
+      "row": 2950,
+      "game_id": "0022500223",
+      "player_name": "Vít Krejčí",
+      "field": "fg_pct",
+      "original": "0.667"
+    },
+    {
+      "row": 2968,
+      "game_id": "0022500224",
+      "player_name": "Aaron Gordon",
+      "field": "fg_pct",
+      "original": "0.5"
+    },
+    {
+      "row": 2983,
+      "game_id": "0022500225",
+      "player_name": "Jarrett Allen",
+      "field": "fg_pct",
+      "original": "0.5"
+    },
+    {
+      "row": 2984,
+      "game_id": "0022500225",
+      "player_name": "Sam Merrill",
+      "field": "pts",
+      "original": "12"
+    },
+    {
+      "row": 3006,
+      "game_id": "0022500226",
+      "player_name": "Nick Richards",
+      "field": "minutes",
+      "original": "15.216666666666667"
+    },
+    {
+      "row": 3016,
+      "game_id": "0022500226",
+      "player_name": "Khaman Maluach",
+      "field": "fg_pct",
+      "original": "0.5"
+    },
+    {
+      "row": 3016,
+      "game_id": "0022500226",
+      "player_name": "Khaman Maluach",
+      "field": "pts",
+      "original": "2"
+    },
+    {
+      "row": 3028,
+      "game_id": "0022500226",
+      "player_name": "Taelon Peter",
+      "field": "minutes",
+      "original": "9.383333333333333"
+    },
+    {
+      "row": 3035,
+      "game_id": "0022500227",
+      "player_name": "Isaiah Collier",
+      "field": "minutes",
+      "original": "25.25"
+    },
+    {
+      "row": 3038,
+      "game_id": "0022500227",
+      "player_name": "Kevin Love",
+      "field": "fg_pct",
+      "original": "0.333"
+    },
+    {
+      "row": 3042,
+      "game_id": "0022500227",
+      "player_name": "Onyeka Okongwu",
+      "field": "fg_pct",
+      "original": "0.611"
+    },
+    {
+      "row": 3046,
+      "game_id": "0022500227",
+      "player_name": "Luke Kennard",
+      "field": "minutes",
+      "original": "20.216666666666665"
+    },
+    {
+      "row": 3053,
+      "game_id": "0022500228",
+      "player_name": "Sam Merrill",
+      "field": "minutes",
+      "original": "27.2"
+    },
+    {
+      "row": 3064,
+      "game_id": "0022500228",
+      "player_name": "Jaylen Wells",
+      "field": "minutes",
+      "original": "23.85"
+    },
+    {
+      "row": 3069,
+      "game_id": "0022500228",
+      "player_name": "Vince Williams Jr.",
+      "field": "fg_pct",
+      "original": "0.333"
+    },
+    {
+      "row": 3074,
+      "game_id": "0022500229",
+      "player_name": "Ryan Kalkbrenner",
+      "field": "fg_pct",
+      "original": "0.667"
+    },
+    {
+      "row": 3086,
+      "game_id": "0022500229",
+      "player_name": "Cason Wallace",
+      "field": "fg_pct",
+      "original": "0.571"
+    },
+    {
+      "row": 3094,
+      "game_id": "0022500230",
+      "player_name": "Jeremiah Robinson-Earl",
+      "field": "minutes",
+      "original": "30.283333333333335"
+    },
+    {
+      "row": 3099,
+      "game_id": "0022500230",
+      "player_name": "Isaiah Jackson",
+      "field": "fg_pct",
+      "original": "0.5"
+    },
+    {
+      "row": 3105,
+      "game_id": "0022500230",
+      "player_name": "Monté Morris",
+      "field": "fg_pct",
+      "original": "0"
+    },
+    {
+      "row": 3107,
+      "game_id": "0022500230",
+      "player_name": "Scottie Barnes",
+      "field": "minutes",
+      "original": "31.75"
+    },
+    {
+      "row": 3119,
+      "game_id": "0022500231",
+      "player_name": "Myles Turner",
+      "field": "fg_pct",
+      "original": "0.25"
+    },
+    {
+      "row": 3133,
+      "game_id": "0022500231",
+      "player_name": "Deandre Ayton",
+      "field": "minutes",
+      "original": "28.433333333333334"
+    },
+    {
+      "row": 3133,
+      "game_id": "0022500231",
+      "player_name": "Deandre Ayton",
+      "field": "pts",
+      "original": "20"
+    },
+    {
+      "row": 3140,
+      "game_id": "0022500231",
+      "player_name": "Jarred Vanderbilt",
+      "field": "fg_pct",
+      "original": "0"
+    },
+    {
+      "row": 3145,
+      "game_id": "0022500232",
+      "player_name": "Anthony Edwards",
+      "field": "minutes",
+      "original": "37.93333333333333"
+    },
+    {
+      "row": 3152,
+      "game_id": "0022500232",
+      "player_name": "Aaron Gordon",
+      "field": "pts",
+      "original": "23"
+    },
+    {
+      "row": 3156,
+      "game_id": "0022500232",
+      "player_name": "Bruce Brown",
+      "field": "pts",
+      "original": "7"
+    },
+    {
+      "row": 3157,
+      "game_id": "0022500232",
+      "player_name": "Julian Strawther",
+      "field": "fg_pct",
+      "original": "0"
+    },
+    {
+      "row": 3157,
+      "game_id": "0022500232",
+      "player_name": "Julian Strawther",
+      "field": "minutes",
+      "original": "6.066666666666666"
+    },
+    {
+      "row": 3170,
+      "game_id": "0022500233",
+      "player_name": "Derrick Jones Jr.",
+      "field": "minutes",
+      "original": "10.933333333333334"
+    },
+    {
+      "row": 3177,
+      "game_id": "0022500233",
+      "player_name": "Nicolas Batum",
+      "field": "minutes",
+      "original": "20.283333333333335"
+    },
+    {
+      "row": 3181,
+      "game_id": "0022500234",
+      "player_name": "Harrison Barnes",
+      "field": "minutes",
+      "original": "30.2"
+    },
+    {
+      "row": 3188,
+      "game_id": "0022500234",
+      "player_name": "Jeremy Sochan",
+      "field": "pts",
+      "original": "11"
+    },
+    {
+      "row": 3195,
+      "game_id": "0022500234",
+      "player_name": "Russell Westbrook",
+      "field": "fg_pct",
+      "original": "0.364"
+    },
+    {
+      "row": 3195,
+      "game_id": "0022500234",
+      "player_name": "Russell Westbrook",
+      "field": "pts",
+      "original": "14"
+    },
+    {
+      "row": 3203,
+      "game_id": "0022500235",
+      "player_name": "Alex Sarr",
+      "field": "minutes",
+      "original": "23.1"
+    },
+    {
+      "row": 3205,
+      "game_id": "0022500235",
+      "player_name": "CJ McCollum",
+      "field": "minutes",
+      "original": "32.15"
+    },
+    {
+      "row": 3209,
+      "game_id": "0022500235",
+      "player_name": "Marvin Bagley III",
+      "field": "pts",
+      "original": "4"
+    },
+    {
+      "row": 3218,
+      "game_id": "0022500235",
+      "player_name": "Egor Dëmin",
+      "field": "minutes",
+      "original": "19.733333333333334"
+    },
+    {
+      "row": 3223,
+      "game_id": "0022500235",
+      "player_name": "Jalen Wilson",
+      "field": "minutes",
+      "original": "2.2666666666666666"
+    },
+    {
+      "row": 3226,
+      "game_id": "0022500236",
+      "player_name": "Kevin Durant",
+      "field": "pts",
+      "original": "35"
+    },
+    {
+      "row": 3229,
+      "game_id": "0022500236",
+      "player_name": "Amen Thompson",
+      "field": "fg_pct",
+      "original": "0.308"
+    },
+    {
+      "row": 3233,
+      "game_id": "0022500236",
+      "player_name": "Reed Sheppard",
+      "field": "minutes",
+      "original": "28.766666666666666"
+    },
+    {
+      "row": 3239,
+      "game_id": "0022500236",
+      "player_name": "Goga Bitadze",
+      "field": "pts",
+      "original": "4"
+    },
+    {
+      "row": 3240,
+      "game_id": "0022500236",
+      "player_name": "Jett Howard",
+      "field": "fg_pct",
+      "original": "0.333"
+    },
+    {
+      "row": 3241,
+      "game_id": "0022500236",
+      "player_name": "Tyus Jones",
+      "field": "minutes",
+      "original": "15.333333333333334"
+    },
+    {
+      "row": 3252,
+      "game_id": "0022500237",
+      "player_name": "Bryce McGowens",
+      "field": "minutes",
+      "original": "12.583333333333334"
+    },
+    {
+      "row": 3255,
+      "game_id": "0022500237",
+      "player_name": "Jimmy Butler III",
+      "field": "fg_pct",
+      "original": "0.75"
+    },
+    {
+      "row": 3258,
+      "game_id": "0022500237",
+      "player_name": "Stephen Curry",
+      "field": "pts",
+      "original": "9"
+    },
+    {
+      "row": 3264,
+      "game_id": "0022500237",
+      "player_name": "Pat Spencer",
+      "field": "minutes",
+      "original": "4.716666666666667"
+    },
+    {
+      "row": 3271,
+      "game_id": "0022500238",
+      "player_name": "Brandon Williams",
+      "field": "pts",
+      "original": "15"
+    },
+    {
+      "row": 3280,
+      "game_id": "0022500238",
+      "player_name": "Donovan Clingan",
+      "field": "minutes",
+      "original": "27.9"
+    },
+    {
+      "row": 3309,
+      "game_id": "0022500240",
+      "player_name": "Lauri Markkanen",
+      "field": "fg_pct",
+      "original": "0.455"
+    },
+    {
+      "row": 3310,
+      "game_id": "0022500240",
+      "player_name": "Jusuf Nurkić",
+      "field": "pts",
+      "original": "5"
+    },
+    {
+      "row": 3315,
+      "game_id": "0022500240",
+      "player_name": "Kyle Filipowski",
+      "field": "minutes",
+      "original": "21.116666666666667"
+    },
+    {
+      "row": 3316,
+      "game_id": "0022500240",
+      "player_name": "Isaiah Collier",
+      "field": "minutes",
+      "original": "36.5"
+    },
+    {
+      "row": 3318,
+      "game_id": "0022500240",
+      "player_name": "Isaac Okoro",
+      "field": "pts",
+      "original": "5"
+    },
+    {
+      "row": 3321,
+      "game_id": "0022500240",
+      "player_name": "Kevin Huerter",
+      "field": "minutes",
+      "original": "32.516666666666666"
+    },
+    {
+      "row": 3325,
+      "game_id": "0022500240",
+      "player_name": "Patrick Williams",
+      "field": "pts",
+      "original": "8"
+    },
+    {
+      "row": 3332,
+      "game_id": "0022500241",
+      "player_name": "Donovan Mitchell",
+      "field": "pts",
+      "original": "37"
+    },
+    {
+      "row": 3334,
+      "game_id": "0022500241",
+      "player_name": "Lonzo Ball",
+      "field": "fg_pct",
+      "original": "0.25"
+    },
+    {
+      "row": 3352,
+      "game_id": "0022500242",
+      "player_name": "Daniss Jenkins",
+      "field": "minutes",
+      "original": "33.45"
+    },
+    {
+      "row": 3366,
+      "game_id": "0022500242",
+      "player_name": "Jay Huff",
+      "field": "minutes",
+      "original": "8.05"
+    },
+    {
+      "row": 3373,
+      "game_id": "0022500243",
+      "player_name": "Andre Drummond",
+      "field": "pts",
+      "original": "14"
+    },
+    {
+      "row": 3386,
+      "game_id": "0022500243",
+      "player_name": "Brook Lopez",
+      "field": "minutes",
+      "original": "14.033333333333333"
+    },
+    {
+      "row": 3389,
+      "game_id": "0022500243",
+      "player_name": "Nicolas Batum",
+      "field": "minutes",
+      "original": "20.8"
+    },
+    {
+      "row": 3399,
+      "game_id": "0022500244",
+      "player_name": "Dru Smith",
+      "field": "minutes",
+      "original": "15.5"
+    },
+    {
+      "row": 3402,
+      "game_id": "0022500244",
+      "player_name": "Karl-Anthony Towns",
+      "field": "fg_pct",
+      "original": "0.368"
+    },
+    {
+      "row": 3404,
+      "game_id": "0022500244",
+      "player_name": "Landry Shamet",
+      "field": "fg_pct",
+      "original": "0.182"
+    },
+    {
+      "row": 3409,
+      "game_id": "0022500244",
+      "player_name": "Guerschon Yabusele",
+      "field": "minutes",
+      "original": "10"
+    },
+    {
+      "row": 3414,
+      "game_id": "0022500245",
+      "player_name": "Immanuel Quickley",
+      "field": "minutes",
+      "original": "31.066666666666666"
+    },
+    {
+      "row": 3422,
+      "game_id": "0022500245",
+      "player_name": "Ryan Kalkbrenner",
+      "field": "minutes",
+      "original": "28.466666666666665"
+    },
+    {
+      "row": 3427,
+      "game_id": "0022500245",
+      "player_name": "Moussa Diabaté",
+      "field": "minutes",
+      "original": "19.566666666666666"
+    },
+    {
+      "row": 3430,
+      "game_id": "0022500246",
+      "player_name": "Jaden McDaniels",
+      "field": "minutes",
+      "original": "23.283333333333335"
+    },
+    {
+      "row": 3435,
+      "game_id": "0022500246",
+      "player_name": "Naz Reid",
+      "field": "minutes",
+      "original": "22.566666666666666"
+    },
+    {
+      "row": 3436,
+      "game_id": "0022500246",
+      "player_name": "Mike Conley",
+      "field": "minutes",
+      "original": "15.683333333333334"
+    },
+    {
+      "row": 3437,
+      "game_id": "0022500246",
+      "player_name": "Jaylen Clark",
+      "field": "fg_pct",
+      "original": "0.4"
+    },
+    {
+      "row": 3448,
+      "game_id": "0022500246",
+      "player_name": "Brandon Williams",
+      "field": "minutes",
+      "original": "24.3"
+    },
+    {
+      "row": 3451,
+      "game_id": "0022500246",
+      "player_name": "D'Angelo Russell",
+      "field": "fg_pct",
+      "original": "0.364"
+    },
+    {
+      "row": 3458,
+      "game_id": "0022500247",
+      "player_name": "Yves Missi",
+      "field": "minutes",
+      "original": "21.9"
+    },
+    {
+      "row": 3461,
+      "game_id": "0022500247",
+      "player_name": "Micah Peavy",
+      "field": "minutes",
+      "original": "24.183333333333334"
+    },
+    {
+      "row": 3492,
+      "game_id": "0022500248",
+      "player_name": "Josh Giddey",
+      "field": "minutes",
+      "original": "30.316666666666666"
+    },
+    {
+      "row": 3499,
+      "game_id": "0022500249",
+      "player_name": "Tristan da Silva",
+      "field": "minutes",
+      "original": "28.866666666666667"
+    },
+    {
+      "row": 3508,
+      "game_id": "0022500249",
+      "player_name": "Jamal Cain",
+      "field": "minutes",
+      "original": "0.15"
+    },
+    {
+      "row": 3513,
+      "game_id": "0022500249",
+      "player_name": "Stephen Curry",
+      "field": "fg_pct",
+      "original": "0.522"
+    },
+    {
+      "row": 3515,
+      "game_id": "0022500249",
+      "player_name": "Gary Payton II",
+      "field": "fg_pct",
+      "original": "0.667"
+    },
+    {
+      "row": 3515,
+      "game_id": "0022500249",
+      "player_name": "Gary Payton II",
+      "field": "pts",
+      "original": "4"
+    },
+    {
+      "row": 3517,
+      "game_id": "0022500249",
+      "player_name": "Al Horford",
+      "field": "minutes",
+      "original": "27.166666666666668"
+    },
+    {
+      "row": 3520,
+      "game_id": "0022500250",
+      "player_name": "Noah Clowney",
+      "field": "minutes",
+      "original": "22.683333333333334"
+    },
+    {
+      "row": 3520,
+      "game_id": "0022500250",
+      "player_name": "Noah Clowney",
+      "field": "pts",
+      "original": "13"
+    },
+    {
+      "row": 3523,
+      "game_id": "0022500250",
+      "player_name": "Egor Dëmin",
+      "field": "minutes",
+      "original": "23.25"
+    },
+    {
+      "row": 3524,
+      "game_id": "0022500250",
+      "player_name": "Drake Powell",
+      "field": "fg_pct",
+      "original": "0.2"
+    },
+    {
+      "row": 3527,
+      "game_id": "0022500250",
+      "player_name": "Day'Ron Sharpe",
+      "field": "minutes",
+      "original": "17.9"
+    },
+    {
+      "row": 3531,
+      "game_id": "0022500250",
+      "player_name": "Jaylen Brown",
+      "field": "minutes",
+      "original": "32"
+    },
+    {
+      "row": 3534,
+      "game_id": "0022500250",
+      "player_name": "Derrick White",
+      "field": "minutes",
+      "original": "32.78333333333333"
+    },
+    {
+      "row": 3537,
+      "game_id": "0022500250",
+      "player_name": "Luka Garza",
+      "field": "minutes",
+      "original": "20.383333333333333"
+    },
+    {
+      "row": 3540,
+      "game_id": "0022500250",
+      "player_name": "Baylor Scheierman",
+      "field": "pts",
+      "original": "3"
+    },
+    {
+      "row": 3546,
+      "game_id": "0022500251",
+      "player_name": "Nickeil Alexander-Walker",
+      "field": "minutes",
+      "original": "36.71666666666667"
+    },
+    {
+      "row": 3548,
+      "game_id": "0022500251",
+      "player_name": "Mouhamed Gueye",
+      "field": "minutes",
+      "original": "21.4"
+    },
+    {
+      "row": 3562,
+      "game_id": "0022500252",
+      "player_name": "Julian Champagnie",
+      "field": "pts",
+      "original": "9"
+    },
+    {
+      "row": 3563,
+      "game_id": "0022500252",
+      "player_name": "Harrison Barnes",
+      "field": "pts",
+      "original": "23"
+    },
+    {
+      "row": 3565,
+      "game_id": "0022500252",
+      "player_name": "Devin Vassell",
+      "field": "fg_pct",
+      "original": "0.273"
+    },
+    {
+      "row": 3568,
+      "game_id": "0022500252",
+      "player_name": "Keldon Johnson",
+      "field": "minutes",
+      "original": "30.233333333333334"
+    },
+    {
+      "row": 3576,
+      "game_id": "0022500252",
+      "player_name": "Cedric Coward",
+      "field": "pts",
+      "original": "19"
+    },
+    {
+      "row": 3578,
+      "game_id": "0022500252",
+      "player_name": "Cam Spencer",
+      "field": "fg_pct",
+      "original": "0.6"
+    },
+    {
+      "row": 3587,
+      "game_id": "0022500253",
+      "player_name": "Luka Dončić",
+      "field": "minutes",
+      "original": "34.233333333333334"
+    },
+    {
+      "row": 3600,
+      "game_id": "0022500253",
+      "player_name": "Keyonte George",
+      "field": "pts",
+      "original": "34"
+    },
+    {
+      "row": 3601,
+      "game_id": "0022500253",
+      "player_name": "Kevin Love",
+      "field": "fg_pct",
+      "original": "0"
+    },
+    {
+      "row": 3606,
+      "game_id": "0022500253",
+      "player_name": "Elijah Harkless",
+      "field": "minutes",
+      "original": "2.6666666666666665"
+    },
+    {
+      "row": 3609,
+      "game_id": "0022500254",
+      "player_name": "Donovan Clingan",
+      "field": "minutes",
+      "original": "23.45"
+    },
+    {
+      "row": 3615,
+      "game_id": "0022500254",
+      "player_name": "Duop Reath",
+      "field": "minutes",
+      "original": "10.416666666666666"
+    },
+    {
+      "row": 3622,
+      "game_id": "0022500254",
+      "player_name": "Devin Booker",
+      "field": "minutes",
+      "original": "29.05"
+    },
+    {
+      "row": 3629,
+      "game_id": "0022500254",
+      "player_name": "Nigel Hayes-Davis",
+      "field": "pts",
+      "original": "0"
+    },
+    {
+      "row": 3638,
+      "game_id": "0022500255",
+      "player_name": "Dean Wade",
+      "field": "minutes",
+      "original": "26.716666666666665"
+    },
+    {
+      "row": 3647,
+      "game_id": "0022500255",
+      "player_name": "Josh Okogie",
+      "field": "fg_pct",
+      "original": "0"
+    },
+    {
+      "row": 3647,
+      "game_id": "0022500255",
+      "player_name": "Josh Okogie",
+      "field": "minutes",
+      "original": "8.133333333333333"
+    },
+    {
+      "row": 3650,
+      "game_id": "0022500255",
+      "player_name": "Jae'Sean Tate",
+      "field": "pts",
+      "original": "0"
+    },
+    {
+      "row": 3655,
+      "game_id": "0022500256",
+      "player_name": "Andrew Nembhard",
+      "field": "pts",
+      "original": "16"
+    },
+    {
+      "row": 3658,
+      "game_id": "0022500256",
+      "player_name": "Jeremiah Robinson-Earl",
+      "field": "minutes",
+      "original": "16.516666666666666"
+    },
+    {
+      "row": 3660,
+      "game_id": "0022500256",
+      "player_name": "T.J. McConnell",
+      "field": "minutes",
+      "original": "14.05"
+    },
+    {
+      "row": 3667,
+      "game_id": "0022500256",
+      "player_name": "Collin Sexton",
+      "field": "fg_pct",
+      "original": "0.308"
+    },
+    {
+      "row": 3675,
+      "game_id": "0022500257",
+      "player_name": "Davion Mitchell",
+      "field": "pts",
+      "original": "5"
+    },
+    {
+      "row": 3676,
+      "game_id": "0022500257",
+      "player_name": "Jaime Jaquez Jr.",
+      "field": "pts",
+      "original": "12"
+    },
+    {
+      "row": 3684,
+      "game_id": "0022500257",
+      "player_name": "Brandin Podziemski",
+      "field": "minutes",
+      "original": "34.45"
+    },
+    {
+      "row": 3693,
+      "game_id": "0022500258",
+      "player_name": "Tyrese Maxey",
+      "field": "minutes",
+      "original": "38.5"
+    },
+    {
+      "row": 3699,
+      "game_id": "0022500258",
+      "player_name": "Scottie Barnes",
+      "field": "fg_pct",
+      "original": "0.471"
+    },
+    {
+      "row": 3700,
+      "game_id": "0022500258",
+      "player_name": "Jakob Poeltl",
+      "field": "fg_pct",
+      "original": "0.8"
+    },
+    {
+      "row": 3703,
+      "game_id": "0022500258",
+      "player_name": "Ja'Kobe Walter",
+      "field": "minutes",
+      "original": "14.55"
+    },
+    {
+      "row": 3712,
+      "game_id": "0022500259",
+      "player_name": "Mike Conley",
+      "field": "minutes",
+      "original": "27.416666666666668"
+    },
+    {
+      "row": 3720,
+      "game_id": "0022500259",
+      "player_name": "Kyshawn George",
+      "field": "minutes",
+      "original": "37.36666666666667"
+    },
+    {
+      "row": 3728,
+      "game_id": "0022500260",
+      "player_name": "Zion Williamson",
+      "field": "fg_pct",
+      "original": "0.462"
+    },
+    {
+      "row": 3734,
+      "game_id": "0022500260",
+      "player_name": "Jose Alvarado",
+      "field": "minutes",
+      "original": "18.9"
+    },
+    {
+      "row": 3749,
+      "game_id": "0022500261",
+      "player_name": "Isaiah Hartenstein",
+      "field": "minutes",
+      "original": "26.516666666666666"
+    },
+    {
+      "row": 3750,
+      "game_id": "0022500261",
+      "player_name": "Cason Wallace",
+      "field": "minutes",
+      "original": "26.083333333333332"
+    },
+    {
+      "row": 3756,
+      "game_id": "0022500261",
+      "player_name": "Alex Caruso",
+      "field": "fg_pct",
+      "original": "0.143"
+    },
+    {
+      "row": 3770,
+      "game_id": "0022500262",
+      "player_name": "P.J. Washington",
+      "field": "minutes",
+      "original": "33.43333333333333"
+    },
+    {
+      "row": 3774,
+      "game_id": "0022500262",
+      "player_name": "D'Angelo Russell",
+      "field": "fg_pct",
+      "original": "0.6"
+    },
+    {
+      "row": 3795,
+      "game_id": "0022500263",
+      "player_name": "Caleb Love",
+      "field": "pts",
+      "original": "5"
+    },
+    {
+      "row": 3798,
+      "game_id": "0022500263",
+      "player_name": "Duop Reath",
+      "field": "pts",
+      "original": "0"
+    },
+    {
+      "row": 3815,
+      "game_id": "0022500264",
+      "player_name": "Jalen Suggs",
+      "field": "minutes",
+      "original": "26.25"
+    },
+    {
+      "row": 3819,
+      "game_id": "0022500264",
+      "player_name": "Jonathan Isaac",
+      "field": "pts",
+      "original": "9"
+    },
+    {
+      "row": 3828,
+      "game_id": "0022500264",
+      "player_name": "Brook Lopez",
+      "field": "minutes",
+      "original": "5.816666666666666"
+    },
+    {
+      "row": 3833,
+      "game_id": "0022500264",
+      "player_name": "Kobe Brown",
+      "field": "minutes",
+      "original": "15.65"
+    },
+    {
+      "row": 3836,
+      "game_id": "0022500265",
+      "player_name": "Jaylen Wells",
+      "field": "fg_pct",
+      "original": "0.444"
+    },
+    {
+      "row": 3838,
+      "game_id": "0022500265",
+      "player_name": "Zach Edey",
+      "field": "fg_pct",
+      "original": "1"
+    },
+    {
+      "row": 3844,
+      "game_id": "0022500265",
+      "player_name": "Olivier-Maxence Prosper",
+      "field": "minutes",
+      "original": "18"
+    },
+    {
+      "row": 3849,
+      "game_id": "0022500265",
+      "player_name": "Precious Achiuwa",
+      "field": "fg_pct",
+      "original": "0.333"
+    },
+    {
+      "row": 3855,
+      "game_id": "0022500265",
+      "player_name": "Malik Monk",
+      "field": "minutes",
+      "original": "14.066666666666666"
+    },
+    {
+      "row": 3856,
+      "game_id": "0022500265",
+      "player_name": "Dennis Schröder",
+      "field": "minutes",
+      "original": "25.1"
+    },
+    {
+      "row": 3861,
+      "game_id": "0022500266",
+      "player_name": "Myles Turner",
+      "field": "minutes",
+      "original": "28.45"
+    },
+    {
+      "row": 3903,
+      "game_id": "0022500268",
+      "player_name": "Sion James",
+      "field": "pts",
+      "original": "3"
+    },
+    {
+      "row": 3911,
+      "game_id": "0022500268",
+      "player_name": "John Collins",
+      "field": "minutes",
+      "original": "25.55"
+    },
+    {
+      "row": 3916,
+      "game_id": "0022500268",
+      "player_name": "Nicolas Batum",
+      "field": "minutes",
+      "original": "19.183333333333334"
+    },
+    {
+      "row": 3925,
+      "game_id": "0022500269",
+      "player_name": "Desmond Bane",
+      "field": "minutes",
+      "original": "32.266666666666666"
+    },
+    {
+      "row": 3960,
+      "game_id": "0022500270",
+      "player_name": "Nickeil Alexander-Walker",
+      "field": "pts",
+      "original": "10"
+    },
+    {
+      "row": 3964,
+      "game_id": "0022500270",
+      "player_name": "Asa Newell",
+      "field": "minutes",
+      "original": "2.6"
+    },
+    {
+      "row": 3970,
+      "game_id": "0022500271",
+      "player_name": "Coby White",
+      "field": "minutes",
+      "original": "31.316666666666666"
+    },
+    {
+      "row": 3974,
+      "game_id": "0022500271",
+      "player_name": "Julian Phillips",
+      "field": "minutes",
+      "original": "9.966666666666667"
+    },
+    {
+      "row": 3979,
+      "game_id": "0022500271",
+      "player_name": "Bilal Coulibaly",
+      "field": "fg_pct",
+      "original": "0.333"
+    },
+    {
+      "row": 3987,
+      "game_id": "0022500271",
+      "player_name": "Will Riley",
+      "field": "pts",
+      "original": "0"
+    },
+    {
+      "row": 3993,
+      "game_id": "0022500272",
+      "player_name": "Andre Jackson Jr.",
+      "field": "pts",
+      "original": "6"
+    },
+    {
+      "row": 4007,
+      "game_id": "0022500272",
+      "player_name": "Isaiah Stewart",
+      "field": "minutes",
+      "original": "23.366666666666667"
+    },
+    {
+      "row": 4015,
+      "game_id": "0022500273",
+      "player_name": "Cooper Flagg",
+      "field": "minutes",
+      "original": "33.43333333333333"
+    },
+    {
+      "row": 4029,
+      "game_id": "0022500273",
+      "player_name": "Cedric Coward",
+      "field": "minutes",
+      "original": "25.2"
+    },
+    {
+      "row": 4030,
+      "game_id": "0022500273",
+      "player_name": "Vince Williams Jr.",
+      "field": "minutes",
+      "original": "24.133333333333333"
+    },
+    {
+      "row": 4031,
+      "game_id": "0022500273",
+      "player_name": "Kentavious Caldwell-Pope",
+      "field": "minutes",
+      "original": "25.316666666666666"
+    },
+    {
+      "row": 4037,
+      "game_id": "0022500274",
+      "player_name": "Peyton Watson",
+      "field": "minutes",
+      "original": "34.166666666666664"
+    },
+    {
+      "row": 4038,
+      "game_id": "0022500274",
+      "player_name": "Spencer Jones",
+      "field": "minutes",
+      "original": "23.533333333333335"
+    },
+    {
+      "row": 4045,
+      "game_id": "0022500274",
+      "player_name": "Jonas Valančiūnas",
+      "field": "fg_pct",
+      "original": "0.5"
+    },
+    {
+      "row": 4047,
+      "game_id": "0022500274",
+      "player_name": "Keegan Murray",
+      "field": "fg_pct",
+      "original": "0.5"
+    },
+    {
+      "row": 4047,
+      "game_id": "0022500274",
+      "player_name": "Keegan Murray",
+      "field": "minutes",
+      "original": "36.55"
+    },
+    {
+      "row": 4048,
+      "game_id": "0022500274",
+      "player_name": "Drew Eubanks",
+      "field": "minutes",
+      "original": "21.633333333333333"
+    },
+    {
+      "row": 4049,
+      "game_id": "0022500274",
+      "player_name": "Zach LaVine",
+      "field": "fg_pct",
+      "original": "0.429"
+    },
+    {
+      "row": 4052,
+      "game_id": "0022500274",
+      "player_name": "Precious Achiuwa",
+      "field": "pts",
+      "original": "7"
+    },
+    {
+      "row": 4055,
+      "game_id": "0022500274",
+      "player_name": "Malik Monk",
+      "field": "pts",
+      "original": "12"
+    },
+    {
+      "row": 4082,
+      "game_id": "0022500276",
+      "player_name": "Nickeil Alexander-Walker",
+      "field": "fg_pct",
+      "original": "0.471"
+    },
+    {
+      "row": 4086,
+      "game_id": "0022500276",
+      "player_name": "Asa Newell",
+      "field": "minutes",
+      "original": "4.5"
+    },
+    {
+      "row": 4087,
+      "game_id": "0022500276",
+      "player_name": "Kon Knueppel",
+      "field": "fg_pct",
+      "original": "0.529"
+    },
+    {
+      "row": 4087,
+      "game_id": "0022500276",
+      "player_name": "Kon Knueppel",
+      "field": "minutes",
+      "original": "34.45"
+    },
+    {
+      "row": 4098,
+      "game_id": "0022500277",
+      "player_name": "Jordan Walsh",
+      "field": "minutes",
+      "original": "24.316666666666666"
+    },
+    {
+      "row": 4099,
+      "game_id": "0022500277",
+      "player_name": "Neemias Queta",
+      "field": "fg_pct",
+      "original": "1"
+    },
+    {
+      "row": 4105,
+      "game_id": "0022500277",
+      "player_name": "Josh Minott",
+      "field": "fg_pct",
+      "original": "0.875"
+    },
+    {
+      "row": 4117,
+      "game_id": "0022500277",
+      "player_name": "Jase Richardson",
+      "field": "fg_pct",
+      "original": "0.636"
+    },
+    {
+      "row": 4120,
+      "game_id": "0022500278",
+      "player_name": "De'Andre Hunter",
+      "field": "fg_pct",
+      "original": "0.455"
+    },
+    {
+      "row": 4121,
+      "game_id": "0022500278",
+      "player_name": "Evan Mobley",
+      "field": "minutes",
+      "original": "34.35"
+    },
+    {
+      "row": 4125,
+      "game_id": "0022500278",
+      "player_name": "Dean Wade",
+      "field": "pts",
+      "original": "5"
+    },
+    {
+      "row": 4140,
+      "game_id": "0022500278",
+      "player_name": "Jahmyl Telfort",
+      "field": "minutes",
+      "original": "3.533333333333333"
+    },
+    {
+      "row": 4148,
+      "game_id": "0022500279",
+      "player_name": "Ja'Kobe Walter",
+      "field": "minutes",
+      "original": "19.216666666666665"
+    },
+    {
+      "row": 4164,
+      "game_id": "0022500280",
+      "player_name": "Chet Holmgren",
+      "field": "fg_pct",
+      "original": "0.25"
+    },
+    {
+      "row": 4164,
+      "game_id": "0022500280",
+      "player_name": "Chet Holmgren",
+      "field": "minutes",
+      "original": "25.4"
+    },
+    {
+      "row": 4166,
+      "game_id": "0022500280",
+      "player_name": "Cason Wallace",
+      "field": "fg_pct",
+      "original": "0.333"
+    },
+    {
+      "row": 4168,
+      "game_id": "0022500280",
+      "player_name": "Jaylin Williams",
+      "field": "fg_pct",
+      "original": "0.333"
+    },
+    {
+      "row": 4171,
+      "game_id": "0022500280",
+      "player_name": "Alex Caruso",
+      "field": "pts",
+      "original": "5"
+    },
+    {
+      "row": 4177,
+      "game_id": "0022500280",
+      "player_name": "Toumani Camara",
+      "field": "fg_pct",
+      "original": "0.333"
+    },
+    {
+      "row": 4177,
+      "game_id": "0022500280",
+      "player_name": "Toumani Camara",
+      "field": "minutes",
+      "original": "26.566666666666666"
+    },
+    {
+      "row": 4189,
+      "game_id": "0022500281",
+      "player_name": "Mark Williams",
+      "field": "minutes",
+      "original": "28.6"
+    },
+    {
+      "row": 4190,
+      "game_id": "0022500281",
+      "player_name": "Jordan Goodwin",
+      "field": "minutes",
+      "original": "33.05"
+    },
+    {
+      "row": 4201,
+      "game_id": "0022500281",
+      "player_name": "Kelly Olynyk",
+      "field": "minutes",
+      "original": "14.05"
+    },
+    {
+      "row": 4218,
+      "game_id": "0022500282",
+      "player_name": "Rui Hachimura",
+      "field": "fg_pct",
+      "original": "0.5"
+    },
+    {
+      "row": 4223,
+      "game_id": "0022500282",
+      "player_name": "Jaxson Hayes",
+      "field": "minutes",
+      "original": "18.166666666666668"
+    },
+    {
+      "row": 4225,
+      "game_id": "0022500282",
+      "player_name": "Gabe Vincent",
+      "field": "minutes",
+      "original": "20.233333333333334"
+    },
+    {
+      "row": 4229,
+      "game_id": "0022500283",
+      "player_name": "Isaiah Jackson",
+      "field": "fg_pct",
+      "original": "0.5"
+    },
+    {
+      "row": 4236,
+      "game_id": "0022500283",
+      "player_name": "Garrison Mathews",
+      "field": "minutes",
+      "original": "5.833333333333333"
+    },
+    {
+      "row": 4237,
+      "game_id": "0022500283",
+      "player_name": "Tony Bradley",
+      "field": "fg_pct",
+      "original": "0"
+    },
+    {
+      "row": 4237,
+      "game_id": "0022500283",
+      "player_name": "Tony Bradley",
+      "field": "minutes",
+      "original": "6.433333333333334"
+    },
+    {
+      "row": 4238,
+      "game_id": "0022500283",
+      "player_name": "Ausar Thompson",
+      "field": "fg_pct",
+      "original": "0.667"
+    },
+    {
+      "row": 4242,
+      "game_id": "0022500283",
+      "player_name": "Cade Cunningham",
+      "field": "minutes",
+      "original": "35.8"
+    },
+    {
+      "row": 4250,
+      "game_id": "0022500284",
+      "player_name": "Scottie Barnes",
+      "field": "fg_pct",
+      "original": "0.615"
+    },
+    {
+      "row": 4271,
+      "game_id": "0022500285",
+      "player_name": "Noah Clowney",
+      "field": "pts",
+      "original": "31"
+    },
+    {
+      "row": 4274,
+      "game_id": "0022500285",
+      "player_name": "Egor Dëmin",
+      "field": "fg_pct",
+      "original": "0.364"
+    },
+    {
+      "row": 4275,
+      "game_id": "0022500285",
+      "player_name": "Drake Powell",
+      "field": "fg_pct",
+      "original": "0.5"
+    },
+    {
+      "row": 4279,
+      "game_id": "0022500285",
+      "player_name": "E.J. Liddell",
+      "field": "fg_pct",
+      "original": "0"
+    },
+    {
+      "row": 4288,
+      "game_id": "0022500285",
+      "player_name": "Ariel Hukporti",
+      "field": "fg_pct",
+      "original": "0"
+    },
+    {
+      "row": 4298,
+      "game_id": "0022500286",
+      "player_name": "Davion Mitchell",
+      "field": "pts",
+      "original": "8"
+    },
+    {
+      "row": 4302,
+      "game_id": "0022500286",
+      "player_name": "Dru Smith",
+      "field": "minutes",
+      "original": "15.816666666666666"
+    },
+    {
+      "row": 4313,
+      "game_id": "0022500286",
+      "player_name": "Caleb Martin",
+      "field": "minutes",
+      "original": "4.683333333333334"
+    },
+    {
+      "row": 4324,
+      "game_id": "0022500287",
+      "player_name": "Jock Landale",
+      "field": "fg_pct",
+      "original": "0.556"
+    },
+    {
+      "row": 4325,
+      "game_id": "0022500287",
+      "player_name": "John Konchar",
+      "field": "fg_pct",
+      "original": "0"
+    },
+    {
+      "row": 4325,
+      "game_id": "0022500287",
+      "player_name": "John Konchar",
+      "field": "minutes",
+      "original": "7.916666666666667"
+    },
+    {
+      "row": 4335,
+      "game_id": "0022500288",
+      "player_name": "Kyle Kuzma",
+      "field": "fg_pct",
+      "original": "0.556"
+    },
+    {
+      "row": 4335,
+      "game_id": "0022500288",
+      "player_name": "Kyle Kuzma",
+      "field": "minutes",
+      "original": "27.283333333333335"
+    },
+    {
+      "row": 4356,
+      "game_id": "0022500288",
+      "player_name": "Robert Williams III",
+      "field": "fg_pct",
+      "original": "0.6"
+    },
+    {
+      "row": 4360,
+      "game_id": "0022500289",
+      "player_name": "Saddiq Bey",
+      "field": "minutes",
+      "original": "34.483333333333334"
+    },
+    {
+      "row": 4366,
+      "game_id": "0022500289",
+      "player_name": "Jose Alvarado",
+      "field": "minutes",
+      "original": "31.933333333333334"
+    },
+    {
+      "row": 4372,
+      "game_id": "0022500289",
+      "player_name": "Coby White",
+      "field": "minutes",
+      "original": "35.266666666666666"
+    },
+    {
+      "row": 4400,
+      "game_id": "0022500290",
+      "player_name": "Isaiah Crawford",
+      "field": "fg_pct",
+      "original": "0"
+    },
+    {
+      "row": 4418,
+      "game_id": "0022500291",
+      "player_name": "Kyle Anderson",
+      "field": "fg_pct",
+      "original": "0.857"
+    },
+    {
+      "row": 4425,
+      "game_id": "0022500292",
+      "player_name": "Drew Eubanks",
+      "field": "pts",
+      "original": "2"
+    },
+    {
+      "row": 4431,
+      "game_id": "0022500292",
+      "player_name": "Malik Monk",
+      "field": "minutes",
+      "original": "26.083333333333332"
+    },
+    {
+      "row": 4438,
+      "game_id": "0022500292",
+      "player_name": "Donte DiVincenzo",
+      "field": "minutes",
+      "original": "37.05"
+    },
+    {
+      "row": 4439,
+      "game_id": "0022500292",
+      "player_name": "Naz Reid",
+      "field": "minutes",
+      "original": "23.45"
+    },
+    {
+      "row": 4440,
+      "game_id": "0022500292",
+      "player_name": "Mike Conley",
+      "field": "minutes",
+      "original": "24.966666666666665"
+    },
+    {
+      "row": 4440,
+      "game_id": "0022500292",
+      "player_name": "Mike Conley",
+      "field": "pts",
+      "original": "3"
+    },
+    {
+      "row": 4455,
+      "game_id": "0022500293",
+      "player_name": "Jordan Walsh",
+      "field": "minutes",
+      "original": "19.833333333333332"
+    },
+    {
+      "row": 4467,
+      "game_id": "0022500294",
+      "player_name": "Brandon Miller",
+      "field": "fg_pct",
+      "original": "0.077"
+    },
+    {
+      "row": 4476,
+      "game_id": "0022500294",
+      "player_name": "Jakob Poeltl",
+      "field": "pts",
+      "original": "8"
+    },
+    {
+      "row": 4491,
+      "game_id": "0022500295",
+      "player_name": "Isaiah Jackson",
+      "field": "minutes",
+      "original": "22.733333333333334"
+    },
+    {
+      "row": 4496,
+      "game_id": "0022500295",
+      "player_name": "Nikola Vučević",
+      "field": "pts",
+      "original": "16"
+    },
+    {
+      "row": 4501,
+      "game_id": "0022500295",
+      "player_name": "Tre Jones",
+      "field": "fg_pct",
+      "original": "0.778"
+    },
+    {
+      "row": 4507,
+      "game_id": "0022500296",
+      "player_name": "Tyler Herro",
+      "field": "fg_pct",
+      "original": "0.353"
+    },
+    {
+      "row": 4508,
+      "game_id": "0022500296",
+      "player_name": "Davion Mitchell",
+      "field": "minutes",
+      "original": "32.1"
+    },
+    {
+      "row": 4517,
+      "game_id": "0022500296",
+      "player_name": "Cade Cunningham",
+      "field": "minutes",
+      "original": "38.38333333333333"
+    },
+    {
+      "row": 4522,
+      "game_id": "0022500296",
+      "player_name": "Javonte Green",
+      "field": "pts",
+      "original": "5"
+    },
+    {
+      "row": 4534,
+      "game_id": "0022500297",
+      "player_name": "Cole Anthony",
+      "field": "fg_pct",
+      "original": "0.5"
+    },
+    {
+      "row": 4543,
+      "game_id": "0022500297",
+      "player_name": "Danny Wolf",
+      "field": "minutes",
+      "original": "30.283333333333335"
+    },
+    {
+      "row": 4549,
+      "game_id": "0022500298",
+      "player_name": "Jimmy Butler III",
+      "field": "minutes",
+      "original": "37.233333333333334"
+    },
+    {
+      "row": 4551,
+      "game_id": "0022500298",
+      "player_name": "Quinten Post",
+      "field": "minutes",
+      "original": "16.683333333333334"
+    },
+    {
+      "row": 4560,
+      "game_id": "0022500298",
+      "player_name": "Zion Williamson",
+      "field": "minutes",
+      "original": "30.733333333333334"
+    },
+    {
+      "row": 4565,
+      "game_id": "0022500298",
+      "player_name": "Micah Peavy",
+      "field": "fg_pct",
+      "original": "0.25"
+    },
+    {
+      "row": 4575,
+      "game_id": "0022500299",
+      "player_name": "Nick Richards",
+      "field": "fg_pct",
+      "original": "0"
+    },
+    {
+      "row": 4609,
+      "game_id": "0022500300",
+      "player_name": "Caleb Martin",
+      "field": "minutes",
+      "original": "21.4"
+    },
+    {
+      "row": 4622,
+      "game_id": "0022500301",
+      "player_name": "Kevin Durant",
+      "field": "pts",
+      "original": "25"
+    },
+    {
+      "row": 4625,
+      "game_id": "0022500301",
+      "player_name": "Amen Thompson",
+      "field": "minutes",
+      "original": "30.833333333333332"
+    },
+    {
+      "row": 4628,
+      "game_id": "0022500301",
+      "player_name": "Steven Adams",
+      "field": "fg_pct",
+      "original": "0.5"
+    },
+    {
+      "row": 4628,
+      "game_id": "0022500301",
+      "player_name": "Steven Adams",
+      "field": "minutes",
+      "original": "16.95"
+    },
+    {
+      "row": 4632,
+      "game_id": "0022500301",
+      "player_name": "Jeff Green",
+      "field": "fg_pct",
+      "original": "0.4"
+    },
+    {
+      "row": 4638,
+      "game_id": "0022500302",
+      "player_name": "Darius Garland",
+      "field": "fg_pct",
+      "original": "0.438"
+    },
+    {
+      "row": 4645,
+      "game_id": "0022500302",
+      "player_name": "Jordan Walsh",
+      "field": "minutes",
+      "original": "38.06666666666667"
+    },
+    {
+      "row": 4659,
+      "game_id": "0022500303",
+      "player_name": "Jordan Clarkson",
+      "field": "fg_pct",
+      "original": "0.385"
+    },
+    {
+      "row": 4663,
+      "game_id": "0022500303",
+      "player_name": "Ariel Hukporti",
+      "field": "pts",
+      "original": "0"
+    },
+    {
+      "row": 4667,
+      "game_id": "0022500303",
+      "player_name": "Brandon Ingram",
+      "field": "minutes",
+      "original": "32.1"
+    },
+    {
+      "row": 4669,
+      "game_id": "0022500303",
+      "player_name": "Immanuel Quickley",
+      "field": "minutes",
+      "original": "34.766666666666666"
+    },
+    {
+      "row": 4682,
+      "game_id": "0022500304",
+      "player_name": "Tyrese Maxey",
+      "field": "fg_pct",
+      "original": "0.452"
+    },
+    {
+      "row": 4703,
+      "game_id": "0022500305",
+      "player_name": "Rayan Rupert",
+      "field": "minutes",
+      "original": "6.45"
+    },
+    {
+      "row": 4709,
+      "game_id": "0022500305",
+      "player_name": "Luguentz Dort",
+      "field": "pts",
+      "original": "10"
+    },
+    {
+      "row": 4720,
+      "game_id": "0022500306",
+      "player_name": "Julius Randle",
+      "field": "pts",
+      "original": "22"
+    },
+    {
+      "row": 4725,
+      "game_id": "0022500306",
+      "player_name": "Naz Reid",
+      "field": "fg_pct",
+      "original": "0.545"
+    },
+    {
+      "row": 4726,
+      "game_id": "0022500306",
+      "player_name": "Mike Conley",
+      "field": "minutes",
+      "original": "17.116666666666667"
+    },
+    {
+      "row": 4730,
+      "game_id": "0022500306",
+      "player_name": "Johnny Juzang",
+      "field": "fg_pct",
+      "original": "0"
+    },
+    {
+      "row": 4734,
+      "game_id": "0022500306",
+      "player_name": "Luke Kornet",
+      "field": "minutes",
+      "original": "23.783333333333335"
+    },
+    {
+      "row": 4739,
+      "game_id": "0022500306",
+      "player_name": "Kelly Olynyk",
+      "field": "fg_pct",
+      "original": "0.75"
+    },
+    {
+      "row": 4739,
+      "game_id": "0022500306",
+      "player_name": "Kelly Olynyk",
+      "field": "minutes",
+      "original": "13.516666666666667"
+    },
+    {
+      "row": 4744,
+      "game_id": "0022500306",
+      "player_name": "David Jones Garcia",
+      "field": "fg_pct",
+      "original": "0"
+    },
+    {
+      "row": 4746,
+      "game_id": "0022500307",
+      "player_name": "Keegan Murray",
+      "field": "minutes",
+      "original": "36.483333333333334"
+    },
+    {
+      "row": 4747,
+      "game_id": "0022500307",
+      "player_name": "Drew Eubanks",
+      "field": "pts",
+      "original": "4"
+    },
+    {
+      "row": 4750,
+      "game_id": "0022500307",
+      "player_name": "Precious Achiuwa",
+      "field": "minutes",
+      "original": "23.716666666666665"
+    },
+    {
+      "row": 4757,
+      "game_id": "0022500307",
+      "player_name": "Zach Edey",
+      "field": "fg_pct",
+      "original": "0.8"
+    },
+    {
+      "row": 4757,
+      "game_id": "0022500307",
+      "player_name": "Zach Edey",
+      "field": "minutes",
+      "original": "29.433333333333334"
+    },
+    {
+      "row": 4759,
+      "game_id": "0022500307",
+      "player_name": "Vince Williams Jr.",
+      "field": "fg_pct",
+      "original": "0"
+    },
+    {
+      "row": 4772,
+      "game_id": "0022500308",
+      "player_name": "Dalton Knecht",
+      "field": "minutes",
+      "original": "17.416666666666668"
+    },
+    {
+      "row": 4778,
+      "game_id": "0022500308",
+      "player_name": "Bryce McGowens",
+      "field": "minutes",
+      "original": "33.483333333333334"
+    }
+  ]
+}

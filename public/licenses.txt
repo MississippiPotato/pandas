@@ -1,4 +1,4 @@
-NBA DataLab — third-party runtime notices
+pandas Visual Analysis Workbench — third-party runtime notices
 
 D3.js: ISC. read-excel-file: MIT. Additional package notices follow.
 NBA data source notices are separate and recorded in the data manifest.
@@ -573,3 +573,19 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 Commits in this fork are (c) Nikolay Kuchumov (kuchumovn@gmail.com)
 and fall under same licence structure as the original repo (MIT)
 
+
+
+Titanic example data
+====================
+Source: mwaskom/seaborn-data, titanic.csv, commit a29a0141d20e156043ec257a64c8de3b3a03fd6e.
+https://github.com/mwaskom/seaborn-data/blob/a29a0141d20e156043ec257a64c8de3b3a03fd6e/titanic.csv
+Publisher points to https://www.kaggle.com/c/titanic/data as the upstream source.
+891-row teaching sample. Natural missing values retained. passenger_id is a generated row identifier.
+Dataset source notices and terms are separate from the software licenses above.
+NBA monthly examples are derived from the pinned November 2025 snapshot described in data/nba/2025-26-nov/manifest.json.
+
+NBA missingness exercise
+========================
+The NBA Player Games Missingness Exercise is a deliberately modified teaching copy.
+726 observed values are removed by a fixed rule; see data/examples/nba-missing-audit.json.
+This does not describe official NBA missingness. Original values are provided separately.

@@ -1,3 +1,4 @@
+import {isNumericColumn} from '../../data/semantics.js';
 import { ensure, unsupported } from '../errors.js';
 import { field, rows, keyOf, resultTable, columnValues } from '../dataset.js';
 import { aggregate } from '../statistics.js';
@@ -10,7 +11,7 @@ export function validateMetrics(table, metrics) {
     const c = field(table, m.field);
     ensure(['sum', 'mean', 'median', 'min', 'max', 'std', 'var', 'count', 'size', 'nunique'].includes(m.fn), 'INVALID_AGG');
     ensure(typeof m.as === 'string' && m.as.trim(), 'METRIC_NAME');
-    if (!['count', 'size', 'nunique'].includes(m.fn)) ensure(['number', 'integer', 'boolean'].includes(c.type), 'NUMERIC_REQUIRED');
+    if (!['count', 'size', 'nunique'].includes(m.fn)) ensure((isNumericColumn(c)||c.type==='boolean'), 'NUMERIC_REQUIRED');
   });
   ensure(new Set(metrics.map(m => m.as)).size === metrics.length, 'DUPLICATE_METRIC');
 }

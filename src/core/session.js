@@ -1,3 +1,4 @@
+import {visualSummary} from './visual-summary.js';
 import { ensure } from './errors.js';
 import { History } from './history.js';
 import { execute } from './operation-registry.js';
@@ -47,7 +48,8 @@ export class Session {
     if (selection) table = execute(table, { type: 'filter', params: { predicate: selection } }).table;
     return { version: this.#version, activeId: this.#active, rows: rowCount(table), committedRows: rowCount(this.activeTable),
       columns: table.columns, records: rows(table, offset, limit), rowIds: visibleIds(table).slice(offset, offset + limit),
-      profile: profile(table), nodes: this.nodes(), history: this.history, result: this.#results.get(this.#active).report ?? null,
+      steps:this.nodes().map(n=>({id:n.id,code:this.#results.get(n.id).pandas?.code??'',report:this.#results.get(n.id).report??null})),
+      profile: {rows:rowCount(table),columns:visualSummary(table)}, nodes: this.nodes(), history: this.history, result: this.#results.get(this.#active).report ?? null,
       provenance:table.provenance,lineage:table.lineage,pandas:this.#results.get(this.#active).pandas??null,
       tables:[...this.#results].map(([id,r])=>({id,rows:rowCount(r.table),columns:r.table.columns,provenance:r.table.provenance})) };
   }

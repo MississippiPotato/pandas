@@ -1,3 +1,4 @@
+import {isNumericColumn} from '../data/semantics.js';
 import { ensure } from './errors.js';
 import { columnValues, rowCount, field } from './dataset.js';
 export const numeric = values => values.filter(v => typeof v === 'number' && Number.isFinite(v));
@@ -38,8 +39,8 @@ export function valueCounts(values, { dropna = false, normalize = false } = {}) 
 export function profile(table) {
   return { rows: rowCount(table), columns: table.columns.map(c => {
     const vals = columnValues(table, c.id), missing = vals.filter(v => v === null).length;
-    const base = { ...c, count: vals.length - missing, missing, missingRate: vals.length ? missing / vals.length : null, unique: new Set(vals).size };
-    if (['number', 'integer'].includes(c.type)) return { ...base,
+    const base = { ...c, count: vals.length - missing, missing, missingRate: vals.length ? missing / vals.length : null, unique: new Set(vals.filter(v=>v!==null)).size };
+    if (isNumericColumn(c)) return { ...base,
       ...Object.fromEntries(['mean', 'median', 'min', 'max', 'std', 'var'].map(fn => [fn, aggregate(vals, fn)])),
       q1: quantile(vals, .25), q3: quantile(vals, .75) };
     return { ...base, values: valueCounts(vals) };
@@ -47,7 +48,7 @@ export function profile(table) {
 }
 export function correlation(table, fields, minPeriods = 2) {
   ensure(Number.isInteger(minPeriods) && minPeriods >= 2, 'INVALID_MIN_PERIODS');
-  fields.forEach(ref => ensure(['number', 'integer'].includes(field(table, ref).type), 'NUMERIC_REQUIRED', { field: ref }));
+  fields.forEach(ref => ensure(isNumericColumn(field(table, ref)), 'NUMERIC_REQUIRED', { field: ref }));
   return fields.flatMap(x => fields.map(y => {
     const xs = columnValues(table, x), ys = columnValues(table, y), pairs = xs.map((v, i) => [v, ys[i]]).filter(p => p.every(v => typeof v === 'number'));
     const n = pairs.length;

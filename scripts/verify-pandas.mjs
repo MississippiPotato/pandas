@@ -47,6 +47,8 @@ add('boolean numeric coercion does not become one or zero',[{x:true},{x:false},{
 add('numeric text conversion uses decimal JavaScript formatting',[{x:1},{x:.000001},{x:.0000001},{x:null}],[{type:'cast',params:{field:'x',type:'string'}}],[{name:'x',type:'number'}]);
 add('qcut all equal values yields missing bins',[{x:3},{x:3},{x:null}],[{type:'qcut',params:{field:'x',q:4,duplicates:'drop',as:'q'}}],[{name:'x',type:'number'}]);
 add('derived mixed branch normalizes output text',[{x:0},{x:2},{x:null}],[{type:'derive',params:{name:'label',expression:{type:'call',fn:'if',args:[{type:'binary',op:'>',left:{type:'field',field:'x'},right:{type:'literal',value:1}},{type:'literal',value:'High'},{type:'field',field:'x'}]}}}],[{name:'x',type:'number'}]);
+add('identifier role keeps leading zeros in grouping counts',[{id:'001',value:2},{id:'001',value:null},{id:'002',value:5}],[{type:'group',params:{keys:['id'],metrics:[{field:'id',fn:'count',as:'n'},{field:'value',fn:'sum',as:'total'}]}}],[{name:'id',type:'string',semantic:'key'},{name:'value',type:'number'}]);
+add('manual identifier conversion enables explicit numeric means',[{id:1001,g:'A'},{id:1003,g:'A'}],[{type:'cast',params:{field:'id',type:'number',semantic:'value'}},{type:'group',params:{keys:['g'],metrics:[{field:'id',fn:'mean',as:'explicit_mean'}]}}],[{name:'id',type:'integer',semantic:'key'},{name:'g',type:'string'}]);
 const output = new URL('../output/verification/',import.meta.url); await mkdir(output,{recursive:true});
 const results=[];
 const selected=process.env.PANDAS_CASE?cases.filter(c=>c.name.includes(process.env.PANDAS_CASE)):cases;

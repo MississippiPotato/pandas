@@ -1,0 +1,31 @@
+team,team_full_name,city,conference,games_played
+ATL,Atlanta Hawks,Atlanta,East,15
+BOS,Boston Celtics,Boston,East,14
+CLE,Cleveland Cavaliers,Cleveland,East,15
+NOP,New Orleans Pelicans,New Orleans,West,16
+CHI,Chicago Bulls,Chicago,East,14
+DAL,Dallas Mavericks,Dallas,West,16
+DEN,Denver Nuggets,Denver,West,14
+GSW,Golden State Warriors,Golden State,West,15
+HOU,Houston Rockets,Houston,West,13
+LAC,LA Clippers,LA,West,15
+LAL,Los Angeles Lakers,Los Angeles,West,13
+MIA,Miami Heat,Miami,East,15
+MIL,Milwaukee Bucks,Milwaukee,East,16
+MIN,Minnesota Timberwolves,Minnesota,West,15
+BKN,Brooklyn Nets,Brooklyn,East,14
+NYK,New York Knicks,New York,East,14
+ORL,Orlando Magic,Orlando,East,14
+IND,Indiana Pacers,Indiana,East,15
+PHI,Philadelphia 76ers,Philadelphia,East,14
+PHX,Phoenix Suns,Phoenix,West,15
+POR,Portland Trail Blazers,Portland,West,14
+SAC,Sacramento Kings,Sacramento,West,16
+SAS,San Antonio Spurs,San Antonio,West,14
+OKC,Oklahoma City Thunder,Oklahoma City,West,15
+TOR,Toronto Raptors,Toronto,East,15
+UTA,Utah Jazz,Utah,West,14
+MEM,Memphis Grizzlies,Memphis,West,15
+WAS,Washington Wizards,Washington,East,13
+DET,Detroit Pistons,Detroit,East,15
+CHA,Charlotte Hornets,Charlotte,East,15

@@ -1,12 +1,13 @@
+import {visualDiff,visualSummary} from './visual-summary.js';
 import {chartQuery} from './analytics.js';
-import {profile} from './statistics.js';
+import {isNumericColumn} from '../data/semantics.js';
 import {rows, field, visibleIds, keyOf} from './dataset.js';
 
 // Read-only payload shared by the Worker and semantic tests. Counts use full tables.
 export function operationPreview(inputs, spec, result) {
   const before=inputs[0], after=result.table, p=spec.params??{};
-  const beforeProfile=profile(before), afterProfile=profile(after);
-  const focus=before.columns.find(c=>c.id===p.field||c.name===p.field)??before.columns.find(c=>['integer','number'].includes(c.type));
+  const beforeProfile={rows:before.index.length,columns:visualSummary(before)}, afterProfile={rows:after.index.length,columns:visualSummary(after)};
+  const focus=before.columns.find(c=>c.id===p.field||c.name===p.field)??before.columns.find(isNumericColumn);
   const afterFocus=after.columns.find(c=>c.id===focus?.id);
   const extentValues=focus&&afterFocus?[...before.index.map(i=>before.values[focus.id][i]),...after.index.map(i=>after.values[afterFocus.id][i])].filter(v=>typeof v==='number'&&Number.isFinite(v)):[];
   const histogramDomain=extentValues.length?extentValues.reduce(([lo,hi],v)=>[Math.min(lo,v),Math.max(hi,v)],[Infinity,-Infinity]):undefined;
@@ -14,6 +15,7 @@ export function operationPreview(inputs, spec, result) {
   const missing=beforeProfile.columns.map(c=>{const a=afterProfile.columns.find(a=>a.id===c.id);return {id:c.id,name:c.name,before:c.missing,after:a?.missing??null,beforeRows:before.index.length,afterRows:after.index.length};});
   const output={report:result.report,pandas:result.pandas,rows:after.index.length,columns:after.columns,records:rows(after,0,8),profile:afterProfile,
     charts:chartQuery(after,config),beforeCharts:chartQuery(before,config),missing,focus:focus?.name,
+    diff:visualDiff(before,after,spec),summaries:visualSummary(before),
     inputs:inputs.map(t=>({id:t.id,fileName:t.provenance?.fileName??t.id,rows:t.index.length,columns:t.columns})),spec};
   if(spec.type==='group') {
     const records=rows(after), ids=visibleIds(after), keys=p.keys.map(k=>field(before,k)), metric=p.metrics[0];

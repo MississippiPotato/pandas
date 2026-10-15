@@ -1,0 +1,51 @@
+async(page)=>{
+  const checks=[],check=(name,pass,detail)=>{checks.push({name,pass:!!pass,detail});if(!pass)throw Error(name+': '+JSON.stringify(detail));};
+  const idle=()=>page.waitForFunction(()=>document.querySelector('#busy')?.hidden,{}, {timeout:30000});
+  const form=()=>page.locator('#operation-form'),set=(name,value)=>form().locator(`[name="${name}"]`).selectOption(value),fill=(name,value)=>form().locator(`[name="${name}"]`).fill(value);
+  const preview=async()=>{await page.locator('[data-action=preview]').click();await page.waitForSelector('#operation-preview .preview-result');await idle();};
+  const apply=async()=>{await page.locator('[data-action=commit]').click();await idle();await page.waitForSelector('#operation-preview:empty',{state:'attached'});};
+  const stats=()=>page.locator('.work-stats strong').allTextContents();
+  await page.goto('http://127.0.0.1:4176/#/studio?table=nba_players');await page.waitForSelector('#operation-form select');await idle();
+  await set('operation','merge');await set('rightTable','source:example_nba_teams');await set('left0','example_nba_players:c1');await set('right0','example_nba_teams:c0');await preview();
+  check('merge overlap uses distinct readable team keys',await page.locator('.overlap-choice').nth(1).textContent().then(s=>s.includes('30')));
+  check('merge estimates real 475 × 16 output and no new nulls',await page.locator('#operation-widgets').innerText().then(s=>s.includes('475 × 16')&&s.includes(': 0')),await page.locator('#operation-widgets').innerText());
+  await page.locator('.overlap-choice').first().click();await preview();check('overlap segment configures actual left join',await form().locator('[name=how]').inputValue()==='left'&&await page.locator('#live-preview-code').innerText().then(s=>s.includes('"left"')));
+  await apply();check('merge commits 475 rows and 16 columns',JSON.stringify(await stats()).startsWith('["475","16"'),await stats());
+  const url=page.url();await page.reload();await page.waitForSelector('#operation-form select');await idle();
+  check('operation query restores exact derived table on refresh',page.url()===url&&JSON.stringify(await stats()).startsWith('["475","16"'),await stats());
+  check('refresh restores generated merge code',await page.locator('.live-code').innerText().then(s=>s.includes('.merge(')));
+  await page.locator('.dataset-item [data-node="source:example_nba_players"]').click();await idle();await set('operation','cut');await set('field','example_nba_players:c6');await fill('edges','0,10,20,30,50');await preview();
+  check('cut displays draggable edges and per-bin percentages',await page.locator('#operation-widgets .edge').count()===5&&await page.locator('#operation-widgets').innerText().then(s=>s.includes('%')));
+  const edge=page.locator('#operation-widgets .edge').nth(1);await edge.scrollIntoViewIfNeeded();const b=await edge.boundingBox();
+  await page.mouse.move(b.x+b.width/2,b.y+20);await page.mouse.down();await page.mouse.move(b.x+14,b.y+20,{steps:8});await page.mouse.up();
+  const moved=await form().locator('[name=edges]').inputValue();check('real edge drag updates cut parameters',moved!=='0,10,20,30,50',moved);await preview();
+  check('dragged edges update equivalent pandas code',await page.locator('#live-preview-code').innerText().then(s=>s.includes('.cut(')&&s.includes(moved.split(',')[1])));
+  await set('operation','qcut');await set('field','example_nba_players:c6');await preview();check('qcut shows computed quartile edges',await page.locator('#operation-widgets .edge').count()===5);
+  await set('operation','filter');await set('field0','example_nba_players:c6');
+  const brush=page.locator('#operation-widgets .widget-brush .overlay');await brush.scrollIntoViewIfNeeded();const bb=await brush.boundingBox();
+  await page.mouse.move(bb.x+bb.width*.3,bb.y+bb.height/2);await page.mouse.down();await page.mouse.move(bb.x+bb.width*.7,bb.y+bb.height/2,{steps:8});await page.mouse.up();await preview();
+  check('operation histogram brush configures between and count preview',await form().locator('[name=operator0]').inputValue()==='between'&&await page.locator('#operation-widgets').textContent().then(s=>/\d+ \/ 475/.test(s)));
+  await apply();check('visual filter commits a smaller real table',Number((await stats())[0])>0&&Number((await stats())[0])<475,await stats());
+  await page.locator('.dataset-item [data-node="source:example_nba_players"]').click();await idle();await page.selectOption('#chart-type','scatter');await idle();
+  const row=page.locator('.result-card tbody tr').first();await row.hover();check('table hover highlights corresponding plotted row',await page.locator('#main-chart .row-highlight').count()===1);
+  // Pointer tooltip traverses the brush overlay, which otherwise intercepts mark events.
+  const point=page.locator('#main-chart path[data-row-id]').first();await point.scrollIntoViewIfNeeded();const pb=await point.boundingBox();await page.mouse.move(pb.x+pb.width/2,pb.y+pb.height/2);
+  check('scatter has a live global tooltip through the brush overlay',await page.locator('#chart-tooltip').isVisible());
+  await page.selectOption('#chart-type','bar');const bar=page.locator('#main-chart .bar-row rect').first();await bar.hover();check('bar tooltip includes value and input sample units',await page.locator('#chart-tooltip').isVisible()&&await page.locator('#chart-tooltip').innerText().then(s=>s.includes('n=')));
+  await bar.click();await idle();check('bar click filters linked DataFrame details',Number((await stats())[0])<475&&await page.locator('.selection-strip.has-selection').count()===1);
+  await page.locator('[data-action=clear-selection]').click();await idle();
+  // Load optional raw NBA table from the same user-facing data picker.
+  await page.locator('[data-action=add-nba]').click();await page.locator('dialog details summary').click();await page.locator('dialog [data-source=player_game_stats]').click();await idle();
+  const numOptions=await page.locator('[data-config=x] option').allTextContents();check('raw NBA ID fields excluded from numeric mapping',!numOptions.some(s=>/player_id|team_id|game_id/.test(s)),numOptions);
+  check('raw ID fields retain visible key badges',await page.locator('.field-type-button').filter({hasText:'ID'}).count()===3);
+  await page.locator('[data-tab=statistics]').click();check('describe excludes ID means',await page.locator('.profile-summary tbody tr').filter({hasText:'player_id'}).innerText().then(s=>!s.includes('162')));
+  await page.locator('.field-type-button[data-change-type="nba_player_game_stats:c1"]').click();await page.selectOption('#semantic-type','number');await page.locator('#apply-type').click();await idle();
+  check('manual type badge conversion becomes a replayable cast',await page.locator('.live-code').innerText().then(s=>s.includes('_nd_cast('))&&await page.locator('[data-config=x] option').allTextContents().then(ss=>ss.some(s=>s.includes('team_id'))));
+  await page.locator('[data-action=undo]').click();await idle();check('undo restores ID isolation',!(await page.locator('[data-config=x] option').allTextContents()).some(s=>s.includes('team_id')));
+  await page.goto('http://127.0.0.1:4176/#/nba?tab=court');await page.waitForSelector('#nba-entity');await idle();
+  check('English court case has no untranslated Chinese notes',!/[\u4e00-\u9fff]/.test(await page.locator('body').innerText()));
+  await page.locator('[data-action=send-studio]').click();await page.waitForSelector('#operation-form select');await idle();
+  check('Studio court shares translated coordinate note',await page.locator('.coordinate-note').innerText().then(s=>s.includes('Provider definition')&&!/[\u4e00-\u9fff]/.test(s)));
+  await page.locator('[data-action=locale]').click();check('Chinese Studio court translates same coordinate note',await page.locator('.coordinate-note').innerText().then(s=>s.includes('供应方定义')));
+  return {passed:checks.filter(c=>c.pass).length,total:checks.length,checks};
+}

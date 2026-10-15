@@ -1,0 +1,41 @@
+async(page)=>{
+  const checks=[],check=(name,pass,detail)=>{checks.push({name,pass:!!pass,detail});if(!pass)throw Error(name+': '+JSON.stringify(detail));};
+  const idle=()=>page.waitForFunction(()=>document.querySelector('#busy')?.hidden,{}, {timeout:30000});
+  const stats=()=>page.locator('.work-stats strong').allTextContents(),number=s=>Number(s.replaceAll(',',''));
+  await page.evaluate(()=>localStorage.setItem('nba-datalab-locale','zh-CN'));
+  await page.goto('http://127.0.0.1:4176/?theme='+Date.now()+'#/studio');await page.waitForSelector('#operation-form select');await idle();
+  check('new NBA default is 4784 × 16 game-level exercise',JSON.stringify((await stats()).slice(0,3).map(number))==='[4784,16,3320]',await stats());
+  check('practice provenance and original/audit links visible',await page.locator('.practice-banner').innerText().then(s=>s.includes('练习')&&s.includes('原始')&&s.includes('清单')));
+  check('only retained game ID has a semantic key summary',await page.locator('.key-summary').count()===1);
+  const auditResponse=await page.request.get('http://127.0.0.1:4176/data/examples/nba-missing-audit.json'),audit=await auditResponse.json();
+  check('published audit lists every intentionally removed value',audit.removed.length===726&&audit.removed.filter(r=>r.field==='minutes').length===357);
+  await page.locator('[data-original-data]').click();await idle();
+  check('original values remain available with only recorded position blanks',number((await stats())[2])===2594&&await page.locator('.practice-banner').count()===0);
+  const goHome=async()=>{await page.goto('http://127.0.0.1:4176/#/overview');await page.waitForSelector('.nba-guides');await idle();};
+  const guide=async kind=>{await goHome();await page.locator(`[data-nba-guide="${kind}"]`).last().click();await page.waitForSelector('#operation-form select');await idle();await page.waitForSelector('#operation-preview .preview-result');};
+  await goHome();check('home has one NBA theme and four executable tasks',await page.locator('h1').innerText().then(s=>s.includes('NBA'))&&await page.locator('.nba-guides [data-nba-guide]').count()===4);
+  check('home illustration uses real NBA teams and points',await page.locator('.mini-data').innerText().then(s=>s.includes('team')&&s.includes('ORL')&&!s.includes('Region')));
+  await guide('missing');
+  check('one-click cleaning guide opens numeric minutes/median preview',await page.locator('#operation-form [name=method]').inputValue()==='median'&&await page.locator('#live-preview-code').innerText().then(s=>s.includes('minutes')&&s.includes('median')));
+  check('practice cleaning previews 357 genuine changed cells without committing',number((await stats())[2])===3320&&await page.locator('#dataframe-diff .diff-changed').count()>0);
+  await page.locator('[data-action=commit]').click();await idle();check('applying minutes fill changes only its missing cells',number((await stats())[2])===2963);
+  await guide('merge');
+  check('one-click merge guide uses readable team / many-to-one',await page.locator('#operation-form [name=validate]').inputValue()==='many_to_one'&&await page.locator('#operation-widgets').innerText().then(s=>s.includes('4,784 × 20')||s.includes('4784 × 20')));
+  check('merge overlap shows 30 common team keys',await page.locator('.overlap-choice').nth(1).textContent().then(s=>s.includes('30')));
+  await page.locator('[data-action=commit]').click();await idle();check('team join commits 4784 × 20',number((await stats())[0])===4784&&number((await stats())[1])===20);
+  await guide('rolling');
+  check('one-click rolling guide sorts per player by real game date',await page.locator('#live-preview-code').innerText().then(s=>s.includes('player_name')&&s.includes('game_date')&&s.includes('.rolling(5,')));
+  check('five-game rolling comparison renders originals and results',await page.locator('[data-rolling-chart] svg').count()===1&&await page.locator('#operation-form [name=window]').inputValue()==='5');
+  await page.locator('[data-action=commit]').click();await idle();check('rolling preserves 4784 rows and adds a real result column',number((await stats())[0])===4784&&number((await stats())[1])===17);
+  // The actual generated script must reproduce these real-data windows in pandas.
+  const menu=page.locator('.export-menu');if(!await menu.evaluate(el=>el.open))await menu.locator('summary').click();
+  const dl=page.waitForEvent('download');await page.locator('[data-export=python]').first().click();await(await dl).saveAs('output/verification/nba-theme-rolling.py');const csv=page.waitForEvent('download');await page.locator('[data-export=csv]').first().click();await(await csv).saveAs('output/verification/nba-theme-rolling.csv');
+  await guide('group');
+  check('one-click group guide keeps sample size separate from observed points',await page.locator('#live-preview-code').innerText().then(s=>s.includes('points_total')&&s.includes('appearances')&&s.includes('size'))&&await page.locator('#operation-widgets').textContent().then(s=>s.includes('n=')));
+  await page.locator('[data-action=commit]').click();await idle();check('team comparison produces 30 × 3 grouped result',number((await stats())[0])===30&&number((await stats())[1])===3);
+  await page.locator('[data-action=locale]').click();await idle();
+  check('English NBA exercise labels and descriptions translated',!/[\u4e00-\u9fff]/.test(await page.locator('body').innerText()));
+  await page.setViewportSize({width:390,height:844});check('themed data/flow keeps narrow viewport bounded',await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
+  await page.screenshot({path:'output/playwright/nba-theme-mobile.png',fullPage:false,timeout:8000});await page.setViewportSize({width:1440,height:1000});
+  return {passed:checks.filter(c=>c.pass).length,total:checks.length,checks};
+}

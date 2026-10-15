@@ -1,3 +1,4 @@
+import {isNumericColumn} from '../../data/semantics.js';
 import { ensure, unsupported } from '../errors.js';
 import { field, rows, replace, resultTable, keyOf } from '../dataset.js';
 import { aggregate } from '../statistics.js';
@@ -5,7 +6,7 @@ import { sort } from './cleaning.js';
 export function rolling(table, p) {
   unsupported(p, ['field', 'by', 'order', 'window', 'minPeriods', 'fn', 'as']);
   const metric = field(table, p.field), keys = (p.by ?? []).map(k => field(table, k));
-  ensure(['number', 'integer'].includes(metric.type), 'NUMERIC_REQUIRED');
+  ensure(isNumericColumn(metric), 'NUMERIC_REQUIRED');
   ensure(Number.isInteger(p.window) && p.window > 0 && Number.isInteger(p.minPeriods ?? p.window) && (p.minPeriods ?? p.window) >= 0 && (p.minPeriods ?? p.window) <= p.window, 'ROLLING_WINDOW');
   ensure(['sum', 'mean', 'min', 'max', 'std'].includes(p.fn ?? 'mean'), 'ROLLING_FUNCTION');
   ensure(typeof p.as === 'string' && p.as.trim() && !table.columns.some(c => c.name === p.as), 'INVALID_NAME');
@@ -38,7 +39,7 @@ export function resample(table, p) {
   ensure(['D', 'W-MON', 'MS'].includes(p.rule), 'RESAMPLE_RULE');
   ensure(['sum','mean','median','min','max','std','var','count','size','nunique'].includes(p.fn??'mean'), 'INVALID_AGG');
   ensure(Number.isInteger(p.maxBuckets??10000)&&(p.maxBuckets??10000)>0&&(p.maxBuckets??10000)<=10000,'RESAMPLE_LIMIT_PARAMETER');
-  if(!['count','size','nunique'].includes(p.fn??'mean'))ensure(['integer','number','boolean'].includes(metric.type),'NUMERIC_REQUIRED');
+  if(!['count','size','nunique'].includes(p.fn??'mean'))ensure((isNumericColumn(metric)||metric.type==='boolean'),'NUMERIC_REQUIRED');
   ensure(typeof p.as === 'string' && p.as.trim() && ![date, ...keys].some(c => c.name === p.as), 'INVALID_NAME');
   const groups = new Map();
   for (const r of rows(table)) {

@@ -1,3 +1,4 @@
+import {isNumericColumn} from '../../data/semantics.js';
 import {ensure,unsupported} from '../errors.js';
 import {field,rows,replace,columnValues,keyOf,resultTable,visibleIds} from '../dataset.js';
 import {aggregate,quantile} from '../statistics.js';
@@ -5,7 +6,7 @@ import {bucketStart} from './time.js';
 function output(table,p,type){ensure(typeof p.as==='string'&&p.as.trim()&&!table.columns.some(c=>c.name===p.as),'INVALID_NAME');return [...table.columns,{id:`${table.id}:${p.as}`,name:p.as,type}];}
 export function bin(table,p,quantiles=false){
   unsupported(p,quantiles?['field','q','duplicates','as']:['field','edges','right','includeLowest','as']);
-  const c=field(table,p.field);ensure(['number','integer'].includes(c.type),'NUMERIC_REQUIRED');
+  const c=field(table,p.field);ensure(isNumericColumn(c),'NUMERIC_REQUIRED');
   let edges=p.edges;
   if(quantiles){ensure(Number.isInteger(p.q)&&p.q>=1&&p.q<=100,'INVALID_BINS');edges=Array.from({length:p.q+1},(_,i)=>quantile(columnValues(table,c.id),i/p.q));
     ensure(!edges.includes(null),'NO_BIN_VALUES');
@@ -22,7 +23,7 @@ export function bin(table,p,quantiles=false){
 }
 export function rank(table,p){
   unsupported(p,['field','by','as','method','ascending','pct']);const c=field(table,p.field),keys=(p.by??[]).map(k=>field(table,k));
-  ensure(['number','integer'].includes(c.type),'NUMERIC_REQUIRED');ensure(['average','min','max','first','dense'].includes(p.method??'average'),'RANK_METHOD');
+  ensure(isNumericColumn(c),'NUMERIC_REQUIRED');ensure(['average','min','max','first','dense'].includes(p.method??'average'),'RANK_METHOD');
   const data=rows(table),groups=new Map(),ranks=Array(data.length).fill(null);
   data.forEach((r,i)=>{const key=keyOf(keys.map(k=>r[k.name]));if(!groups.has(key))groups.set(key,[]);if(r[c.name]!==null)groups.get(key).push(i);});
   for(const indices of groups.values()){
@@ -34,11 +35,11 @@ export function rank(table,p){
   return replace(table,data.map((r,i)=>({...r,[p.as]:ranks[i]})),output(table,p,'number'));
 }
 export function cumulative(table,p){
-  unsupported(p,['field','by','as']);const c=field(table,p.field),keys=(p.by??[]).map(k=>field(table,k));ensure(['number','integer'].includes(c.type),'NUMERIC_REQUIRED');const sums=new Map();
+  unsupported(p,['field','by','as']);const c=field(table,p.field),keys=(p.by??[]).map(k=>field(table,k));ensure(isNumericColumn(c),'NUMERIC_REQUIRED');const sums=new Map();
   return replace(table,rows(table).map(r=>{const key=keyOf(keys.map(k=>r[k.name]));if(r[c.name]===null)return {...r,[p.as]:null};const value=(sums.get(key)??0)+r[c.name];sums.set(key,value);return {...r,[p.as]:value};}),output(table,p,'number'));
 }
 export function transform(table,p){
-  unsupported(p,['field','by','fn','as']);const c=field(table,p.field),keys=p.by.map(k=>field(table,k));ensure(['sum','mean','count'].includes(p.fn),'INVALID_AGG');const data=rows(table),groups=new Map();
+  unsupported(p,['field','by','fn','as']);const c=field(table,p.field),keys=p.by.map(k=>field(table,k));ensure(['sum','mean','count'].includes(p.fn),'INVALID_AGG');const data=rows(table),groups=new Map();if(p.fn!=='count')ensure(isNumericColumn(c),'NUMERIC_REQUIRED');
   data.forEach(r=>{const key=keyOf(keys.map(k=>r[k.name]));if(!groups.has(key))groups.set(key,[]);groups.get(key).push(r[c.name]);});
   const values=new Map([...groups].map(([k,v])=>[k,aggregate(v,p.fn)]));
   return replace(table,data.map(r=>({...r,[p.as]:values.get(keyOf(keys.map(k=>r[k.name])))})),output(table,p,'number'));

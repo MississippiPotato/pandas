@@ -21,6 +21,7 @@ async function handle({ data: { requestId, action, payload = {} } }) {
       case 'values': {const table=session.table(payload.id??session.activeId),column=table.columns.find(c=>c.id===payload.field||c.name===payload.field);result=column?valueCounts(table.index.map(i=>table.values[column.id][i])):[];break;}
       case 'quantile':result=quantile(columnValues(payload.selection?filter(session.activeTable,{predicate:payload.selection}):session.activeTable,payload.field),payload.q);break;
       case 'duplicates':{const table=session.activeTable,mask=duplicated(table,payload),records=rows(table);result={count:mask.filter(Boolean).length,records:records.filter((_,i)=>mask[i]).slice(0,30),columns:table.columns};break;}
+      case 'nbaExampleOverview':{const table=session.table('source:example_nba_games');const all=rows(table),mini=[all[0],all[1],all.find(r=>r.team!==all[0].team)];result={rows:table.index.length,mini,charts:chartQuery(table,{x:'pts',y:'ast',date:'game_date',category:'team',metric:'pts',aggregate:'sum'})};break;}
       case 'overview': {
         const team=session.table('source:nba_team_game_stats'),player=session.table('source:nba_player_game_stats'),games=session.table('source:nba_games');
         const played=filter(player,{predicate:{op:'eq',field:'played',value:true}});

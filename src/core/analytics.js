@@ -1,14 +1,21 @@
+import {isNumericColumn} from '../data/semantics.js';
 import {bin as d3bin,extent} from 'd3';
 import {field,columnValues,rows,visibleIds,keyOf} from './dataset.js';
 import {aggregate,quantile,correlation,valueCounts} from './statistics.js';
 import {filter} from './operations/cleaning.js';
 const finite=v=>typeof v==='number'&&Number.isFinite(v);
 const find=(table,ref,fallback)=>table.columns.find(c=>c.id===ref||c.name===ref)??fallback;
+const queryCache=new WeakMap();
 export function chartQuery(base,config={},selection=null){
+  let cache=queryCache.get(base);if(!cache){cache=new Map();queryCache.set(base,cache);}const key=JSON.stringify([config,selection]);
+  if(cache.has(key))return cache.get(key);const result=computeChart(base,config,selection);if(cache.size>=6)cache.delete(cache.keys().next().value);cache.set(key,result);return result;
+}
+function computeChart(base,config={},selection=null){
   const selected=selection?filter(base,{predicate:selection}):base;
-  const nums=base.columns.filter(c=>['number','integer'].includes(c.type)),cats=base.columns.filter(c=>!['number','integer','date','datetime'].includes(c.type));
-  const x=find(base,config.x,nums[0]),y=find(base,config.y,nums[1]??nums[0]),category=find(base,config.category,cats[0]??base.columns[0]);
-  const date=find(base,config.date,base.columns.find(c=>['date','datetime'].includes(c.type))),metric=find(base,config.metric,y??x);
+  const nums=base.columns.filter(c=>isNumericColumn(c)),cats=base.columns.filter(c=>!['number','integer','date','datetime'].includes(c.type));
+  const validNum=ref=>nums.find(c=>c.id===ref||c.name===ref);
+  const x=validNum(config.x)??nums[0],y=validNum(config.y)??nums[1]??nums[0],category=find(base,config.category,cats[0]??base.columns[0]);
+  const date=find(base,config.date,base.columns.find(c=>['date','datetime'].includes(c.type))),metric=validNum(config.metric)??y??x;
   const read=(table,c)=>c?table.index.map(i=>table.values[c.id][i]):[];
   const xbase=read(base,x),xsel=read(selected,x),ybase=read(base,y),selectedIds=new Set(visibleIds(selected)),ids=visibleIds(base),color=read(base,category);
   const labels=find(base,'player_name',category),labelValues=read(base,labels),madeCol=find(base,'made'),madeValues=read(base,madeCol);

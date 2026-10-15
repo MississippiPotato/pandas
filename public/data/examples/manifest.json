@@ -1,0 +1,128 @@
+{
+  "tables": [
+    {
+      "id": "nba_missing",
+      "rows": 4784,
+      "columns": [
+        "player_name",
+        "team",
+        "pts",
+        "ast",
+        "reb",
+        "game_date",
+        "minutes",
+        "fg_pct",
+        "opponent",
+        "position",
+        "stl",
+        "blk",
+        "fgm",
+        "fga",
+        "won",
+        "game_id"
+      ],
+      "sha256": "dff0db6f8254d36bacd9fb5b87c299590d32954bc8ca25842e3d4275a4c3aabc"
+    },
+    {
+      "id": "nba_games",
+      "rows": 4784,
+      "columns": [
+        "player_name",
+        "team",
+        "pts",
+        "ast",
+        "reb",
+        "game_date",
+        "minutes",
+        "fg_pct",
+        "opponent",
+        "position",
+        "stl",
+        "blk",
+        "fgm",
+        "fga",
+        "won",
+        "game_id"
+      ],
+      "sha256": "4eb32560412502445bd063bd1085ae6df1d5b8ed211a2ee86d0090013e7118d5"
+    },
+    {
+      "id": "nba_players",
+      "rows": 475,
+      "columns": [
+        "player_name",
+        "team",
+        "conference",
+        "position",
+        "gp",
+        "min",
+        "pts",
+        "reb",
+        "ast",
+        "fg_pct",
+        "first_game",
+        "last_game"
+      ],
+      "sha256": "cfd1423c450cdead074b11ca7e868a04d5a958dcf7eca3d1458b387bd645f0dd"
+    },
+    {
+      "id": "nba_teams",
+      "rows": 30,
+      "columns": [
+        "team",
+        "team_full_name",
+        "city",
+        "conference",
+        "games_played"
+      ],
+      "sha256": "33618c1f0ca5ac1fde874f6d31e3ff236eeae1baf1a686a919a129bc42ae7256"
+    },
+    {
+      "id": "titanic",
+      "rows": 891,
+      "columns": [
+        "passenger_id",
+        "pclass",
+        "sex",
+        "age",
+        "sibsp",
+        "parch",
+        "fare",
+        "embarked",
+        "survived"
+      ],
+      "sha256": "72be73e16bfa50de258bbbbb64f9b9cfb4a912d6f6ca1e1aa6e34322b310d18c"
+    }
+  ],
+  "sources": {
+    "nba": "../nba/2025-26-nov/manifest.json",
+    "titanic": {
+      "url": "https://raw.githubusercontent.com/mwaskom/seaborn-data/a29a0141d20e156043ec257a64c8de3b3a03fd6e/titanic.csv",
+      "upstream": "https://www.kaggle.com/c/titanic/data",
+      "sha256": "81787d320d7f7b03df935e91de8bd19e11d45c5bbcab86ef4d4a76dc91b7d4f2"
+    },
+    "nba_games": {
+      "source": "../nba/2025-26-nov/manifest.json",
+      "rule": "played=true; player names from source; team/opponent names prejoined via official IDs; won compares team game points. No numeric values invented.",
+      "rows": 4784,
+      "period": "2025-11-01/2025-11-30"
+    },
+    "nba_missing": {
+      "source": "nba_games.csv",
+      "purpose": "User-authorized, explicitly labelled practice copy. Fixed SHA256(game_id|player_id|field) mod 100 removes fg_pct at threshold5, minutes at8, pts at3. Existing missingness preserved. Not an official NBA completeness claim.",
+      "removedCells": 726,
+      "removedByField": {
+        "fg_pct": 241,
+        "minutes": 357,
+        "pts": 128
+      },
+      "auditFile": "nba-missing-audit.json",
+      "auditSHA256": "030288f811163c90119f6e4e15bb3ccd55d10f3cf5c88cb240cc503130304486"
+    }
+  },
+  "notes": [
+    "NBA values describe November 2025, not a full season. Team is last observed team; all played appearances are included. FG% is sum(FGM)/sum(FGA). No salary, valuation or age is invented. This monthly table preserves observed values; the separate, explicitly labelled game-level missingness exercise has its own audit.",
+    "Titanic uses the 891-row seaborn/Kaggle sample. passenger_id is a generated row identifier; names are absent upstream. Natural missingness retained.",
+    "NBA game-level data is the primary theme. Original readable game records and a clearly labelled missing-value exercise copy are both available. Dates and repeated players support real within-player rolling; readable team keys join the team lookup."
+  ]
+}

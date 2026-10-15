@@ -50,6 +50,7 @@ export function join(left, right, p) {
     { rightInput: right.id, leftKeys: lk.map(c => c.id), rightKeys: rk.map(c => c.id) }),
     report: { estimatedRows: estimate, matched:estimate-(['left','outer'].includes(how)?unmatchedLeft:0)-(['right','outer'].includes(how)?unmatchedRight:0),unmatchedLeft, unmatchedRight, expansion: lrows.length ? estimate / lrows.length : null,
       leftRows:lrows.length,rightRows:rrows.length,matchedLeft:lrows.length-unmatchedLeft,matchedRight:rrows.length-unmatchedRight,
+      sharedDistinctKeys:[...lm.keys()].filter(k=>rm.has(k)).length,generatedMissing:pairs.reduce((n,[i,j])=>n+outputCols.filter(c=>c.side==='right'?j===null:i===null&&!sharedKeys.has(c.original)).length,0),
       leftDistinctKeys:lm.size,rightDistinctKeys:rm.size,leftDuplicateKeys:[...lm.values()].filter(v=>v.length>1).length,rightDuplicateKeys:[...rm.values()].filter(v=>v.length>1).length,
       manyToManyKeys:[...lm].filter(([k,v])=>v.length>1&&(rm.get(k)?.length??0)>1).length,
       keyRelations:[...new Set([...lm.keys(),...rm.keys()])].slice(0,30).map(key=>({key:JSON.parse(key),left:lm.get(key)?.length??0,right:rm.get(key)?.length??0,pairs:(lm.get(key)?.length??0)*(rm.get(key)?.length??0)})),keyRelationsTotal:new Set([...lm.keys(),...rm.keys()]).size } };

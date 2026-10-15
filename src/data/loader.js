@@ -1,3 +1,4 @@
+import { inferSemantic } from './semantics.js';
 import { createTable } from '../core/dataset.js';
 import { ensure } from '../core/errors.js';
 import { inferType, convert } from './schema.js';
@@ -65,6 +66,7 @@ export function parseInput(text, options = {}) {
 export function prepareImport(text, options = {}) {
   const parsed = parseInput(text, options);
   const schema = parsed.names.map(name => ({ name, type: options.types?.[name] ?? inferType(name, parsed.records.map(r => r[name])) }));
+  schema.forEach(c=>{c.semantic=options.semantics?.[c.name]??inferSemantic(c.name,parsed.records.map(r=>r[c.name]),c.type);c.label=options.labels?.[c.name];});
   const errors = []; const records = parsed.records.map((r, row) => Object.fromEntries(schema.map(c => {
     try { return [c.name, convert(r[c.name], c.type)]; }
     catch (error) { errors.push({ row: row + 1, field: c.name, value: r[c.name], code: error.code }); return [c.name, null]; }
