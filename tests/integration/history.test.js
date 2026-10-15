@@ -6,6 +6,16 @@ import { createStore } from '../../src/core/store.js';
 import { importText } from '../../src/data/loader.js';
 import { replay } from '../../src/core/pipeline.js';
 import { groupSpec, sales, schema } from '../fixtures/cases.js';
+test('upstream edits cannot silently retarget metric or pivot column identities',()=>{
+  const session=new Session();session.add(createTable([{g:'A',c:'Jan',v:2},{g:'A',c:'Feb',v:4}]));
+  const metrics=[{field:'v',fn:'sum',as:'Total'},{field:'v',fn:'mean',as:'Average'}],group=session.commit({type:'group',params:{keys:['g'],metrics}});
+  const total=group.table.columns.find(c=>c.name==='Total').id;session.commit({type:'select',params:{fields:[total]}});
+  session.edit(group.id,{type:'group',params:{keys:['g'],metrics:[...metrics].reverse()}});assert.deepEqual(rows(session.activeTable),[{Total:6}]);
+  const pivot=new Session();pivot.add(createTable([{g:'A',c:'Jan',v:2},{g:'A',c:'Feb',v:4}]));
+  const filter=pivot.commit({type:'filter',params:{predicate:{op:'in',field:'c',values:['Jan','Feb']}}});pivot.commit({type:'pivot_table',params:{index:'g',columns:'c',value:'v',agg:'sum'}});
+  const january=pivot.activeTable.columns.find(c=>c.pivotValues?.[0]==='Jan').id;pivot.commit({type:'select',params:{fields:[january]}});const original=rows(pivot.activeTable);
+  assert.throws(()=>pivot.edit(filter.id,{type:'filter',params:{predicate:{op:'eq',field:'c',value:'Feb'}}}),error=>error.code==='FIELD_NOT_FOUND');assert.deepEqual(rows(pivot.activeTable),original);
+});
 const filtered = value => ({type:'filter',params:{predicate:{field:'Revenue',op:'gte',value}}});
 test('preview is isolated; undo/redo restore exact results and new commit discards redo', () => {
   const s = new Session(); s.add(createTable(sales,{id:'sales',columns:schema}));

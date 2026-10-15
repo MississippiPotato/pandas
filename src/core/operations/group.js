@@ -31,7 +31,7 @@ export function group(table, p) {
     ...keys.map((k, i) => [k.name, bucket.vals[i]]),
     ...p.metrics.map((m, i) => [m.as, aggregate(bucket.indices.map(index => metricColumns[i][index]), m.fn, m)])
   ]));
-  const columns = [...keys, ...p.metrics.map((m, i) => ({ id: `${table.id}:agg:${i}`, name: m.as, type: ['count', 'size', 'nunique'].includes(m.fn) ? 'integer' : 'number' }))];
+  const columns = [...keys, ...p.metrics.map(m => ({ id: `${table.id}:agg:${encodeURIComponent(m.as)}`, name: m.as, type: ['count', 'size', 'nunique'].includes(m.fn) ? 'integer' : 'number' }))];
   return resultTable(table, output, columns, 'group', entries.map(([key]) => `${table.id}:group:${key}`), { keys: keys.map(k => k.id), groups: entries.map(([, b]) => b.vals) });
 }
 export function pivot(table, p, aggregateValues = true) {
@@ -53,7 +53,7 @@ export function pivot(table, p, aggregateValues = true) {
   }
   let rEntries = [...rowKeys], cEntries = [...colKeys];
   if (p.sort) { rEntries.sort(([a], [b]) => a < b ? -1 : a > b ? 1 : 0); cEntries.sort(([a], [b]) => a < b ? -1 : a > b ? 1 : 0); }
-  const colMeta = cEntries.map(([key, values], i) => ({ id: `${table.id}:pivot:${i}`, name: `pivot_${key}`, type: aggregateValues ? 'number' : metric.type, pivotValues: values }));
+  const colMeta = cEntries.map(([key, values]) => ({ id: `${table.id}:pivot:${encodeURIComponent(keyOf([columns.map(c=>c.id),values]))}`, name: `pivot_${key}`, type: aggregateValues ? 'number' : metric.type, pivotValues: values }));
   ensure(!colMeta.some(c => index.some(k => k.name === c.name)), 'PIVOT_NAME_COLLISION');
   const output = rEntries.map(([, rv]) => Object.fromEntries([
     ...index.map((c, i) => [c.name, rv[i]]), ...cEntries.map(([, cv], i) => {
