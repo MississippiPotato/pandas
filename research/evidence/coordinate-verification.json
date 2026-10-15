@@ -1,0 +1,71 @@
+{
+  "checkedAt": "2026-10-15",
+  "status": "provider-defined-and-local-consistency-checked",
+  "officialDictionaryStatus": "No official NBA coordinate data dictionary located; direct CDN liveData attempts returned HTTP 403.",
+  "localSource": "public/data/nba/2025-26-nov/shots.csv",
+  "sha256": "b480f6f58777be318f77c0e786edc8ca261ca94d45bc8ac05e965256ba9e0a40",
+  "sources": {
+    "providerDefinition": "https://sdvplotr.sportsdataverse.org/reference/sdv_court_coords.html",
+    "providerCode": "https://github.com/sportsdataverse/sdvplotR/blob/31bb4e1ebd1014d5683a72a463aaa5b4c1571c28/R/court_coords.R",
+    "producerCode": "https://github.com/sportsdataverse/hoopR-nba-stats-data/blob/1f450754e7cf7005f8575b83106b49c41943b9f4/python/nba_data_build/reshape/build.py#L306",
+    "officialCourtDimensions": "https://official.nba.com/rule-no-1-court-dimensions-equipment/",
+    "mirroredOfficialFixture": "https://github.com/sportsdataverse/sportsdataverse-py/blob/4636718a57a2380a5c9527d8d8b82048f00f5372/tests/fixtures/nba_engine/0022300001/cdn_playbyplay.json"
+  },
+  "definition": {
+    "inputUnit": "0.1 ft",
+    "origin": "shooting basket center",
+    "x": "across court, negative shooter left",
+    "y": "along court, positive away from baseline",
+    "verticalHoopFrame": {
+      "x_ft": "x_legacy / 10",
+      "y_ft": "y_legacy / 10"
+    },
+    "sportyRCenterFrame": {
+      "court_x": "-41.75 + y_legacy / 10",
+      "court_y": "x_legacy / 10"
+    }
+  },
+  "metrics": {
+    "rows": 39092,
+    "numericCoordinatePairs": 39092,
+    "xRange": [
+      -250,
+      250
+    ],
+    "yRange": [
+      -51,
+      610
+    ],
+    "beyondHalfCourtY417_5": 6,
+    "negativeY": 1895,
+    "zeroPair": 1125,
+    "threePointZeroPair": 0,
+    "distanceAbsErrorMedianFt": 0.24326481415029821,
+    "distanceAbsErrorMaxFt": 0.5,
+    "distanceAbsErrorAtMostHalfFoot": 39092
+  },
+  "mirroredNbaFixtureExamples": [
+    {
+      "gameId": "0022300001",
+      "actionNumber": 71,
+      "area": "Left Corner 3",
+      "xLegacy": -224,
+      "yLegacy": 39,
+      "shotDistance": 22.77
+    },
+    {
+      "gameId": "0022300001",
+      "actionNumber": 131,
+      "area": "Right Corner 3",
+      "xLegacy": 240,
+      "yLegacy": 29,
+      "shotDistance": 24.19
+    }
+  ],
+  "decision": {
+    "rawScatter": "enable, preserve original axes and all finite records",
+    "courtOverlay": "enable only with explicit provider-coordinate attribution and transform version; not represented as direct NBA dictionary verification",
+    "clipping": "No silent half-court clipping; 6 long-range events require full-range option or explicit excluded count",
+    "zeroPair": "Do not discard all (0,0) shots; source includes valid close shots."
+  }
+}

@@ -1,0 +1,1143 @@
+{
+  "id": "nba-2025-26-nov",
+  "schemaVersion": 1,
+  "normalizedAt": "2026-10-15",
+  "range": {
+    "start": "2025-11-01",
+    "end": "2025-11-30",
+    "season": "2025–26",
+    "seasonType": "regular-season",
+    "fullSeason": false
+  },
+  "attribution": {
+    "publisher": "SportsDataverse",
+    "upstream": "NBA.com/Stats",
+    "url": "https://github.com/sportsdataverse/sportsdataverse-data",
+    "purpose": "Educational non-commercial local analysis"
+  },
+  "licenseClaim": "CC-BY-4.0",
+  "redistributionStatus": "pending-upstream-review",
+  "coordinates": {
+    "status": "provider-defined-and-local-consistency-checked",
+    "enabled": true,
+    "fields": [
+      "x_legacy",
+      "y_legacy"
+    ],
+    "inputUnit": "0.1 ft",
+    "origin": "shooting basket center",
+    "x": "negative shooter left",
+    "y": "positive away from baseline",
+    "transformVersion": "sdv-legacy-vertical-v1",
+    "display": "raw legacy values; court geometry scaled to match",
+    "reference": "https://sdvplotr.sportsdataverse.org/reference/sdv_court_coords.html",
+    "officialDictionaryVerified": false,
+    "preserveFullExtent": true,
+    "note": "Provider-attributed court overlay; no direct NBA dictionary claim. Preserve all finite coordinates, origin events and six beyond-half-court heaves."
+  },
+  "verification": {
+    "officialGameBooks": 3,
+    "independentNumericChecks": 81,
+    "scope": "Purposive spot check, not complete event verification"
+  },
+  "licenseNotices": {
+    "publisherReadme": "CC BY 4.0 badge",
+    "publisherSoftwareLicense": "MIT",
+    "upstreamAuthorization": "Applicability remains under review; educational purpose alone is not an authorization record",
+    "publisherCommit": "c30618f5f439abc8275f0a9bea30892a598890b8"
+  },
+  "transformations": [
+    "schedule: regular-season and November 2025",
+    "box: retain DNP, parse MM:SS, attach game_date",
+    "player IDs/names from player box; no roster join",
+    "shots: preserve all selected events; original hash + original row ordinal; no dedup or coordinate clipping"
+  ],
+  "sources": [
+    {
+      "tag": "nba_stats_schedules",
+      "release_id": 97519767,
+      "asset_id": 512437528,
+      "name": "nba_schedule_2026.csv.gz",
+      "size": 23071,
+      "updated_at": "2026-08-13T03:31:58Z",
+      "expected_digest": "sha256:c1ff3711ef8b8ec4310c60159d1225a400facc7ce1e29bc64f09ae4130496509",
+      "sha256": "c1ff3711ef8b8ec4310c60159d1225a400facc7ce1e29bc64f09ae4130496509",
+      "url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nba_stats_schedules/nba_schedule_2026.csv.gz"
+    },
+    {
+      "tag": "nba_stats_shots",
+      "release_id": 359073661,
+      "asset_id": 624005925,
+      "name": "shots_2026.csv",
+      "size": 36414170,
+      "updated_at": "2026-10-09T05:34:54Z",
+      "expected_digest": "sha256:6fedf813bc180234feffd70d858a2d3b6f2f4f440c437044d4f9997b095834ae",
+      "sha256": "6fedf813bc180234feffd70d858a2d3b6f2f4f440c437044d4f9997b095834ae",
+      "url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nba_stats_shots/shots_2026.csv"
+    },
+    {
+      "tag": "nba_stats_player_boxscores",
+      "release_id": 97519777,
+      "asset_id": 602082403,
+      "name": "player_boxscores_2026.csv",
+      "size": 6131057,
+      "updated_at": "2026-10-01T00:32:00Z",
+      "expected_digest": "sha256:decaee33440ec8bd26d21152d61b4b69970bed45c3d07ede42f2700b7bd364e7",
+      "sha256": "decaee33440ec8bd26d21152d61b4b69970bed45c3d07ede42f2700b7bd364e7",
+      "url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nba_stats_player_boxscores/player_boxscores_2026.csv"
+    },
+    {
+      "tag": "nba_stats_team_boxscores",
+      "release_id": 97519772,
+      "asset_id": 602082769,
+      "name": "team_boxscores_2026.csv",
+      "size": 358439,
+      "updated_at": "2026-10-01T00:32:17Z",
+      "expected_digest": "sha256:b5133e5602d1ab9c4a4b4240aced7af3b6587e124f7ab7335b5de961c897ade8",
+      "sha256": "b5133e5602d1ab9c4a4b4240aced7af3b6587e124f7ab7335b5de961c897ade8",
+      "url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nba_stats_team_boxscores/team_boxscores_2026.csv"
+    }
+  ],
+  "quality": {
+    "playerNameConflicts": [],
+    "secondsCarry": [
+      {
+        "game_id": "0022500064",
+        "player_id": "203944",
+        "team_id": "1610612750",
+        "raw": "32:60",
+        "normalizedMinutes": 33
+      },
+      {
+        "game_id": "0022500070",
+        "player_id": "1631133",
+        "team_id": "1610612755",
+        "raw": "11:60",
+        "normalizedMinutes": 12
+      },
+      {
+        "game_id": "0022500166",
+        "player_id": "1628976",
+        "team_id": "1610612753",
+        "raw": "29:60",
+        "normalizedMinutes": 30
+      },
+      {
+        "game_id": "0022500167",
+        "player_id": "1628989",
+        "team_id": "1610612741",
+        "raw": "24:60",
+        "normalizedMinutes": 25
+      },
+      {
+        "game_id": "0022500169",
+        "player_id": "1630692",
+        "team_id": "1610612756",
+        "raw": "23:60",
+        "normalizedMinutes": 24
+      },
+      {
+        "game_id": "0022500195",
+        "player_id": "1629130",
+        "team_id": "1610612765",
+        "raw": "29:60",
+        "normalizedMinutes": 30
+      },
+      {
+        "game_id": "0022500199",
+        "player_id": "1642450",
+        "team_id": "1610612765",
+        "raw": "33:60",
+        "normalizedMinutes": 34
+      },
+      {
+        "game_id": "0022500202",
+        "player_id": "1630245",
+        "team_id": "1610612741",
+        "raw": "32:60",
+        "normalizedMinutes": 33
+      },
+      {
+        "game_id": "0022500215",
+        "player_id": "1628969",
+        "team_id": "1610612752",
+        "raw": "27:60",
+        "normalizedMinutes": 28
+      },
+      {
+        "game_id": "0022500250",
+        "player_id": "1627759",
+        "team_id": "1610612738",
+        "raw": "31:60",
+        "normalizedMinutes": 32
+      },
+      {
+        "game_id": "0022500253",
+        "player_id": "1629028",
+        "team_id": "1610612747",
+        "raw": "29:60",
+        "normalizedMinutes": 30
+      },
+      {
+        "game_id": "0022500254",
+        "player_id": "1642853",
+        "team_id": "1610612756",
+        "raw": "9:60",
+        "normalizedMinutes": 10
+      }
+    ]
+  },
+  "tables": [
+    {
+      "id": "players",
+      "file": "players.csv",
+      "rows": 498,
+      "bytes": 11536,
+      "sha256": "130e0daac13b0df0558c7c67146989a400cea5bdfef4846f4922588df83e2149",
+      "columns": [
+        {
+          "name": "player_id",
+          "type": "string",
+          "description": {
+            "zh-CN": "player_id",
+            "en-US": "player_id"
+          },
+          "unit": null
+        },
+        {
+          "name": "player_name",
+          "type": "string",
+          "description": {
+            "zh-CN": "player_name",
+            "en-US": "player_name"
+          },
+          "unit": null
+        }
+      ],
+      "lazy": false
+    },
+    {
+      "id": "teams",
+      "file": "teams.csv",
+      "rows": 30,
+      "bytes": 1022,
+      "sha256": "ab8e8e89862ddeed7b2218d110ca733321b8fc1d22a7553d1b1a43dfc67dcf6f",
+      "columns": [
+        {
+          "name": "team_id",
+          "type": "string",
+          "description": {
+            "zh-CN": "team_id",
+            "en-US": "team_id"
+          },
+          "unit": null
+        },
+        {
+          "name": "team_abbr",
+          "type": "string",
+          "description": {
+            "zh-CN": "team_abbr",
+            "en-US": "team_abbr"
+          },
+          "unit": null
+        },
+        {
+          "name": "team_name",
+          "type": "string",
+          "description": {
+            "zh-CN": "team_name",
+            "en-US": "team_name"
+          },
+          "unit": null
+        },
+        {
+          "name": "team_city",
+          "type": "string",
+          "description": {
+            "zh-CN": "team_city",
+            "en-US": "team_city"
+          },
+          "unit": null
+        }
+      ],
+      "lazy": false
+    },
+    {
+      "id": "games",
+      "file": "games.csv",
+      "rows": 219,
+      "bytes": 28744,
+      "sha256": "78c939255ee66fa09e088aac59e5e398d225dbad5cc485a59456edb44207679c",
+      "columns": [
+        {
+          "name": "game_id",
+          "type": "string",
+          "description": {
+            "zh-CN": "game_id",
+            "en-US": "game_id"
+          },
+          "unit": null
+        },
+        {
+          "name": "season",
+          "type": "number",
+          "description": {
+            "zh-CN": "season",
+            "en-US": "season"
+          },
+          "unit": null
+        },
+        {
+          "name": "season_type",
+          "type": "string",
+          "description": {
+            "zh-CN": "season_type",
+            "en-US": "season_type"
+          },
+          "unit": null
+        },
+        {
+          "name": "game_date",
+          "type": "date",
+          "description": {
+            "zh-CN": "game_date",
+            "en-US": "game_date"
+          },
+          "unit": null
+        },
+        {
+          "name": "matchup",
+          "type": "string",
+          "description": {
+            "zh-CN": "matchup",
+            "en-US": "matchup"
+          },
+          "unit": null
+        },
+        {
+          "name": "home_team_id",
+          "type": "string",
+          "description": {
+            "zh-CN": "home_team_id",
+            "en-US": "home_team_id"
+          },
+          "unit": null
+        },
+        {
+          "name": "home_team_abbreviation",
+          "type": "string",
+          "description": {
+            "zh-CN": "home_team_abbreviation",
+            "en-US": "home_team_abbreviation"
+          },
+          "unit": null
+        },
+        {
+          "name": "home_team_name",
+          "type": "string",
+          "description": {
+            "zh-CN": "home_team_name",
+            "en-US": "home_team_name"
+          },
+          "unit": null
+        },
+        {
+          "name": "home_pts",
+          "type": "number",
+          "description": {
+            "zh-CN": "home_pts",
+            "en-US": "home_pts"
+          },
+          "unit": null
+        },
+        {
+          "name": "home_wl",
+          "type": "string",
+          "description": {
+            "zh-CN": "home_wl",
+            "en-US": "home_wl"
+          },
+          "unit": null
+        },
+        {
+          "name": "away_team_id",
+          "type": "string",
+          "description": {
+            "zh-CN": "away_team_id",
+            "en-US": "away_team_id"
+          },
+          "unit": null
+        },
+        {
+          "name": "away_team_abbreviation",
+          "type": "string",
+          "description": {
+            "zh-CN": "away_team_abbreviation",
+            "en-US": "away_team_abbreviation"
+          },
+          "unit": null
+        },
+        {
+          "name": "away_team_name",
+          "type": "string",
+          "description": {
+            "zh-CN": "away_team_name",
+            "en-US": "away_team_name"
+          },
+          "unit": null
+        },
+        {
+          "name": "away_pts",
+          "type": "number",
+          "description": {
+            "zh-CN": "away_pts",
+            "en-US": "away_pts"
+          },
+          "unit": null
+        },
+        {
+          "name": "away_wl",
+          "type": "string",
+          "description": {
+            "zh-CN": "away_wl",
+            "en-US": "away_wl"
+          },
+          "unit": null
+        }
+      ],
+      "lazy": false
+    },
+    {
+      "id": "player_game_stats",
+      "file": "player_game_stats.csv",
+      "rows": 5698,
+      "bytes": 873058,
+      "sha256": "55525980c4135d015de41057f16c50424b2e11e42b1b866936945938e073f392",
+      "columns": [
+        {
+          "name": "game_id",
+          "type": "string",
+          "description": {
+            "zh-CN": "game_id",
+            "en-US": "game_id"
+          },
+          "unit": null
+        },
+        {
+          "name": "team_id",
+          "type": "string",
+          "description": {
+            "zh-CN": "team_id",
+            "en-US": "team_id"
+          },
+          "unit": null
+        },
+        {
+          "name": "side",
+          "type": "string",
+          "description": {
+            "zh-CN": "side",
+            "en-US": "side"
+          },
+          "unit": null
+        },
+        {
+          "name": "game_date",
+          "type": "date",
+          "description": {
+            "zh-CN": "game_date",
+            "en-US": "game_date"
+          },
+          "unit": null
+        },
+        {
+          "name": "season",
+          "type": "number",
+          "description": {
+            "zh-CN": "season",
+            "en-US": "season"
+          },
+          "unit": null
+        },
+        {
+          "name": "season_type",
+          "type": "string",
+          "description": {
+            "zh-CN": "season_type",
+            "en-US": "season_type"
+          },
+          "unit": null
+        },
+        {
+          "name": "minutes_raw",
+          "type": "string",
+          "description": {
+            "zh-CN": "minutes_raw",
+            "en-US": "minutes_raw"
+          },
+          "unit": null
+        },
+        {
+          "name": "minutes",
+          "type": "number",
+          "description": {
+            "zh-CN": "minutes",
+            "en-US": "minutes"
+          },
+          "unit": "minutes"
+        },
+        {
+          "name": "pts",
+          "type": "number",
+          "description": {
+            "zh-CN": "pts",
+            "en-US": "pts"
+          },
+          "unit": null
+        },
+        {
+          "name": "reb",
+          "type": "number",
+          "description": {
+            "zh-CN": "reb",
+            "en-US": "reb"
+          },
+          "unit": null
+        },
+        {
+          "name": "ast",
+          "type": "number",
+          "description": {
+            "zh-CN": "ast",
+            "en-US": "ast"
+          },
+          "unit": null
+        },
+        {
+          "name": "stl",
+          "type": "number",
+          "description": {
+            "zh-CN": "stl",
+            "en-US": "stl"
+          },
+          "unit": null
+        },
+        {
+          "name": "blk",
+          "type": "number",
+          "description": {
+            "zh-CN": "blk",
+            "en-US": "blk"
+          },
+          "unit": null
+        },
+        {
+          "name": "tov",
+          "type": "number",
+          "description": {
+            "zh-CN": "tov",
+            "en-US": "tov"
+          },
+          "unit": null
+        },
+        {
+          "name": "pf",
+          "type": "number",
+          "description": {
+            "zh-CN": "pf",
+            "en-US": "pf"
+          },
+          "unit": null
+        },
+        {
+          "name": "plus_minus",
+          "type": "number",
+          "description": {
+            "zh-CN": "plus_minus",
+            "en-US": "plus_minus"
+          },
+          "unit": null
+        },
+        {
+          "name": "fgm",
+          "type": "number",
+          "description": {
+            "zh-CN": "fgm",
+            "en-US": "fgm"
+          },
+          "unit": null
+        },
+        {
+          "name": "fga",
+          "type": "number",
+          "description": {
+            "zh-CN": "fga",
+            "en-US": "fga"
+          },
+          "unit": null
+        },
+        {
+          "name": "fg_pct",
+          "type": "number",
+          "description": {
+            "zh-CN": "fg_pct",
+            "en-US": "fg_pct"
+          },
+          "unit": "ratio"
+        },
+        {
+          "name": "fg3m",
+          "type": "number",
+          "description": {
+            "zh-CN": "fg3m",
+            "en-US": "fg3m"
+          },
+          "unit": null
+        },
+        {
+          "name": "fg3a",
+          "type": "number",
+          "description": {
+            "zh-CN": "fg3a",
+            "en-US": "fg3a"
+          },
+          "unit": null
+        },
+        {
+          "name": "fg3_pct",
+          "type": "number",
+          "description": {
+            "zh-CN": "fg3_pct",
+            "en-US": "fg3_pct"
+          },
+          "unit": "ratio"
+        },
+        {
+          "name": "ftm",
+          "type": "number",
+          "description": {
+            "zh-CN": "ftm",
+            "en-US": "ftm"
+          },
+          "unit": null
+        },
+        {
+          "name": "fta",
+          "type": "number",
+          "description": {
+            "zh-CN": "fta",
+            "en-US": "fta"
+          },
+          "unit": null
+        },
+        {
+          "name": "ft_pct",
+          "type": "number",
+          "description": {
+            "zh-CN": "ft_pct",
+            "en-US": "ft_pct"
+          },
+          "unit": "ratio"
+        },
+        {
+          "name": "oreb",
+          "type": "number",
+          "description": {
+            "zh-CN": "oreb",
+            "en-US": "oreb"
+          },
+          "unit": null
+        },
+        {
+          "name": "dreb",
+          "type": "number",
+          "description": {
+            "zh-CN": "dreb",
+            "en-US": "dreb"
+          },
+          "unit": null
+        },
+        {
+          "name": "player_id",
+          "type": "string",
+          "description": {
+            "zh-CN": "player_id",
+            "en-US": "player_id"
+          },
+          "unit": null
+        },
+        {
+          "name": "player_name",
+          "type": "string",
+          "description": {
+            "zh-CN": "player_name",
+            "en-US": "player_name"
+          },
+          "unit": null
+        },
+        {
+          "name": "position",
+          "type": "string",
+          "description": {
+            "zh-CN": "position",
+            "en-US": "position"
+          },
+          "unit": null
+        },
+        {
+          "name": "comment",
+          "type": "string",
+          "description": {
+            "zh-CN": "comment",
+            "en-US": "comment"
+          },
+          "unit": null
+        },
+        {
+          "name": "played",
+          "type": "boolean",
+          "description": {
+            "zh-CN": "played",
+            "en-US": "played"
+          },
+          "unit": null
+        }
+      ],
+      "lazy": false
+    },
+    {
+      "id": "team_game_stats",
+      "file": "team_game_stats.csv",
+      "rows": 438,
+      "bytes": 61602,
+      "sha256": "ece0d49727cb27ca6eecff91133bcd6410895d67403fde78485cc58a1729f854",
+      "columns": [
+        {
+          "name": "game_id",
+          "type": "string",
+          "description": {
+            "zh-CN": "game_id",
+            "en-US": "game_id"
+          },
+          "unit": null
+        },
+        {
+          "name": "team_id",
+          "type": "string",
+          "description": {
+            "zh-CN": "team_id",
+            "en-US": "team_id"
+          },
+          "unit": null
+        },
+        {
+          "name": "side",
+          "type": "string",
+          "description": {
+            "zh-CN": "side",
+            "en-US": "side"
+          },
+          "unit": null
+        },
+        {
+          "name": "game_date",
+          "type": "date",
+          "description": {
+            "zh-CN": "game_date",
+            "en-US": "game_date"
+          },
+          "unit": null
+        },
+        {
+          "name": "season",
+          "type": "number",
+          "description": {
+            "zh-CN": "season",
+            "en-US": "season"
+          },
+          "unit": null
+        },
+        {
+          "name": "season_type",
+          "type": "string",
+          "description": {
+            "zh-CN": "season_type",
+            "en-US": "season_type"
+          },
+          "unit": null
+        },
+        {
+          "name": "minutes_raw",
+          "type": "string",
+          "description": {
+            "zh-CN": "minutes_raw",
+            "en-US": "minutes_raw"
+          },
+          "unit": null
+        },
+        {
+          "name": "minutes",
+          "type": "number",
+          "description": {
+            "zh-CN": "minutes",
+            "en-US": "minutes"
+          },
+          "unit": "minutes"
+        },
+        {
+          "name": "pts",
+          "type": "number",
+          "description": {
+            "zh-CN": "pts",
+            "en-US": "pts"
+          },
+          "unit": null
+        },
+        {
+          "name": "reb",
+          "type": "number",
+          "description": {
+            "zh-CN": "reb",
+            "en-US": "reb"
+          },
+          "unit": null
+        },
+        {
+          "name": "ast",
+          "type": "number",
+          "description": {
+            "zh-CN": "ast",
+            "en-US": "ast"
+          },
+          "unit": null
+        },
+        {
+          "name": "stl",
+          "type": "number",
+          "description": {
+            "zh-CN": "stl",
+            "en-US": "stl"
+          },
+          "unit": null
+        },
+        {
+          "name": "blk",
+          "type": "number",
+          "description": {
+            "zh-CN": "blk",
+            "en-US": "blk"
+          },
+          "unit": null
+        },
+        {
+          "name": "tov",
+          "type": "number",
+          "description": {
+            "zh-CN": "tov",
+            "en-US": "tov"
+          },
+          "unit": null
+        },
+        {
+          "name": "pf",
+          "type": "number",
+          "description": {
+            "zh-CN": "pf",
+            "en-US": "pf"
+          },
+          "unit": null
+        },
+        {
+          "name": "plus_minus",
+          "type": "number",
+          "description": {
+            "zh-CN": "plus_minus",
+            "en-US": "plus_minus"
+          },
+          "unit": null
+        },
+        {
+          "name": "fgm",
+          "type": "number",
+          "description": {
+            "zh-CN": "fgm",
+            "en-US": "fgm"
+          },
+          "unit": null
+        },
+        {
+          "name": "fga",
+          "type": "number",
+          "description": {
+            "zh-CN": "fga",
+            "en-US": "fga"
+          },
+          "unit": null
+        },
+        {
+          "name": "fg_pct",
+          "type": "number",
+          "description": {
+            "zh-CN": "fg_pct",
+            "en-US": "fg_pct"
+          },
+          "unit": "ratio"
+        },
+        {
+          "name": "fg3m",
+          "type": "number",
+          "description": {
+            "zh-CN": "fg3m",
+            "en-US": "fg3m"
+          },
+          "unit": null
+        },
+        {
+          "name": "fg3a",
+          "type": "number",
+          "description": {
+            "zh-CN": "fg3a",
+            "en-US": "fg3a"
+          },
+          "unit": null
+        },
+        {
+          "name": "fg3_pct",
+          "type": "number",
+          "description": {
+            "zh-CN": "fg3_pct",
+            "en-US": "fg3_pct"
+          },
+          "unit": "ratio"
+        },
+        {
+          "name": "ftm",
+          "type": "number",
+          "description": {
+            "zh-CN": "ftm",
+            "en-US": "ftm"
+          },
+          "unit": null
+        },
+        {
+          "name": "fta",
+          "type": "number",
+          "description": {
+            "zh-CN": "fta",
+            "en-US": "fta"
+          },
+          "unit": null
+        },
+        {
+          "name": "ft_pct",
+          "type": "number",
+          "description": {
+            "zh-CN": "ft_pct",
+            "en-US": "ft_pct"
+          },
+          "unit": "ratio"
+        },
+        {
+          "name": "oreb",
+          "type": "number",
+          "description": {
+            "zh-CN": "oreb",
+            "en-US": "oreb"
+          },
+          "unit": null
+        },
+        {
+          "name": "dreb",
+          "type": "number",
+          "description": {
+            "zh-CN": "dreb",
+            "en-US": "dreb"
+          },
+          "unit": null
+        },
+        {
+          "name": "team_abbr",
+          "type": "string",
+          "description": {
+            "zh-CN": "team_abbr",
+            "en-US": "team_abbr"
+          },
+          "unit": null
+        },
+        {
+          "name": "wl",
+          "type": "string",
+          "description": {
+            "zh-CN": "wl",
+            "en-US": "wl"
+          },
+          "unit": null
+        }
+      ],
+      "lazy": false
+    },
+    {
+      "id": "shots",
+      "file": "shots.csv",
+      "rows": 39092,
+      "bytes": 7744157,
+      "sha256": "b480f6f58777be318f77c0e786edc8ca261ca94d45bc8ac05e965256ba9e0a40",
+      "columns": [
+        {
+          "name": "shot_id",
+          "type": "string",
+          "description": {
+            "zh-CN": "shot_id",
+            "en-US": "shot_id"
+          },
+          "unit": null
+        },
+        {
+          "name": "game_id",
+          "type": "string",
+          "description": {
+            "zh-CN": "game_id",
+            "en-US": "game_id"
+          },
+          "unit": null
+        },
+        {
+          "name": "player_id",
+          "type": "string",
+          "description": {
+            "zh-CN": "player_id",
+            "en-US": "player_id"
+          },
+          "unit": null
+        },
+        {
+          "name": "team_id",
+          "type": "string",
+          "description": {
+            "zh-CN": "team_id",
+            "en-US": "team_id"
+          },
+          "unit": null
+        },
+        {
+          "name": "game_date",
+          "type": "date",
+          "description": {
+            "zh-CN": "game_date",
+            "en-US": "game_date"
+          },
+          "unit": null
+        },
+        {
+          "name": "season",
+          "type": "number",
+          "description": {
+            "zh-CN": "season",
+            "en-US": "season"
+          },
+          "unit": null
+        },
+        {
+          "name": "season_type",
+          "type": "string",
+          "description": {
+            "zh-CN": "season_type",
+            "en-US": "season_type"
+          },
+          "unit": null
+        },
+        {
+          "name": "period",
+          "type": "number",
+          "description": {
+            "zh-CN": "period",
+            "en-US": "period"
+          },
+          "unit": null
+        },
+        {
+          "name": "clock",
+          "type": "string",
+          "description": {
+            "zh-CN": "clock",
+            "en-US": "clock"
+          },
+          "unit": null
+        },
+        {
+          "name": "action_type",
+          "type": "string",
+          "description": {
+            "zh-CN": "action_type",
+            "en-US": "action_type"
+          },
+          "unit": null
+        },
+        {
+          "name": "sub_type",
+          "type": "string",
+          "description": {
+            "zh-CN": "sub_type",
+            "en-US": "sub_type"
+          },
+          "unit": null
+        },
+        {
+          "name": "shot_result",
+          "type": "string",
+          "description": {
+            "zh-CN": "shot_result",
+            "en-US": "shot_result"
+          },
+          "unit": null
+        },
+        {
+          "name": "made",
+          "type": "boolean",
+          "description": {
+            "zh-CN": "made",
+            "en-US": "made"
+          },
+          "unit": null
+        },
+        {
+          "name": "shot_value",
+          "type": "number",
+          "description": {
+            "zh-CN": "shot_value",
+            "en-US": "shot_value"
+          },
+          "unit": null
+        },
+        {
+          "name": "shot_distance",
+          "type": "number",
+          "description": {
+            "zh-CN": "shot_distance",
+            "en-US": "shot_distance"
+          },
+          "unit": "feet"
+        },
+        {
+          "name": "x_legacy",
+          "type": "number",
+          "description": {
+            "zh-CN": "x_legacy",
+            "en-US": "x_legacy"
+          },
+          "unit": "0.1 feet (provider definition)"
+        },
+        {
+          "name": "y_legacy",
+          "type": "number",
+          "description": {
+            "zh-CN": "y_legacy",
+            "en-US": "y_legacy"
+          },
+          "unit": "0.1 feet (provider definition)"
+        }
+      ],
+      "lazy": true
+    }
+  ]
+}

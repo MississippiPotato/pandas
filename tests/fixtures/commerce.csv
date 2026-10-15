@@ -1,0 +1,13 @@
+Record_id,Region,Month,Revenue,Units,Active,Date
+001,East,Jan,100,2,true,2025-01-01
+002,West,Jan,80,1,true,2025-01-03
+003,East,Feb,,3,false,2025-02-01
+004,West,Feb,120,2,true,2025-02-03
+005,East,Mar,200,0,true,2025-03-01
+006,North,Jan,0,1,false,2025-01-05
+007,North,Feb,160,4,true,2025-02-05
+008,East,Mar,200,0,true,2025-03-02
+008,East,Mar,200,0,true,2025-03-02
+009,West,Mar,50,,true,2025-03-03
+010,North,Mar,60,2,false,2025-03-05
+011,East,Jan,90,3,true,2025-01-08

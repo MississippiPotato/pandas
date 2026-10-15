@@ -1,0 +1,525 @@
+{
+  "checkedAt": "2026-10-15",
+  "method": "Expected numeric facts transcribed from NBA official PDF FINAL BOX pages and compared to normalized CSV by ID; independent of SportsDataverse release.",
+  "scope": "Purposive early-middle-late month spot check; not a census or random accuracy estimate.",
+  "checks": [
+    {
+      "game_id": "0022500147",
+      "source": "https://statsdmz.nba.com/pdfs/20251101/20251101_DALDET_book.pdf",
+      "physicalPage": 1,
+      "checks": [
+        {
+          "check": "game_date",
+          "expected": "2025-11-01",
+          "actual": "2025-11-01",
+          "pass": true
+        },
+        {
+          "check": "home_schedule_score",
+          "expected": 122,
+          "actual": 122,
+          "pass": true
+        },
+        {
+          "check": "home_pts",
+          "expected": 122,
+          "actual": 122.0,
+          "pass": true
+        },
+        {
+          "check": "home_fgm",
+          "expected": 45,
+          "actual": 45.0,
+          "pass": true
+        },
+        {
+          "check": "home_fga",
+          "expected": 91,
+          "actual": 91.0,
+          "pass": true
+        },
+        {
+          "check": "home_fg3m",
+          "expected": 9,
+          "actual": 9.0,
+          "pass": true
+        },
+        {
+          "check": "home_fg3a",
+          "expected": 24,
+          "actual": 24.0,
+          "pass": true
+        },
+        {
+          "check": "home_ftm",
+          "expected": 23,
+          "actual": 23.0,
+          "pass": true
+        },
+        {
+          "check": "home_fta",
+          "expected": 34,
+          "actual": 34.0,
+          "pass": true
+        },
+        {
+          "check": "home_reb",
+          "expected": 47,
+          "actual": 47.0,
+          "pass": true
+        },
+        {
+          "check": "home_ast",
+          "expected": 29,
+          "actual": 29.0,
+          "pass": true
+        },
+        {
+          "check": "away_schedule_score",
+          "expected": 110,
+          "actual": 110,
+          "pass": true
+        },
+        {
+          "check": "away_pts",
+          "expected": 110,
+          "actual": 110.0,
+          "pass": true
+        },
+        {
+          "check": "away_fgm",
+          "expected": 34,
+          "actual": 34.0,
+          "pass": true
+        },
+        {
+          "check": "away_fga",
+          "expected": 80,
+          "actual": 80.0,
+          "pass": true
+        },
+        {
+          "check": "away_fg3m",
+          "expected": 16,
+          "actual": 16.0,
+          "pass": true
+        },
+        {
+          "check": "away_fg3a",
+          "expected": 45,
+          "actual": 45.0,
+          "pass": true
+        },
+        {
+          "check": "away_ftm",
+          "expected": 26,
+          "actual": 26.0,
+          "pass": true
+        },
+        {
+          "check": "away_fta",
+          "expected": 31,
+          "actual": 31.0,
+          "pass": true
+        },
+        {
+          "check": "away_reb",
+          "expected": 43,
+          "actual": 43.0,
+          "pass": true
+        },
+        {
+          "check": "away_ast",
+          "expected": 23,
+          "actual": 23.0,
+          "pass": true
+        },
+        {
+          "check": "Jalen Duren_pts",
+          "expected": 33,
+          "actual": 33.0,
+          "pass": true
+        },
+        {
+          "check": "Jalen Duren_reb",
+          "expected": 10,
+          "actual": 10.0,
+          "pass": true
+        },
+        {
+          "check": "Jalen Duren_ast",
+          "expected": 2,
+          "actual": 2.0,
+          "pass": true
+        },
+        {
+          "check": "D'Angelo Russell_pts",
+          "expected": 31,
+          "actual": 31.0,
+          "pass": true
+        },
+        {
+          "check": "D'Angelo Russell_reb",
+          "expected": 7,
+          "actual": 7.0,
+          "pass": true
+        },
+        {
+          "check": "D'Angelo Russell_ast",
+          "expected": 3,
+          "actual": 3.0,
+          "pass": true
+        }
+      ]
+    },
+    {
+      "game_id": "0022500228",
+      "source": "https://statsdmz.nba.com/pdfs/20251115/20251115_MEMCLE.pdf",
+      "physicalPage": 1,
+      "checks": [
+        {
+          "check": "game_date",
+          "expected": "2025-11-15",
+          "actual": "2025-11-15",
+          "pass": true
+        },
+        {
+          "check": "home_schedule_score",
+          "expected": 108,
+          "actual": 108,
+          "pass": true
+        },
+        {
+          "check": "home_pts",
+          "expected": 108,
+          "actual": 108.0,
+          "pass": true
+        },
+        {
+          "check": "home_fgm",
+          "expected": 38,
+          "actual": 38.0,
+          "pass": true
+        },
+        {
+          "check": "home_fga",
+          "expected": 83,
+          "actual": 83.0,
+          "pass": true
+        },
+        {
+          "check": "home_fg3m",
+          "expected": 13,
+          "actual": 13.0,
+          "pass": true
+        },
+        {
+          "check": "home_fg3a",
+          "expected": 40,
+          "actual": 40.0,
+          "pass": true
+        },
+        {
+          "check": "home_ftm",
+          "expected": 19,
+          "actual": 19.0,
+          "pass": true
+        },
+        {
+          "check": "home_fta",
+          "expected": 29,
+          "actual": 29.0,
+          "pass": true
+        },
+        {
+          "check": "home_reb",
+          "expected": 49,
+          "actual": 49.0,
+          "pass": true
+        },
+        {
+          "check": "home_ast",
+          "expected": 24,
+          "actual": 24.0,
+          "pass": true
+        },
+        {
+          "check": "away_schedule_score",
+          "expected": 100,
+          "actual": 100,
+          "pass": true
+        },
+        {
+          "check": "away_pts",
+          "expected": 100,
+          "actual": 100.0,
+          "pass": true
+        },
+        {
+          "check": "away_fgm",
+          "expected": 31,
+          "actual": 31.0,
+          "pass": true
+        },
+        {
+          "check": "away_fga",
+          "expected": 86,
+          "actual": 86.0,
+          "pass": true
+        },
+        {
+          "check": "away_fg3m",
+          "expected": 9,
+          "actual": 9.0,
+          "pass": true
+        },
+        {
+          "check": "away_fg3a",
+          "expected": 32,
+          "actual": 32.0,
+          "pass": true
+        },
+        {
+          "check": "away_ftm",
+          "expected": 29,
+          "actual": 29.0,
+          "pass": true
+        },
+        {
+          "check": "away_fta",
+          "expected": 40,
+          "actual": 40.0,
+          "pass": true
+        },
+        {
+          "check": "away_reb",
+          "expected": 46,
+          "actual": 46.0,
+          "pass": true
+        },
+        {
+          "check": "away_ast",
+          "expected": 21,
+          "actual": 21.0,
+          "pass": true
+        },
+        {
+          "check": "Donovan Mitchell_pts",
+          "expected": 30,
+          "actual": 30.0,
+          "pass": true
+        },
+        {
+          "check": "Donovan Mitchell_reb",
+          "expected": 5,
+          "actual": 5.0,
+          "pass": true
+        },
+        {
+          "check": "Donovan Mitchell_ast",
+          "expected": 5,
+          "actual": 5.0,
+          "pass": true
+        },
+        {
+          "check": "Jaren Jackson Jr._pts",
+          "expected": 26,
+          "actual": 26.0,
+          "pass": true
+        },
+        {
+          "check": "Jaren Jackson Jr._reb",
+          "expected": 5,
+          "actual": 5.0,
+          "pass": true
+        },
+        {
+          "check": "Jaren Jackson Jr._ast",
+          "expected": 2,
+          "actual": 2.0,
+          "pass": true
+        }
+      ]
+    },
+    {
+      "game_id": "0022500308",
+      "source": "https://statsdmz.nba.com/pdfs/20251130/20251130_NOPLAL_book.pdf",
+      "physicalPage": 1,
+      "checks": [
+        {
+          "check": "game_date",
+          "expected": "2025-11-30",
+          "actual": "2025-11-30",
+          "pass": true
+        },
+        {
+          "check": "home_schedule_score",
+          "expected": 133,
+          "actual": 133,
+          "pass": true
+        },
+        {
+          "check": "home_pts",
+          "expected": 133,
+          "actual": 133.0,
+          "pass": true
+        },
+        {
+          "check": "home_fgm",
+          "expected": 42,
+          "actual": 42.0,
+          "pass": true
+        },
+        {
+          "check": "home_fga",
+          "expected": 87,
+          "actual": 87.0,
+          "pass": true
+        },
+        {
+          "check": "home_fg3m",
+          "expected": 15,
+          "actual": 15.0,
+          "pass": true
+        },
+        {
+          "check": "home_fg3a",
+          "expected": 41,
+          "actual": 41.0,
+          "pass": true
+        },
+        {
+          "check": "home_ftm",
+          "expected": 34,
+          "actual": 34.0,
+          "pass": true
+        },
+        {
+          "check": "home_fta",
+          "expected": 39,
+          "actual": 39.0,
+          "pass": true
+        },
+        {
+          "check": "home_reb",
+          "expected": 46,
+          "actual": 46.0,
+          "pass": true
+        },
+        {
+          "check": "home_ast",
+          "expected": 26,
+          "actual": 26.0,
+          "pass": true
+        },
+        {
+          "check": "away_schedule_score",
+          "expected": 121,
+          "actual": 121,
+          "pass": true
+        },
+        {
+          "check": "away_pts",
+          "expected": 121,
+          "actual": 121.0,
+          "pass": true
+        },
+        {
+          "check": "away_fgm",
+          "expected": 46,
+          "actual": 46.0,
+          "pass": true
+        },
+        {
+          "check": "away_fga",
+          "expected": 91,
+          "actual": 91.0,
+          "pass": true
+        },
+        {
+          "check": "away_fg3m",
+          "expected": 13,
+          "actual": 13.0,
+          "pass": true
+        },
+        {
+          "check": "away_fg3a",
+          "expected": 26,
+          "actual": 26.0,
+          "pass": true
+        },
+        {
+          "check": "away_ftm",
+          "expected": 16,
+          "actual": 16.0,
+          "pass": true
+        },
+        {
+          "check": "away_fta",
+          "expected": 20,
+          "actual": 20.0,
+          "pass": true
+        },
+        {
+          "check": "away_reb",
+          "expected": 40,
+          "actual": 40.0,
+          "pass": true
+        },
+        {
+          "check": "away_ast",
+          "expected": 23,
+          "actual": 23.0,
+          "pass": true
+        },
+        {
+          "check": "Austin Reaves_pts",
+          "expected": 33,
+          "actual": 33.0,
+          "pass": true
+        },
+        {
+          "check": "Austin Reaves_reb",
+          "expected": 5,
+          "actual": 5.0,
+          "pass": true
+        },
+        {
+          "check": "Austin Reaves_ast",
+          "expected": 8,
+          "actual": 8.0,
+          "pass": true
+        },
+        {
+          "check": "Luka Dončić_pts",
+          "expected": 34,
+          "actual": 34.0,
+          "pass": true
+        },
+        {
+          "check": "Luka Dončić_reb",
+          "expected": 12,
+          "actual": 12.0,
+          "pass": true
+        },
+        {
+          "check": "Luka Dončić_ast",
+          "expected": 7,
+          "actual": 7.0,
+          "pass": true
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "assertions": 81,
+    "passed": 81,
+    "failed": 0
+  },
+  "failedFetches": [
+    {
+      "asset": "NBA liveData boxscore and pbp CDN",
+      "result": "HTTP 403 for 3 game boxscores and 1 PBP; no successful direct coordinate fetch claimed."
+    }
+  ]
+}

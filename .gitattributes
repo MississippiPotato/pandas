@@ -1,0 +1,4 @@
+* text=auto eol=lf
+public/data/** -text
+*.csv -text
+*.xlsx binary

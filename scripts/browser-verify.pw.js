@@ -1,0 +1,50 @@
+async (page) => {
+  const checks = [], errors = [];
+  page.on('pageerror', error => errors.push(error.message));
+  const check = (name, pass) => { checks.push({name,pass}); if (!pass) throw new Error(name); };
+  const count = () => page.locator('#stats strong').first().textContent();
+  await page.setViewportSize({width:1440,height:1000});
+  await page.reload();
+  await page.locator('#nba-table option').first().waitFor({state:'attached'});
+  await page.locator('#nba-table').selectOption('player_game_stats');
+  await page.locator('#load').click();
+  await page.waitForFunction(() => document.querySelector('#stats strong')?.textContent === '5,698');
+  check('NBA default table loaded through real worker', await count() === '5,698');
+  check('leading-zero game IDs retained', /^00/.test(await page.locator('#table tbody tr').first().locator('td').first().textContent()));
+  await page.locator('#file').setInputFiles('G:/可视化导论/3/tests/fixtures/sales.csv');
+  await page.locator('#import-dialog').waitFor({state:'visible'});
+  await page.locator('#confirm').click();
+  await page.waitForFunction(() => document.querySelector('#stats strong')?.textContent === '5');
+  check('non-NBA CSV schema confirmation and import', await count() === '5');
+  await page.locator('#dimension').selectOption({label:'Region'});
+  await page.locator('#metric').selectOption({label:'Revenue'});
+  await page.locator('#group').click();
+  await page.locator('#preview').waitFor({state:'visible'});
+  check('preview does not commit or change source', await count() === '5');
+  await page.locator('#language').click();
+  check('language preserves pending preview and selected fields', await page.locator('#preview').isVisible() && await page.locator('#dimension option:checked').textContent() === 'Region');
+  await page.locator('#apply').click();
+  await page.waitForFunction(() => document.querySelector('#stats strong')?.textContent === '3');
+  const values = await page.locator('#table tbody tr').allTextContents();
+  check('groupby results A=5 B=20 missing=40', values[0].includes('A5') && values[1].includes('B20') && values[2].includes('40'));
+  await page.locator('#undo').click();
+  await page.waitForFunction(() => document.querySelector('#stats strong')?.textContent === '5');
+  await page.locator('#redo').click();
+  await page.waitForFunction(() => document.querySelector('#stats strong')?.textContent === '3');
+  check('undo and redo restore exact row counts', await count() === '3');
+  const downloading = page.waitForEvent('download'); await page.locator('#csv').click();
+  const download = await downloading; await download.saveAs('G:/可视化导论/3/output/phase1/browser-export.csv');
+  check('CSV download produces a real file', download.suggestedFilename() === 'analysis.csv');
+  await page.locator('#pandas').click(); await page.locator('#code').waitFor({state:'visible'});
+  check('generated pandas script contains the executed grouping', (await page.locator('#code').textContent()).includes('.groupby('));
+  await page.emulateMedia({colorScheme:'dark'});
+  check('system dark preference still renders only light', await page.evaluate(() => getComputedStyle(document.documentElement).colorScheme === 'light' && getComputedStyle(document.body).backgroundColor !== 'rgb(11, 18, 32)'));
+  await page.evaluate(() => window.scrollTo(0,0));
+  const screenshotErrors=[];
+  try { await page.screenshot({path:'G:/可视化导论/3/output/playwright/phase1-desktop.png',fullPage:false,timeout:8000,animations:'disabled'}); } catch(error) { screenshotErrors.push(error.message); }
+  await page.setViewportSize({width:390,height:844});
+  check('390px layout has no page overflow', await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth));
+  try { await page.screenshot({path:'G:/可视化导论/3/output/playwright/phase1-mobile.png',fullPage:false,timeout:8000,animations:'disabled'}); } catch(error) { screenshotErrors.push(error.message); }
+  check('no blocking page exceptions', errors.length === 0);
+  return {checks,errors,screenshotErrors,passed:checks.every(c=>c.pass)};
+}

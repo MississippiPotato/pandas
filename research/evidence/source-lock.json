@@ -1,0 +1,112 @@
+[
+  {
+    "tag": "nba_stats_player_game_logs",
+    "release_id": 359073633,
+    "asset_id": 513301883,
+    "name": "player_game_logs_2025.csv",
+    "size": 426838,
+    "updated_at": "2026-08-13T17:42:58Z",
+    "expected_digest": "sha256:4647a987844fa31d0bdaab51e96ee3026a306d32e4181ae41f34faf1a5dbfb62",
+    "sha256": "4647a987844fa31d0bdaab51e96ee3026a306d32e4181ae41f34faf1a5dbfb62",
+    "url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nba_stats_player_game_logs/player_game_logs_2025.csv"
+  },
+  {
+    "tag": "nba_stats_player_game_logs",
+    "release_id": 359073633,
+    "asset_id": 513301886,
+    "name": "player_game_logs_2026.csv",
+    "size": 427596,
+    "updated_at": "2026-08-13T17:42:58Z",
+    "expected_digest": "sha256:d54c5312d180b80a7c379850b74ed7d6bcc2a686dfd16e899d998a22440a7871",
+    "sha256": "d54c5312d180b80a7c379850b74ed7d6bcc2a686dfd16e899d998a22440a7871",
+    "url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nba_stats_player_game_logs/player_game_logs_2026.csv"
+  },
+  {
+    "tag": "nba_stats_schedules",
+    "release_id": 97519767,
+    "asset_id": 512435923,
+    "name": "nba_schedule_2025.csv.gz",
+    "size": 22929,
+    "updated_at": "2026-08-13T03:30:17Z",
+    "expected_digest": "sha256:639e8145a750b80a4394d2e7044545019bcc0e39a979618c7ff9edbfcac02c9b",
+    "sha256": "639e8145a750b80a4394d2e7044545019bcc0e39a979618c7ff9edbfcac02c9b",
+    "url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nba_stats_schedules/nba_schedule_2025.csv.gz"
+  },
+  {
+    "tag": "nba_stats_schedules",
+    "release_id": 97519767,
+    "asset_id": 512437528,
+    "name": "nba_schedule_2026.csv.gz",
+    "size": 23071,
+    "updated_at": "2026-08-13T03:31:58Z",
+    "expected_digest": "sha256:c1ff3711ef8b8ec4310c60159d1225a400facc7ce1e29bc64f09ae4130496509",
+    "sha256": "c1ff3711ef8b8ec4310c60159d1225a400facc7ce1e29bc64f09ae4130496509",
+    "url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nba_stats_schedules/nba_schedule_2026.csv.gz"
+  },
+  {
+    "tag": "nba_stats_player_season_stats",
+    "release_id": 359073640,
+    "asset_id": 513302594,
+    "name": "player_season_stats_2025.csv",
+    "size": 3772788,
+    "updated_at": "2026-08-13T17:43:50Z",
+    "expected_digest": "sha256:458d5d6500320ec950753392e965241a777e1f879468ec5310cac46eed873433",
+    "sha256": "458d5d6500320ec950753392e965241a777e1f879468ec5310cac46eed873433",
+    "url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nba_stats_player_season_stats/player_season_stats_2025.csv"
+  },
+  {
+    "tag": "nba_stats_player_season_stats",
+    "release_id": 359073640,
+    "asset_id": 513302597,
+    "name": "player_season_stats_2026.csv",
+    "size": 4392214,
+    "updated_at": "2026-08-13T17:43:50Z",
+    "expected_digest": "sha256:c3e2c5420f534870de33ee4f178cd44c399835a6d52e7587a91c611c5ea46651",
+    "sha256": "c3e2c5420f534870de33ee4f178cd44c399835a6d52e7587a91c611c5ea46651",
+    "url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nba_stats_player_season_stats/player_season_stats_2026.csv"
+  },
+  {
+    "tag": "nba_stats_shots",
+    "release_id": 359073661,
+    "asset_id": 624005925,
+    "name": "shots_2026.csv",
+    "size": 36414170,
+    "updated_at": "2026-10-09T05:34:54Z",
+    "expected_digest": "sha256:6fedf813bc180234feffd70d858a2d3b6f2f4f440c437044d4f9997b095834ae",
+    "sha256": "6fedf813bc180234feffd70d858a2d3b6f2f4f440c437044d4f9997b095834ae",
+    "url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nba_stats_shots/shots_2026.csv"
+  },
+  {
+    "tag": "nba_stats_player_boxscores",
+    "release_id": 97519777,
+    "asset_id": 602082403,
+    "name": "player_boxscores_2026.csv",
+    "size": 6131057,
+    "updated_at": "2026-10-01T00:32:00Z",
+    "expected_digest": "sha256:decaee33440ec8bd26d21152d61b4b69970bed45c3d07ede42f2700b7bd364e7",
+    "sha256": "decaee33440ec8bd26d21152d61b4b69970bed45c3d07ede42f2700b7bd364e7",
+    "url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nba_stats_player_boxscores/player_boxscores_2026.csv"
+  },
+  {
+    "tag": "nba_stats_team_boxscores",
+    "release_id": 97519772,
+    "asset_id": 602082769,
+    "name": "team_boxscores_2026.csv",
+    "size": 358439,
+    "updated_at": "2026-10-01T00:32:17Z",
+    "expected_digest": "sha256:b5133e5602d1ab9c4a4b4240aced7af3b6587e124f7ab7335b5de961c897ade8",
+    "sha256": "b5133e5602d1ab9c4a4b4240aced7af3b6587e124f7ab7335b5de961c897ade8",
+    "url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nba_stats_team_boxscores/team_boxscores_2026.csv"
+  },
+  {
+    "tag": "nba_stats_rosters",
+    "release_id": 359073644,
+    "asset_id": 513298936,
+    "name": "rosters_2026.csv",
+    "size": 71170,
+    "updated_at": "2026-08-13T17:40:43Z",
+    "expected_digest": "sha256:1468b9c76e9b3d0453d341d9fa2ef7acf6ae23b01c4a438e715ab0bfa758a78e",
+    "sha256": "1468b9c76e9b3d0453d341d9fa2ef7acf6ae23b01c4a438e715ab0bfa758a78e",
+    "url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nba_stats_rosters/rosters_2026.csv"
+  }
+]

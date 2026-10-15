@@ -1,0 +1,38 @@
+async(page)=>{
+  const checks=[],ready=()=>page.waitForFunction(()=>document.querySelector('#busy')?.hidden,{}, {timeout:25000});
+  const select=async(name,text)=>{const el=page.locator(`#operation-form select[name="${name}"]`),value=await el.locator('option').evaluateAll((opts,text)=>opts.find(o=>o.textContent.startsWith(text+' ·'))?.value,text);await el.selectOption(value??text);};
+  const id=async name=>page.locator('.field-item').evaluateAll((els,name)=>els.find(e=>e.querySelector('span:nth-child(2)')?.childNodes[0]?.textContent===name)?.dataset.field,name);
+  const multi=async(name,field)=>page.locator(`#operation-form input[name="${name}"][value="${await id(field)}"]`).check();
+  const fill=async(name,value)=>page.locator(`#operation-form [name="${name}"]`).fill(String(value));
+  const source=async()=>{await page.locator('.dataset-item>button:first-child').filter({hasText:'commerce.csv'}).click();await ready();};
+  const apply=async(type,setup,expectedRows=12)=>{await source();await page.locator('#operation-form [name=operation]').selectOption(type);await setup();await page.locator('[data-action=preview]').click();await ready();if(!await page.locator('[data-action=commit]').count())throw new Error(`${type}: ${await page.locator('#toast').innerText()}`);await page.locator('[data-action=commit]').click();await ready();const actual=Number((await page.locator('.work-stats strong').first().innerText()).replaceAll(',',''));if(actual!==expectedRows)throw new Error(`${type}: ${actual} != ${expectedRows}`);checks.push({operation:type,rows:actual,passed:true});};
+  await page.locator('#confirm-import').click();await ready();
+  await apply('sort',async()=>{await select('sort0','Revenue');await select('ascending0','descending');});
+  await apply('dropna',async()=>{await multi('subset','Revenue');},11);
+  await apply('fillna',async()=>{await select('field','Revenue');await select('method','median');});
+  await apply('dedup',async()=>{await select('keep','none');},10);
+  await apply('cast',async()=>{await select('field','Revenue');await select('targetType','number');await select('errors','coerce');});
+  await apply('rename',async()=>{await select('field','Revenue');await fill('name','营业额');});
+  await apply('select',async()=>{await multi('fields','Region');await multi('fields','Revenue');});
+  await apply('derive',async()=>{await fill('name','PerUnit');await fill('formula','[Revenue] / [Units]');});
+  await apply('filter',async()=>{await select('field0','Revenue');await select('operator0','between');await fill('value0',80);await fill('upper0',120);},4);
+  await apply('group',async()=>{await multi('keys','Region');await select('metric0','Revenue');await select('fn0','mean');await fill('as0','Average');},3);
+  await apply('pivot_table',async()=>{await multi('index','Region');await multi('columns','Month');await select('valueField','Revenue');await select('agg','sum');},3);
+  await apply('pivot',async()=>{await multi('index','Record_id');await multi('columns','Month');await select('valueField','Revenue');},11).catch(async error=>{if(!String(error).includes('PIVOT_DUPLICATE'))throw error;checks.push({operation:'pivot',passed:true,case:'duplicate keys rejected'});});
+  await apply('merge',async()=>{const right=await page.locator('#operation-form [name=rightTable] option').evaluateAll(opts=>opts.find(o=>o.textContent.includes('regions.csv'))?.value);await select('rightTable',right);await select('left0','Region');const el=page.locator('#operation-form [name=right0]');await el.selectOption(await el.locator('option').evaluateAll(opts=>opts.find(o=>o.textContent.startsWith('Region ·')).value));await select('how','left');await select('validate','many_to_one');});
+  await apply('concat',async()=>{const cb=page.locator('#operation-form input[name=sources]').locator('..').filter({hasText:'regions.csv'}).locator('input');await cb.check();},16);
+  await apply('rolling',async()=>{await select('field','Revenue');await multi('by','Region');await select('order','Date');await fill('window',3);await fill('minPeriods',1);});
+  await apply('resample',async()=>{await select('field','Revenue');await select('date','Date');await select('rule','MS');await fill('as','Monthly');},3);
+  await apply('cut',async()=>{await select('field','Revenue');await fill('edges','0,100,150,250');});
+  await apply('qcut',async()=>{await select('field','Revenue');await page.locator('#operation-form [name=duplicates]').check();});
+  await apply('rank',async()=>{await select('field','Revenue');await multi('by','Region');});
+  await apply('cumsum',async()=>{await select('field','Revenue');await multi('by','Region');});
+  await apply('transform',async()=>{await select('field','Revenue');await multi('by','Region');});
+  await apply('melt',async()=>{await multi('ids','Record_id');await multi('values','Revenue');await multi('values','Units');},24);
+  await apply('date_part',async()=>{await select('field','Date');await select('part','month');});
+  await apply('outliers',async()=>{await select('field','Revenue');},11);
+  await source();await page.locator('#chart-type').selectOption('correlation');const cell=page.locator('#main-chart rect.cell[role=button]').nth(1);await cell.click();await ready();if(await page.locator('#chart-type').inputValue()!=='scatter')throw new Error('correlation click failed');checks.push({operation:'correlation-to-scatter',passed:true});
+  await page.locator('#chart-type').selectOption('missing');await page.locator('#main-chart rect[role=button]').first().click();await ready();if(await page.locator('dialog').count()!==1)throw new Error('missing field dialog');await page.locator('dialog [data-close]').click();checks.push({operation:'missing-to-cleaning',passed:true});
+  await page.locator('#chart-type').selectOption('scatter');await page.locator('nav a[href="#/gallery"]').click();await ready();if(await page.locator('.gallery-card').count()!==11)throw new Error('gallery count');await page.locator('[data-use-chart=box]').click();await ready();if(await page.locator('#chart-type').inputValue()!=='box')throw new Error('gallery mapping');checks.push({operation:'gallery-uses-current-data',passed:true});
+  return {checks,errors:await page.locator('#toast.error').allTextContents()};
+}

@@ -1,0 +1,6 @@
+Region,Revenue,Units,Date,Active
+A,0,0,2025-01-01,false
+A,10,2,2025-01-02,true
+B,20,4,2025-01-04,true
+B,,4,2025-02-01,false
+,40,8,2025-02-03,true

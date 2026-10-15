@@ -1,0 +1,12 @@
+# Phase 0 source downloads are local research evidence, not release assets.
+research/evidence/raw/
+.playwright-cli/
+node_modules/
+dist/
+output/
+codex_brief.txt
+deep-research-report.md
+*.log
+.env
+.env.*
+!.env.example

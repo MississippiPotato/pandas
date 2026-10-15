@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1260" viewBox="0 0 1440 1260">
+  <title>NBA DataLab — Phase 0 layout review</title>
+  <desc>Static design specification, no working interface or NBA results. Shows a three panel Data Studio, its operation pipeline and the four page structure.</desc>
+  <defs>
+    <style>
+      text{font-family:Inter,'Microsoft YaHei',Arial,sans-serif;fill:#102139} .muted{fill:#52647b;font-size:13px}.label{fill:#33465d;font-size:14px}.small{fill:#52647b;font-size:12px}.teal{fill:#0f766e}.heading{font-size:19px;font-weight:600}.line{stroke:#d5dee9;fill:none}.panel{fill:#ffffff;stroke:#d5dee9}.chip{fill:#eef3f8;stroke:#d5dee9}.code{font-family:Consolas,monospace;font-size:13px;fill:#33465d}
+    </style>
+  </defs>
+  <rect width="1440" height="1260" fill="#f5f7fb"/>
+  <text x="40" y="47" font-size="14" letter-spacing="2" class="teal">COURT &amp; LAB / DESIGN SPECIFICATION</text>
+  <text x="40" y="90" font-size="34" font-weight="650">NBA DataLab</text>
+  <text x="40" y="119" class="label">Phase 0 · 页面与交互布局审查 · 原生 JavaScript + D3</text>
+  <rect x="1132" y="48" width="268" height="42" rx="8" class="chip"/>
+  <text x="1150" y="74" class="label">静态设计稿 / Not implemented</text>
+
+  <rect x="40" y="155" width="1360" height="745" rx="12" class="panel"/>
+  <rect x="40" y="155" width="1360" height="58" rx="12" fill="#eef3f8"/>
+  <circle cx="70" cy="184" r="12" fill="none" stroke="#b45309" stroke-width="2"/>
+  <path d="M58 184h24M70 172v24" stroke="#b45309"/>
+  <text x="94" y="190" font-size="17" font-weight="600">NBA DataLab</text>
+  <text x="300" y="190" class="label">Overview</text><text x="435" y="190" class="label">NBA Explore</text>
+  <rect x="571" y="168" width="140" height="34" rx="6" fill="#0f766e" fill-opacity=".12"/>
+  <text x="595" y="190" class="teal" font-size="14">Data Studio</text>
+  <text x="747" y="190" class="label">Gallery</text>
+  <text x="1224" y="190" class="label">中文 / EN</text>
+
+  <text x="60" y="245" class="heading">数据分析工作台</text>
+  <text x="271" y="245" class="muted">Active dataset · 统一版本 / 共享数据状态</text>
+  <rect x="928" y="225" width="90" height="30" rx="6" class="chip"/><text x="952" y="245" class="label">导入</text>
+  <text x="1042" y="245" class="label">↶ 撤销   ↷ 重做</text>
+  <rect x="1234" y="224" width="144" height="32" rx="6" fill="#0f766e"/><text x="1271" y="245" fill="#f5f7fb" style="fill:#ffffff;font-size:14px;font-weight:600">导出结果 ↓</text>
+  <path d="M40 268h1360M296 268v484M1092 268v484" class="line"/>
+
+  <text x="60" y="302" class="muted">01 / 数据与字段</text>
+  <rect x="58" y="319" width="220" height="45" rx="6" fill="#0f766e" fill-opacity=".10" stroke="#0f766e"/>
+  <text x="72" y="347" class="label">◫  当前数据集</text>
+  <text x="74" y="393" class="label">◫  第二张表 / Join source</text>
+  <text x="60" y="431" class="small">多表管理 · 版本与来源</text>
+  <path d="M60 450h216" class="line"/>
+  <text x="60" y="480" class="muted">FIELDS / 字段</text>
+  <text x="70" y="514" class="teal" font-size="14">#</text><text x="95" y="514" class="label">Numeric field</text><text x="250" y="514" class="small">—</text>
+  <text x="70" y="550" class="teal" font-size="14">#</text><text x="95" y="550" class="label">Second measure</text><text x="250" y="550" class="small">—</text>
+  <text x="62" y="586" class="muted">ABC</text><text x="95" y="586" class="label">Category field</text>
+  <text x="66" y="622" class="muted">▣</text><text x="95" y="622" class="label">Date field</text>
+  <text x="60" y="659" class="small">类型 / 缺失率 / 分布</text>
+  <path d="M60 681h216" class="line"/>
+  <text x="60" y="711" class="label">清洗   筛选   分组   关联</text>
+  <text x="60" y="736" class="small">每项操作均调用通用 JS 引擎</text>
+
+  <text x="318" y="302" class="muted">02 / 联动分析画布</text>
+  <rect x="318" y="321" width="752" height="36" rx="6" fill="#eef3f8"/>
+  <text x="334" y="344" class="label">已提交记录 —</text><text x="516" y="344" class="teal" font-size="14">临时选择 — / —</text>
+  <text x="897" y="344" class="small">清除 · 应用筛选</text>
+  <rect x="318" y="373" width="470" height="218" rx="8" class="panel"/>
+  <text x="338" y="402" class="label">主分析图 / Scatter · Group · Pivot</text>
+  <path d="M351 548V432M351 548h402" stroke="#52647b" fill="none"/>
+  <path d="M352 510h400M352 471h400M451 432v116M551 432v116M651 432v116" stroke="#d5dee9" stroke-dasharray="3 5"/>
+  <rect x="464" y="452" width="162" height="68" rx="3" fill="#0f766e" fill-opacity=".10" stroke="#0f766e" stroke-dasharray="4 3"/>
+  <text x="485" y="481" class="teal" font-size="14">D3 Brush</text><text x="485" y="503" class="small">选区 → 数据谓词</text>
+  <text x="352" y="572" class="small">图形占位，未绘制真实数据</text>
+  <rect x="804" y="373" width="266" height="218" rx="8" class="panel"/>
+  <text x="824" y="402" class="label">分布 / 缺失 / 时间</text>
+  <path d="M828 548h218" stroke="#52647b"/>
+  <path d="M838 525v23M871 504v44M904 478v70M937 490v58M970 515v33M1003 531v17" stroke="#d5dee9" stroke-width="18"/>
+  <text x="824" y="571" class="small">同一有效行集合 · 实时联动</text>
+  <rect x="318" y="607" width="752" height="128" rx="8" class="panel"/>
+  <text x="338" y="634" class="label">Data preview / 当前结果明细</text><text x="902" y="634" class="small">分页 50 / 100 行</text>
+  <path d="M334 647h720M334 676h720M334 705h720M502 647v69M686 647v69M870 647v69" class="line"/>
+  <text x="342" y="668" class="small">字段</text><text x="518" y="668" class="small">类型</text><text x="702" y="668" class="small">数值</text><text x="886" y="668" class="small">记录身份</text>
+  <text x="342" y="699" class="small">—</text><text x="518" y="699" class="small">—</text><text x="702" y="699" class="small">—</text><text x="886" y="699" class="small">—</text>
+
+  <text x="1114" y="302" class="muted">03 / 操作与预览</text>
+  <text x="1114" y="341" class="heading">分组聚合</text>
+  <text x="1114" y="379" class="small">GROUP BY / 维度</text>
+  <rect x="1114" y="392" width="264" height="36" rx="6" class="chip"/><text x="1128" y="416" class="label">选择字段                         ▾</text>
+  <text x="1114" y="459" class="small">METRIC / 指标与方法</text>
+  <rect x="1114" y="472" width="264" height="36" rx="6" class="chip"/><text x="1128" y="496" class="label">Numeric field → Mean       ▾</text>
+  <text x="1114" y="543" class="label">Before / After</text>
+  <text x="1114" y="575" class="muted">记录数       —  →  —</text><text x="1114" y="602" class="muted">缺失值       —  →  —</text>
+  <text x="1114" y="640" class="small">先预览真实计算，再确认写入流程</text>
+  <rect x="1114" y="677" width="85" height="36" rx="6" class="chip"/><text x="1141" y="701" class="label">取消</text>
+  <rect x="1213" y="677" width="165" height="36" rx="6" fill="#0f766e"/><text x="1263" y="701" style="fill:#ffffff;font-size:14px;font-weight:600">应用操作</text>
+
+  <path d="M40 752h1360" class="line"/>
+  <text x="60" y="781" class="muted">04 / 可重放分析流程</text>
+  <rect x="60" y="798" width="134" height="32" rx="6" class="chip"/><text x="88" y="819" class="label">原始数据</text>
+  <text x="207" y="820" class="muted">→</text><rect x="232" y="798" width="126" height="32" rx="6" class="chip"/><text x="267" y="819" class="label">清洗</text>
+  <text x="372" y="820" class="muted">→</text><rect x="397" y="798" width="126" height="32" rx="6" class="chip"/><text x="432" y="819" class="label">筛选</text>
+  <text x="537" y="820" class="muted">→</text><rect x="563" y="798" width="153" height="32" rx="6" fill="#0f766e" fill-opacity=".10" stroke="#0f766e"/><text x="593" y="819" class="teal" font-size="14">分组聚合</text>
+  <text x="745" y="819" class="small">编辑节点 · 下游重算 · 撤销 / 重做</text>
+  <text x="60" y="863" class="code">df.groupby(keys, dropna=False, as_index=False).agg(...)</text>
+  <text x="927" y="863" class="small">同规格 → JS 执行 + pandas 映射</text>
+
+  <text x="40" y="946" class="heading">四页面共用分析引擎</text>
+  <text x="40" y="972" class="muted">先引擎 → 再 Studio → 图形分析 → NBA 体验 → 验收与 Pages</text>
+  <rect x="40" y="996" width="325" height="153" rx="10" class="panel"/>
+  <text x="60" y="1027" class="heading">Overview</text><text x="60" y="1056" class="label">真实窗口概览 / 双入口</text>
+  <text x="60" y="1088" class="small">趋势 → 球队 / 球员 → 继续分析</text><text x="60" y="1122" class="teal" font-size="13">范围与统计口径始终可见</text>
+  <rect x="385" y="996" width="325" height="153" rx="10" class="panel"/>
+  <text x="405" y="1027" class="heading">NBA Explore</text><text x="405" y="1056" class="label">球员 / 球队 / 时间 / 投篮</text>
+  <text x="405" y="1088" class="small">真实坐标 → 刷选 → 命中 / 出手</text><text x="405" y="1122" class="teal" font-size="13">当前节点可发送至 Studio</text>
+  <rect x="730" y="996" width="325" height="153" rx="10" class="panel"/>
+  <text x="750" y="1027" class="heading">Data Studio</text><text x="750" y="1056" class="label">任意合格 CSV / TSV / JSON</text>
+  <text x="750" y="1088" class="small">导入 → 清洗 → 聚合 → 关联 → 导出</text><text x="750" y="1122" class="teal" font-size="13">核心功能完整度先于装饰</text>
+  <rect x="1075" y="996" width="325" height="153" rx="10" class="panel"/>
+  <text x="1095" y="1027" class="heading">Gallery</text><text x="1095" y="1056" class="label">按类型选图 / 按角色选字段</text>
+  <text x="1095" y="1088" class="small">用自己的数据创建 D3 分析图</text><text x="1095" y="1122" class="teal" font-size="13">复用模块与结果，不写死示例</text>
+  <rect x="40" y="1186" width="30" height="30" rx="6" fill="#ffffff" stroke="#d5dee9"/><rect x="80" y="1186" width="30" height="30" rx="6" fill="#0f766e"/><rect x="120" y="1186" width="30" height="30" rx="6" fill="#1d4ed8"/><rect x="160" y="1186" width="30" height="30" rx="6" fill="#b45309"/>
+  <text x="218" y="1207" class="label">Light / Teal / Blue / Court Orange</text>
+  <text x="860" y="1207" class="muted">中英同功能 · 可撤销 · 可复现 · 单一状态</text>
+  <text x="40" y="1240" class="small">2026-10-15 / Phase 0 design artifact. 图表占位只表达布局，不包含模拟 NBA 比赛结果。</text>
+</svg>
+

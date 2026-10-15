@@ -1,0 +1,36 @@
+async (page) => {
+  const checks=[];
+  const assert=(condition,name,details={})=>{if(!condition)throw new Error(`${name}: ${JSON.stringify(details)}`);checks.push({name,passed:true,...details});};
+  const ready=()=>page.waitForFunction(()=>document.querySelector('#busy')?.hidden,{},{timeout:20000});
+  const rows=async()=>Number((await page.locator('.work-stats strong').first().innerText()).replaceAll(',',''));
+  const select=async(name,value)=>{const el=page.locator(`#operation-form select[name="${name}"]`);const match=await el.locator('option').evaluateAll((options,value)=>options.find(o=>o.textContent.startsWith(value+' ·'))?.value,value);await el.selectOption(match??value);};
+  const fieldId=async(name)=>page.locator('.field-item').evaluateAll((items,name)=>items.find(el=>el.querySelector('span:nth-child(2)')?.childNodes[0]?.textContent===name)?.dataset.field,name);
+  const check=async(name,field)=>page.locator(`#operation-form input[name="${name}"]`).filter({has:page.locator(':scope')});
+  const chooseCheck=async(name,field)=>{const id=await fieldId(field);await page.locator(`#operation-form input[name="${name}"][value="${id}"]`).check();};
+  const op=async(type)=>{await ready();await page.locator('#operation-form [name=operation]').selectOption(type);};
+  const preview=async()=>{await page.locator('[data-action=preview]').click();await ready();assert(await page.locator('[data-action=commit]').count()===1,'preview appears');};
+  const commit=async()=>{await page.locator('[data-action=commit]').click();await ready();};
+  await page.locator('#confirm-import').click();await ready();await page.waitForSelector('#operation-form');
+  assert(await rows()===12,'non-NBA CSV imports all rows');
+  assert((await page.locator('.result-card tbody tr').first().innerText()).includes('001'),'leading zero ID remains text');
+  await op('fillna');await select('field','Revenue');await select('method','constant');await page.locator('#operation-form [name=value]').fill('0');await preview();assert(await rows()===12,'preview leaves committed data unchanged');await commit();
+  assert((await page.locator('.work-stats strong').nth(2).innerText())==='1','fillna only replaces Revenue missing value');
+  await op('dedup');await preview();await commit();assert(await rows()===11,'duplicate removal retains eleven rows');
+  await op('filter');await select('field0','Active');await page.locator('#operation-form [name=value0]').fill('true');await preview();await commit();assert(await rows()===8,'typed boolean filter works');
+  await op('group');await chooseCheck('keys','Region');await chooseCheck('keys','Month');await select('metric0','Revenue');await select('fn0','sum');await page.locator('#operation-form [name=as0]').fill('Total');await page.locator('[data-add=metric]').click();await select('metric1','Revenue');await select('fn1','size');await page.locator('#operation-form [name=as1]').fill('N');await preview();
+  assert(await page.locator('#result-preview-chart svg').count()===1,'group preview includes real D3 result');await commit();assert(await rows()===6,'multi-key multi-metric grouping');
+  const grouped=await page.locator('.result-card tbody').innerText();assert(grouped.includes('400')&&grouped.includes('190'),'group sums match independently calculated totals');
+  await page.locator('[data-action=undo]').click();await ready();assert(await rows()===8,'undo restores detailed records');await page.locator('[data-action=redo]').click();await ready();assert(await rows()===6,'redo restores groups');
+  await op('pivot_table');await chooseCheck('index','Region');await chooseCheck('columns','Month');await select('valueField','Total');await select('agg','sum');await preview();await commit();assert(await rows()===3,'pivot generates three real region rows');
+  await page.locator('#chart-type').selectOption('heatmap');assert(await page.locator('#main-chart rect[role=button]').count()>0,'pivot cells are interactive');
+  await page.locator('[data-action=locale]').click();await ready();assert(await rows()===3,'locale preserves derived data');assert((await page.locator('h1').innerText()).includes('Your data'),'English UI visible');
+  await page.locator('.export-menu summary').click();const csvEvent=page.waitForEvent('download');await page.locator('[data-export=csv]').click();const csv=await csvEvent;await csv.saveAs('output/verification/commerce-pivot.csv');await ready();assert(csv.suggestedFilename().endsWith('.csv'),'actual CSV download');
+  const projectEvent=page.waitForEvent('download');await page.locator('[data-export=project]').click();await (await projectEvent).saveAs('output/verification/commerce-project.json');await ready();
+  const pyEvent=page.waitForEvent('download');await page.locator('[data-export=python]').click();await (await pyEvent).saveAs('output/verification/commerce.py');await ready();
+  const svgEvent=page.waitForEvent('download');await page.locator('[data-export=svg]').click();await (await svgEvent).saveAs('output/verification/commerce-chart.svg');await ready();
+  const pngEvent=page.waitForEvent('download');await page.locator('[data-export=png]').click();await (await pngEvent).saveAs('output/verification/commerce-chart.png');await ready();
+  await page.locator('[data-action=save-local]').click();await ready();await page.locator('[data-action=undo]').click();await ready();assert(await rows()===6,'undo after exported pivot');await page.locator('.export-menu summary').click();await page.locator('[data-action=restore-local]').click();await ready();assert(await rows()===3,'IndexedDB project restores exact result');
+  await page.locator('[data-action=locale]').click();await ready();
+  await page.setViewportSize({width:1440,height:1000});await page.evaluate(()=>scrollTo(0,0));await page.screenshot({path:'output/playwright/final-commerce-desktop.png',animations:'disabled',timeout:8000});
+  return {checks,rows:await rows(),errors:await page.locator('#toast.error').allTextContents()};
+}

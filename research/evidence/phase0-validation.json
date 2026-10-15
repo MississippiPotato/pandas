@@ -1,0 +1,103 @@
+{
+  "date_local": "2026-10-15",
+  "scope": "Phase 0 documents and source audit; no app tests/build/deployment",
+  "passed": true,
+  "checks": [
+    {
+      "check": "original unchanged: codex_brief.txt",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "original unchanged: deep-research-report.md",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "required document: IMPLEMENTATION_PLAN",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "required document: RESEARCH_SUMMARY",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "required document: DATA_SOURCES",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "required document: PANDAS_COVERAGE",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "required document: DESIGN_SPEC",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "local document links",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "check": "coverage IDs unique and count 50",
+      "passed": true,
+      "detail": 50
+    },
+    {
+      "check": "coverage status honest",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "10 assets match API/local SHA256 and size",
+      "passed": true,
+      "detail": {
+        "assets": 10,
+        "raw_bytes": 52040272
+      }
+    },
+    {
+      "check": "default snapshot measured counts",
+      "passed": true,
+      "detail": {
+        "rule": "2025-11-01 <= game_date <= 2025-11-30 AND season_type == regular-season",
+        "games": 219,
+        "player_game_stats": 5698,
+        "played_player_game_stats": 4784,
+        "players": 498,
+        "teams": 30,
+        "team_game_stats": 438,
+        "shots": 39092,
+        "game_date_range": [
+          "2025-11-01",
+          "2025-11-30"
+        ]
+      }
+    },
+    {
+      "check": "shot/box FGA FGM internal consistency",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "shot foreign keys",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "SVG parses",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "no application implementation in Phase 0",
+      "passed": true,
+      "detail": null
+    }
+  ]
+}
