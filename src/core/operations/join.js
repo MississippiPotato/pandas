@@ -48,7 +48,11 @@ export function join(left, right, p) {
   })));
   return { table: resultTable(left, output, outputCols, 'join', pairs.map(([i, j]) => keyOf(['join', i === null ? null : lIDs[i], j === null ? null : rIDs[j]])),
     { rightInput: right.id, leftKeys: lk.map(c => c.id), rightKeys: rk.map(c => c.id) }),
-    report: { estimatedRows: estimate, matched:estimate-(['left','outer'].includes(how)?unmatchedLeft:0)-(['right','outer'].includes(how)?unmatchedRight:0),unmatchedLeft, unmatchedRight, expansion: lrows.length ? estimate / lrows.length : null } };
+    report: { estimatedRows: estimate, matched:estimate-(['left','outer'].includes(how)?unmatchedLeft:0)-(['right','outer'].includes(how)?unmatchedRight:0),unmatchedLeft, unmatchedRight, expansion: lrows.length ? estimate / lrows.length : null,
+      leftRows:lrows.length,rightRows:rrows.length,matchedLeft:lrows.length-unmatchedLeft,matchedRight:rrows.length-unmatchedRight,
+      leftDistinctKeys:lm.size,rightDistinctKeys:rm.size,leftDuplicateKeys:[...lm.values()].filter(v=>v.length>1).length,rightDuplicateKeys:[...rm.values()].filter(v=>v.length>1).length,
+      manyToManyKeys:[...lm].filter(([k,v])=>v.length>1&&(rm.get(k)?.length??0)>1).length,
+      keyRelations:[...new Set([...lm.keys(),...rm.keys()])].slice(0,30).map(key=>({key:JSON.parse(key),left:lm.get(key)?.length??0,right:rm.get(key)?.length??0,pairs:(lm.get(key)?.length??0)*(rm.get(key)?.length??0)})),keyRelationsTotal:new Set([...lm.keys(),...rm.keys()]).size } };
 }
 export function concat(tables, p) {
   unsupported(p, ['join', 'maxRows']); ensure(tables.length >= 2, 'CONCAT_INPUTS');

@@ -28,7 +28,7 @@ export function createTable(records, options = {}) {
   return Object.freeze({ id, version: options.version ?? 1, sourceHash: options.sourceHash ?? null,
     provenance: Object.freeze({ ...options.provenance }), columns: Object.freeze(columns), values: Object.freeze(values),
     rowIds: Object.freeze([...rowIds]), index: Object.freeze(records.map((_, i) => i)),
-    lineage: Object.freeze(options.lineage ?? { kind: 'source' }) });
+    lineage: Object.freeze(options.lineage ?? { kind: 'source' }), grain: options.grain ?? null });
 }
 export function field(table, ref) {
   const column = table.columns.find(c => c.id === ref) ?? table.columns.find(c => c.name === ref);
@@ -48,11 +48,11 @@ export function view(table, positions, kind) {
 export function replace(table, records, columns = table.columns, options = {}) {
   return createTable(records, { id: table.id, version: table.version + 1, columns,
     rowIds: visibleIds(table), sourceHash: table.sourceHash, provenance: table.provenance,
-    lineage: { kind: 'row-transform', input: table.id }, ...options });
+    lineage: { kind: 'row-transform', input: table.id }, grain:table.grain, ...options });
 }
 export function resultTable(table, records, columns, kind, rowIds, metadata = {}) {
   return createTable(records, { id: `${table.id}:${kind}`, version: table.version + 1, columns, rowIds,
-    lineage: { kind, input: table.id, ...metadata } });
+    lineage: { kind, input: table.id, ...metadata }, grain:metadata.grain??null });
 }
 export function copyTable(table) {
   return createTable(rows(table), { ...table, rowIds: visibleIds(table), columns: table.columns });

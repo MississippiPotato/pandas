@@ -6,7 +6,7 @@ export function renderChart(container,type,data,options={}){
   const host=d3.select(container);host.selectAll('*').remove();
   const W=800,H=type==='court'?530:type==='missing'?Math.max(180,Math.min(400,data.missingMatrix.fields.length*15)):330,M={t:22,r:28,b:46,l:58};
   const svg=host.append('svg').attr('xmlns','http://www.w3.org/2000/svg').attr('viewBox',`0 0 ${W} ${H}`).attr('role','img').attr('aria-label',options.title??type)
-    .attr('font-family','Inter, system-ui, Microsoft YaHei, sans-serif').attr('font-size',11).attr('fill','#506174');
+    .attr('font-family','Inter, system-ui, Microsoft YaHei, sans-serif').attr('font-size',12).attr('fill','#506174');
   svg.append('rect').attr('width',W).attr('height',H).attr('fill','#ffffff');
   const g=svg.append('g'),locale=options.locale??'zh-CN',zh=locale==='zh-CN';
   const empty=()=>svg.append('text').attr('x',W/2).attr('y',H/2).attr('text-anchor','middle').attr('fill','#81909d').text(zh?'当前字段或选区没有可绘制的数据':'No drawable data for these fields or selection');
@@ -56,7 +56,7 @@ export function renderChart(container,type,data,options={}){
     if(type==='court')svg.append('text').attr('x',M.l).attr('y',H-8).text(options.courtMode&&options.courtMode!=='points'?(zh?'5英尺网格 · 颜色越深值越高 · Tab/Enter选择格子':'5-foot grid · darker = higher · Tab/Enter to select a cell'):(zh?'真实投篮 · ● 命中  + 未中 · 全坐标范围':'Actual shots · ● made  + missed · full coordinate extent'));
     else if(colorKeys.length<=6)colorKeys.forEach((key,i)=>{svg.append('circle').attr('cx',M.l+i*115).attr('cy',H-22).attr('r',3).attr('fill',color(key));svg.append('text').attr('x',M.l+8+i*115).attr('y',H-18).attr('font-size',9).text(String(key??'∅').slice(0,14));});
   }else if(type==='histogram'||type==='distribution'){
-    if(!data.histogram.length){empty();return svg.node();}const x=d3.scaleLinear().domain(data.domain).range([M.l,W-M.r]),y=d3.scaleLinear().domain([0,d3.max(data.histogram,b=>b.count)||1]).nice().range([H-M.b,M.t]);axes(x,y,data.fields.x?.name,zh?'记录数':'Rows');
+    if(!data.histogram.length){empty();return svg.node();}const x=d3.scaleLinear().domain(data.domain).range([M.l,W-M.r]),y=d3.scaleLinear().domain([0,options.histogramMax??(d3.max(data.histogram,b=>b.count)||1)]).nice().range([H-M.b,M.t]);axes(x,y,data.fields.x?.name,zh?'记录数':'Rows');
     g.selectAll('.base').data(data.histogram).join('rect').attr('x',d=>x(d.x0)+1).attr('y',d=>y(d.count)).attr('width',d=>Math.max(0,x(d.x1)-x(d.x0)-2)).attr('height',d=>H-M.b-y(d.count)).attr('fill','#e2eaf1');
     g.selectAll('.chosen').data(data.histogram).join('rect').attr('x',d=>x(d.x0)+1).attr('y',d=>y(d.selected)).attr('width',d=>Math.max(0,x(d.x1)-x(d.x0)-2)).attr('height',d=>H-M.b-y(d.selected)).attr('fill','#21988a');
     if(options.onSelection)g.append('g').attr('class','brush histogram-brush').call(d3.brushX().extent([[M.l,M.t],[W-M.r,H-M.b]]).on('end',event=>{if(event.sourceEvent&&event.selection)options.onSelection('histogram',{field:data.fields.x.id,op:'between',min:x.invert(event.selection[0]),max:x.invert(event.selection[1])});}));
@@ -64,18 +64,18 @@ export function renderChart(container,type,data,options={}){
     const bars=data.bars.filter(b=>b.value!==null).slice(0,15);if(!bars.length){empty();return svg.node();}
     const x=d3.scaleLinear().domain([Math.min(0,d3.min(bars,d=>d.value)),Math.max(1,d3.max(bars,d=>d.value))]).nice().range([160,W-M.r]),y=d3.scaleBand().domain(bars.map((_,i)=>i)).range([M.t,H-M.b]).padding(.3);
     g.append('g').attr('transform',`translate(0,${H-M.b})`).call(d3.axisBottom(x).ticks(5));
-    const groups=g.selectAll('.bar-row').data(bars).join('g');
+    const groups=g.selectAll('.bar-row').data(bars).join('g').attr('class','bar-row');
     groups.append('text').attr('x',149).attr('y',(_,i)=>y(i)+y.bandwidth()/2+4).attr('text-anchor','end').text(d=>String(d.key??(zh?'缺失':'Missing')).slice(0,24));
     const rects=groups.append('rect').attr('x',d=>x(Math.min(0,d.value))).attr('y',(_,i)=>y(i)).attr('width',d=>Math.max(1,Math.abs(x(d.value)-x(0)))).attr('height',y.bandwidth()).attr('rx',3).attr('fill','#21988a');
-    tip(rects,d=>`${d.key??'∅'}: ${format(d.value,locale,4)} / n=${d.count}`);
+    tip(rects,d=>`${d.key??'∅'}: ${format(d.value,locale,4)}${d.count===undefined?'':` / ${zh?'当前结果行数':'current result rows'}=${d.count}`}${d.sourceCount===undefined?'':` / ${zh?'输入样本 n':'input sample n'}=${d.sourceCount}`}`);
     if(options.onSelection)focus(rects,d=>options.onSelection('category',d.key===null?{field:data.fields.category.id,op:'isMissing'}:{field:data.fields.category.id,op:'eq',value:d.key}));
-    svg.append('text').attr('x',W-M.r).attr('y',H-5).attr('text-anchor','end').text(`${zh?'前15组':'Top 15 groups'} · ${data.fields.metric?.name??(zh?'频次':'Frequency')}`);
+    svg.append('text').attr('x',W-M.r).attr('y',H-5).attr('text-anchor','end').text(`${zh?'前15组':'Top 15 groups'} · ${options.caption??`${data.aggregate??''}(${data.fields.metric?.name??(zh?'频次':'Frequency')})`}`);
   }else if(type==='line'||type==='area'){
     const values=data.timeline.filter(d=>d.value!==null);if(!values.length){empty();return svg.node();}
     const x=d3.scaleUtc().domain(d3.extent(data.timeline,d=>new Date(d.date))).range([M.l,W-M.r]),y=d3.scaleLinear().domain([Math.min(0,d3.min(values,d=>d.value)),d3.max(values,d=>d.value)||1]).nice().range([H-M.b,M.t]);axes(x,y,data.fields.date?.name,data.fields.metric?.name);
     if(type==='area')g.append('path').datum(data.timeline).attr('d',d3.area().defined(d=>d.value!==null).x(d=>x(new Date(d.date))).y0(y(0)).y1(d=>y(d.value))).attr('fill','#e1f1eb');
     g.append('path').datum(data.timeline).attr('d',d3.line().defined(d=>d.value!==null).x(d=>x(new Date(d.date))).y(d=>y(d.value))).attr('fill','none').attr('stroke','#188a80').attr('stroke-width',2.5);
-    const dots=g.selectAll('circle').data(values).join('circle').attr('cx',d=>x(new Date(d.date))).attr('cy',d=>y(d.value)).attr('r',3).attr('fill','#188a80');tip(dots,d=>`${d.date}: ${format(d.value,locale,3)} (n=${d.count})`);
+    const dots=g.selectAll('circle').data(values).join('circle').attr('cx',d=>x(new Date(d.date))).attr('cy',d=>y(d.value)).attr('r',3).attr('fill','#188a80');tip(dots,d=>`${d.date}: ${format(d.value,locale,3)} (${data.grain?(zh?'结果行数':'result rows'):'n'}=${d.count})`);
     if(options.onSelection)g.append('g').attr('class','brush time-brush').call(d3.brushX().extent([[M.l,M.t],[W-M.r,H-M.b]]).on('end',event=>{if(event.sourceEvent&&event.selection)options.onSelection('time',{field:data.fields.date.id,op:'between',min:data.fields.date.type==='datetime'?x.invert(event.selection[0]).toISOString():x.invert(event.selection[0]).toISOString().slice(0,10),max:data.fields.date.type==='datetime'?x.invert(event.selection[1]).toISOString():x.invert(event.selection[1]).toISOString().slice(0,10)});}));
   }else if(type==='box'){
     const b=data.box;if(!b.n){empty();return svg.node();}const domain=b.min===b.max?[b.min-1,b.max+1]:[b.min,b.max];const x=d3.scaleLinear().domain(domain).nice().range([M.l,W-M.r]);const y=H/2;
@@ -84,7 +84,7 @@ export function renderChart(container,type,data,options={}){
     for(const value of [b.whiskerLow,b.whiskerHigh])if(value!==null)g.append('line').attr('x1',x(value)).attr('x2',x(value)).attr('y1',y-20).attr('y2',y+20).attr('stroke','#819787');
     g.append('rect').attr('x',x(b.q1)).attr('width',Math.max(2,x(b.q3)-x(b.q1))).attr('y',y-45).attr('height',90).attr('fill','#dff1eb').attr('stroke','#188a80');
     g.append('line').attr('x1',x(b.median)).attr('x2',x(b.median)).attr('y1',y-45).attr('y2',y+45).attr('stroke','#0f766e').attr('stroke-width',3);
-    for(const [label,value]of [['Min',b.min],['Q1',b.q1],['Median',b.median],['Q3',b.q3],['Max',b.max]])svg.append('text').attr('x',x(value)).attr('y',y+70).attr('text-anchor','middle').text(`${label} ${format(value,locale)}`);
+    for(const [label,value]of [[zh?'最小值':'Min',b.min],['Q1',b.q1],[zh?'中位数':'Median',b.median],['Q3',b.q3],[zh?'最大值':'Max',b.max]])svg.append('text').attr('x',x(value)).attr('y',y+70).attr('text-anchor','middle').text(`${label} ${format(value,locale)}`);
     const dots=g.selectAll('circle.outlier').data(b.outliers??[]).join('circle').attr('class','outlier').attr('cx',x).attr('cy',y).attr('r',4).attr('fill','#ce9770');tip(dots,d=>`${data.fields.x?.name}: ${format(d,locale,3)}`);if(options.onSelection)focus(dots,value=>options.onSelection('outlier',{op:'eq',field:data.fields.x.id,value}));svg.append('text').attr('x',M.l).attr('y',24).text(`n=${b.n} · 1.5 × IQR · ${zh?'范围外记录':'rows outside fences'}=${b.outlierCount??0}`);
   }else if(type==='correlation'||type==='heatmap'){
     const corr=type==='correlation'||!data.pivotHeat.length,items=corr?data.matrix:data.pivotHeat;

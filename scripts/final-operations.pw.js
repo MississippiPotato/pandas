@@ -32,7 +32,7 @@ async(page)=>{
   await apply('date_part',async()=>{await select('field','Date');await select('part','month');});
   await apply('outliers',async()=>{await select('field','Revenue');},11);
   await source();await page.locator('#chart-type').selectOption('correlation');const cell=page.locator('#main-chart rect.cell[role=button]').nth(1);await cell.click();await ready();if(await page.locator('#chart-type').inputValue()!=='scatter')throw new Error('correlation click failed');checks.push({operation:'correlation-to-scatter',passed:true});
-  await page.locator('#chart-type').selectOption('missing');await page.locator('#main-chart rect[role=button]').first().click();await ready();if(await page.locator('dialog').count()!==1)throw new Error('missing field dialog');await page.locator('dialog [data-close]').click();checks.push({operation:'missing-to-cleaning',passed:true});
+  await page.locator('#chart-type').selectOption('missing');await page.locator('#main-chart rect[role=button]').first().click();await ready();if(await page.locator('#operation-form [name=operation]').inputValue()!=='fillna')throw new Error('missing field did not configure cleaning');checks.push({operation:'missing-to-cleaning',passed:true});
   await page.locator('#chart-type').selectOption('scatter');await page.locator('nav a[href="#/gallery"]').click();await ready();if(await page.locator('.gallery-card').count()!==11)throw new Error('gallery count');await page.locator('[data-use-chart=box]').click();await ready();if(await page.locator('#chart-type').inputValue()!=='box')throw new Error('gallery mapping');checks.push({operation:'gallery-uses-current-data',passed:true});
   return {checks,errors:await page.locator('#toast.error').allTextContents()};
 }

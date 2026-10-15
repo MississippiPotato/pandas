@@ -32,7 +32,10 @@ export function group(table, p) {
     ...p.metrics.map((m, i) => [m.as, aggregate(bucket.indices.map(index => metricColumns[i][index]), m.fn, m)])
   ]));
   const columns = [...keys, ...p.metrics.map(m => ({ id: `${table.id}:agg:${encodeURIComponent(m.as)}`, name: m.as, type: ['count', 'size', 'nunique'].includes(m.fn) ? 'integer' : 'number' }))];
-  return resultTable(table, output, columns, 'group', entries.map(([key]) => `${table.id}:group:${key}`), { keys: keys.map(k => k.id), groups: entries.map(([, b]) => b.vals) });
+  const ids = entries.map(([key]) => `${table.id}:group:${key}`);
+  const grain = {kind:'group',keys:keys.map(k=>({id:k.id,name:k.name})),metrics:p.metrics.map((m,i)=>({...m,fieldName:field(table,m.field).name,id:columns[keys.length+i].id})),inputRows:table.index.length,
+    includedRows:entries.reduce((n,[,b])=>n+b.indices.length,0),samples:Object.fromEntries(entries.map(([,b],i)=>[ids[i],b.indices.length]))};
+  return resultTable(table, output, columns, 'group', ids, { keys: keys.map(k => k.id), groups: entries.map(([, b]) => b.vals), grain });
 }
 export function pivot(table, p, aggregateValues = true) {
   unsupported(p, ['index', 'columns', 'value', 'agg', 'fillValue', 'dropna', 'sort', 'maxCells']);

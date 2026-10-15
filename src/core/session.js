@@ -22,7 +22,7 @@ export class Session {
   get version() { return this.#version; }
   get history() { return this.#history.position; }
   nodes() { return [...this.#nodes.values()]; }
-  select(id) { ensure(this.#nodes.has(id), 'NODE_NOT_FOUND', { id }); this.#active = id; this.#version++; }
+  select(id) { ensure(this.#nodes.has(id), 'NODE_NOT_FOUND', { id }); this.#active = id; this.#history.replaceCurrent({...this.#history.current,active:id}); this.#version++; }
   table(id) { ensure(this.#results.has(id), 'NODE_NOT_FOUND', { id }); return this.#results.get(id).table; }
   sources(){return [...this.#sources.values()].filter(t=>this.#nodes.has(`source:${t.id}`));}
   removeSource(id){const sourceNode=`source:${id}`;ensure(this.#nodes.has(sourceNode),'SOURCE_MISSING');ensure(![...this.#nodes.values()].some(n=>n.inputs?.includes(sourceNode)),'DATASET_IN_USE');this.#nodes.delete(sourceNode);this.#results.delete(sourceNode);if(this.#active===sourceNode)this.#active=[...this.#nodes.keys()].at(-1)??null;this.#save();}

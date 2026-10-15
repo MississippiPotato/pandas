@@ -6,6 +6,7 @@ import {profile,aggregate,valueCounts,quantile} from '../core/statistics.js';
 import {execute} from '../core/operation-registry.js';
 import {rows,createTable,visibleIds,columnValues} from '../core/dataset.js';
 import {filter,duplicated} from '../core/operations/cleaning.js';
+import {operationPreview} from '../core/operation-preview.js';
 const session = new Session();
 async function handle({ data: { requestId, action, payload = {} } }) {
   try {
@@ -29,7 +30,7 @@ async function handle({ data: { requestId, action, payload = {} } }) {
           leaders:rows(leaders).filter(r=>r.GP>=5).sort((a,b)=>b.PPG-a.PPG).slice(0,7),charts:chartQuery(team,{x:'pts',y:'ast',date:'game_date',category:'team_abbr',metric:'pts',aggregate:'mean'})};break;
       }
       case 'select': session.select(payload.id); result = session.snapshot(); break;
-      case 'preview': { const p = session.preview(payload.spec, payload.inputs),params=payload.spec.params;result = { report: p.report, pandas: p.pandas, rows: p.table.index.length,columns:p.table.columns,records:rows(p.table,0,8),profile:profile(p.table),charts:chartQuery(p.table,{x:params.field,category:params.keys?.[0],metric:params.metrics?.[0]?.as,aggregate:'sum'}),beforeCharts:chartQuery(session.table(payload.inputs?.[0]??session.activeId),{x:params.field}) }; break; }
+      case 'preview': { const inputs=(payload.inputs??[session.activeId]).map(id=>session.table(id));result=operationPreview(inputs,payload.spec,session.preview(payload.spec,payload.inputs));break; }
       case 'commit': session.commit(payload.spec, payload.inputs); result = session.snapshot(); break;
       case 'edit': session.edit(payload.id, payload.spec); result = session.snapshot(); break;
       case 'undo': session.undo(); result = session.snapshot(); break;

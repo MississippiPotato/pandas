@@ -17,6 +17,11 @@ test('upstream edits cannot silently retarget metric or pivot column identities'
   assert.throws(()=>pivot.edit(filter.id,{type:'filter',params:{predicate:{op:'eq',field:'c',value:'Feb'}}}),error=>error.code==='FIELD_NOT_FOUND');assert.deepEqual(rows(pivot.activeTable),original);
 });
 const filtered = value => ({type:'filter',params:{predicate:{field:'Revenue',op:'gte',value}}});
+test('undo of a new branch returns to the table actually selected before committing',()=>{
+  const s=new Session(),source=s.add(createTable(sales,{id:'branch',columns:schema}));s.commit(filtered(10));s.commit(groupSpec);
+  s.select(source);const before=rows(s.activeTable);s.commit(filtered(20));s.undo();assert.equal(s.activeId,source);assert.deepEqual(rows(s.activeTable),before);
+  s.redo();assert.equal(s.activeTable.index.length,2);
+});
 test('preview is isolated; undo/redo restore exact results and new commit discards redo', () => {
   const s = new Session(); s.add(createTable(sales,{id:'sales',columns:schema}));
   assert.equal(s.preview(filtered(10)).table.index.length,3); assert.equal(s.activeTable.index.length,5);
