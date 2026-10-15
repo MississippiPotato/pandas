@@ -1,16 +1,39 @@
 # 交付与验收记录
 
-日期：2026-10-15。**最新的 NBA 主题及三层可视化重构已获用户授权推送及部署。最终发布结果另行记录；已有发布记录保留其版本标识。**
+日期：2026-10-15。**最新的问题引导、工作台与通用导入改版已部署，运行提交 `8e29a9b`。开发阶段以修改及定向核对为主；用户授权发布后，现有 CI 通过 55 项引擎检查、50 组 pandas 对照与 120 项 NBA 核验，公网默认路线已实际走通。完整发布证据见文末。**
 
 当前交付为 **pandas 可视分析工作台 / pandas Visual Analysis Workbench**；NBA 为默认示例。最新实现见以下重构验收，发布记录按版本区分。原 NBA DataLab 公网记录另标为历史。Phase 0/1 文档作为历史证据保留，界面始终固定浅色。
 
 网站：[GitHub Pages](https://MississippiPotato.github.io/pandas/)；仓库：[MississippiPotato/pandas](https://github.com/MississippiPotato/pandas)。本轮线上版本以文末验证结果为准。
 
+## 工作台与通用导入适配（本次改版）
+
+- 工作台增加四步使用路线和四个问题入口，按 schema 预填操作；当前表的数值、分类、日期、标识字段与不可用原因可展开查看。图形／表格／统计／代码并列切换，流程、字段与来源折叠；活动流程计数只计当前依赖路径。Diff 可主动开启，自动预览不再强制展开整张前后表。
+- 导入改为“结构 → 字段 → 起点”三步。自动识别分隔符；支持跳过标题行、无表头、XLSX 工作表与表头行；解析失败仍保留结构设置并可重试。可确认每列类型、标识角色与明确日期格式，转换错误须修正或显式同意转缺失；字段名不必与 NBA 一致。可记录每行含义，提供通用 CSV 模板、宽表 melt 起点和复杂报表／嵌套 JSON 边界说明。
+- 修复 `Paid` 与普通大额唯一整数误判 ID；改用明确名称 token，导入和工作台均可设置角色。修复日期／时间 fillna 导出变字符串的问题。修正筛选直方图的整箱着色，改为精确区间裁剪并说明额外排除的得分缺失；最终散点补充点大小图例与可见的聚焦／悬停详情。增大关键图注，窄屏提示横滑并定位当前步骤。
+- 双语同步新增界面，修正月度命中率英文解释、旧首页榜单说明、concat 内部表名与硬编码 Key 标签。
+
+必要核对：构建成功；实际 Chrome 中导入 4 行非 NBA 订单数据（标题行、分号、DMY 日期、金额缺失、前导零编号），确认日期和类型后填充 Paid=1800，分组预览并应用得到 East 均值 1500、West 均值 2100，各 n=2，当前结果 2×2、活动流程 2 步；中英切换保持这些数值。导入适配定向核对包含无表头、引号中的分隔符、非法日历日期、XLSX 表头处理和嵌套 JSON 拒绝。日期常量填充→日期分组、日期众数填充→重采样、时间戳常量填充→重采样三个新案例由独立 pandas 执行通过。没有以这些检查宣称 23 个操作的所有组合或整个新界面已回归。
+
+实现：`src/ui/import-wizard.js`、`src/ui/workspace-assistant.js`、`src/i18n/onboarding.js`、`src/styles/onboarding.css`；日期回归案例加入 `scripts/verify-pandas.mjs`。本机页面记录见 `output/playwright/workspace-*.yml/.png`；日期定向结果见 `output/verification/pandas-parity-debug.json`。
+
+## 问题引导式改版（此前本地修改）
+
+用户反馈“难以看懂、录视频不知道从何开始”。交互组织参考[世界杯数据实验室](https://favorites-zhaoy.github.io/hw3/)的“先有问题、再展开计算”，沿用本项目浅色 NBA 风格；没有复制其资源、数据或引入 Python 后端。
+
+- 顶层改为“分析故事 / 跟着分析 / 自由工作台”。首页围绕“一场高分就能说明一切吗？”提供单一主入口及五站路线；案例、数据来源和导入作为辅助入口。
+- 新增 `#/guide?step=0…4`：认识数据、缺失处理、出场筛选、滚动走势、球员比较。每页用问题标题、读图说明、少量参数、精确的输入/输出和下一步按钮建立连续分析过程；明细、Diff、代码折叠。第一站先解释“一行=球员的一次出场”，缺失数区分三个练习字段的 726 个移除值与其他来源字段的空白。
+- 图形承担真实配置：缺失填充可点均值/中位数；分钟直方图 Brush 配置真实范围；球员/窗口决定滚动预览；分组最后通过真实最少样本筛选和得分排序，提供均值/标准差散点（点大小=n）与前十得分条形图。路线复用原 Session / execute；多步骤只读预览先整体计算，通过后逐一应用记录节点；导出继续使用原已应用流程。
+- 引导状态放在原本机恢复槽位；修改早期步骤后，重新应用会重建后续路线，旧分析分支仍在自由工作台。完整的自由导入、23 种变换、关联、重塑、空间图等能力保留。
+- `src/ui/guided-analysis.js` 管理路线状态与参数；`src/charts/journey.js` 提供路线图形；`src/i18n/journey.js` 双语文案；`src/styles/journey.css` 浅色布局。
+
+本轮执行 `npm run build` 成功，查看首页、认识数据和缺失处理页面排版；**未运行测试套件或追加完整引导流程验收**，遵从用户“先别测试”的要求。此前 53 / 47 / 120 / 104 等数字仅证明上一轮版本，不自动覆盖这次新增路线。构建日志 `output/verification/journey-build.log`；页面设计截图 `output/playwright/journey-*.png`。
+
 ## 按修改意见完成的三层可视化重构（本地）
 
 | 修改意见 | 实际实现与验证边界 |
 |---|---|
-| 数据语义 | `semantic: key` 与物理 dtype 分离，保留长 ID / 前导零；按字段名和 >95% 唯一大整数启发式识别，默认退出数值统计/相关性/数值轴/数值聚合。类型徽标创建可撤销、可重放、可导出 pandas 的 cast 步骤；count/size/nunique、关联和明细继续可用。启发式可能误判，显式转换可解除。 |
+| 数据语义 | `semantic: key` 与物理 dtype 分离，保留长 ID / 前导零；现按明确 ID/code/uuid 等名称 token 识别，不再把普通唯一大整数或 Paid 字段自动当成 ID。导入可确认角色，类型徽标创建可撤销、可重放、可导出 pandas 的 cast 步骤；count/size/nunique、关联和明细继续可用。 |
 | NBA 主题数据 | **默认 NBA 球员逐场缺失练习表 4,784×16 + 同规模原值表**，按真实球队/对手预关联、日期支持同一球员连续滚动，won 根据球队比分派生；球队城市表 30×5；月度宽表 475×12；Titanic 891×9 为可选通用验证。首页以 NBA 主题提供四个预配置任务，保持 pandas 为功能主线。 |
 | 表格与流程 | 活动依赖流程节点展示 Shape 矩形和精确前后行列/行变化；历史节点直接回看。表头包含完整当前范围统计的数值直方图（含均值/中位数）、Top3 类别和 key 唯一率，支持真实指针刷选或类别点击。DataFrame 是主视图，图表与实时已应用/待确认代码同时展示。 |
 | 视觉差异 | 默认在成功操作预览后打开 Diff：删除记录浅红删除线；填充、类型、重命名和派生列绿色胶囊；分组、透视、关联、重塑输入/输出分屏，按相同键稳定着色。差异只展示前 12 个例子，计算/导出不截断；排序仅改变顺序时不伪造值差异。 |
@@ -149,3 +172,15 @@ flowchart LR
 - 按 `played` 分组的输入样本数为 **4,784 / 914**，与两行聚合结果分别显示，未把结果行数 1 当输入 n；配置尚未确认时，当前表仍为 5,698 行。中英切换后统计与配置保持一致。
 - 发布包只包含 `dist/` 内的 **14 个运行文件**：页面、图标、许可证、构建资源和六张 NBA CSV/清单。调研原始文件、文档、测试数据与本机项目未作为 Pages 运行文件发布。
 - 本轮证据保存在 `output/verification/pandas-release-check.log`、`pandas-published-ci.log`、`pandas-published-browser.log`；实际截图为 `output/playwright/pandas-published-overview.png`、`pandas-published-studio-mobile.png`。本机证据不属于网站运行依赖。
+
+## NBA 主题版本发布记录（2026-10-15）
+
+运行提交 **`25d9a8f64fc9e8cdb53e8c012b322fbac079bc73`** 已推送 main；[GitHub Actions 38733937467](https://github.com/MississippiPotato/pandas/actions/runs/38733937467) 的 build 与 deploy 全部 success。CI 实际通过 53 项测试、47 组真实 pandas 对照、120 项原始 NBA 数据检查。公开页面 HTTP 200，加载 `index-B1Lqf_-z.js` / `index-m0Hs7u6u.css`，与 /pandas/ 构建相符；21 个运行文件。此后用户要求转向修改使用体验，因此未追加完成整套公网交互验收。上方最新引导式改版未包含在该部署中。
+
+## 引导式分析与通用导入发布记录（2026-10-15）
+
+用户明确授权发布。运行提交 **`8e29a9bbbed549f15c7a681490d0d71f7cbc2ee2`** 已推送 main；[GitHub Actions 38749227405](https://github.com/MississippiPotato/pandas/actions/runs/38749227405) 的 build / deploy 均为 **success**。CI 通过 **55 项引擎检查、50 个真实 pandas 2.3.3 对照案例、120 项 NBA 核验**。同步修正旧测试中“唯一大整数自动视为编号”的旧预期，改用明确命名的 sensorId，并增加金额类型和自定义表头日期的回归场景。
+
+公网首页 HTTP **200**，实际加载 `index-C0T12sgu.js` / `index-CMxFsNqB.css`；Worker 为 `analysis.worker-vcz6ujTg.js`，与发布构建一致。实际 Chrome 走完默认五站：4,784 条 → 分钟 357 个缺失填充 → 2,910 条出场 → 组内滚动 → 256 名球员；确认完成后进入工作台，显示 **256×5、6 个活动依赖步骤**。另实际导入录屏用的六行销售 CSV，经过三步确认、sales 中位数 1800 预览与应用，当前表 **6×4、缺失为 0**；切换英文仍保持这些结果。
+
+发布仍仅上传 `dist/` 运行资产；讲稿、调研资料和本机验证文件没有进入 Pages 包。讲稿及录屏 CSV 留在本地 `output/`。本轮公网核对是上述录屏路线，不是所有功能、参数与恢复状态的全面回归。证据：`output/verification/guided-release-actions.log`、`guided-release-tests.log`、`output/playwright/guided-published-*.yml`。

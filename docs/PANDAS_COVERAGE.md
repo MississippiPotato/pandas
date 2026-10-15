@@ -2,6 +2,8 @@
 
 当前实现映射（2026-10-15），覆盖最初 50 项目标：41 项 P0、2 项依赖真实坐标的 P0-D、7 项增强 P1。不是 50 个独立 API，也不是 pandas 完整兼容承诺。23 个注册变换 + IQR 筛选的任务/方法/含义/参数/限制/双语文案统一维护于 [operation-catalog.js](../src/ui/operation-catalog.js)。本次验收、授权发布与历史部署分开见 [DELIVERY](DELIVERY.md)。
 
+最新工作台先按数据结构推荐任务，图形／数据／统计／代码并列切换。导入增加三步确认、分隔符识别、表头行／无表头、字段角色及显式斜线日期顺序；同一 schema 驱动图形与操作，不要求 NBA 字段。宽表可从 `melt()` 起步，复杂报表／嵌套 JSON 不自动猜测展开。开发阶段仅定向核对；授权发布后，运行提交 `8e29a9b` 的 CI 通过 55 项引擎检查、50 组 pandas 对照和 120 项 NBA 核验。下方历史浏览器矩阵并未全部重跑，公网另确认了默认五站路线。
+
 ## 三层可视化补充
 
 本地当前版本按 `修改意见.md` 加入 DataFrame 优先布局、表头微图、Shape 流程、前后 Diff、同屏代码和操作面板图形控件。顶部为三个主入口；11 图已收拢到 Studio，旧图库路由兼容。默认数据改为真实 NBA 球员逐场记录的**明确标注缺失练习副本**，并提供逐格原值对照/移除清单、球队关联表、可选月度表与 Titanic。真实日期及同一球员重复出场使滚动、清洗、关联与分组能在同一个主题内贯通。
@@ -28,7 +30,7 @@
 
 ## 任务与界面组织
 
-加载/查看位于数据侧栏与预览/统计页，对应导入器、shape、dtypes、describe、isna 与 value_counts；五类变换通过任务选择器与分组操作列表进入。首页展示全部六类任务。每个操作直接显示方法和含义，参数/限制及等价代码可展开。配置停止修改 550ms 后自动只读预览；手动预览按钮保留。只有确认应用才修改 Session。
+加载/查看位于三步导入器、数据侧栏与图形/预览/统计页，对应 shape、dtypes、describe、isna 与 value_counts；五类变换通过任务选择器与分组操作列表进入。首页展示五站分析故事，完整能力保留在自由工作台。每个操作直接显示方法和含义，参数/限制及等价代码可展开。配置停止修改 550ms 后自动只读预览；手动预览按钮保留。只有确认应用才修改 Session。
 
 方法核对依据包括 pandas 官方 [布尔索引](https://pandas.pydata.org/docs/user_guide/indexing.html#boolean-indexing)、[groupby](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.groupby.html)、[merge](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.merge.html)、[rolling](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.rolling.html)、[to_numeric](https://pandas.pydata.org/docs/reference/api/pandas.to_numeric.html)。文档核对与兼容验证是两件事；离线逐值对照固定 pandas **2.3.3**，不据此声称所有 pandas 版本和参数都兼容。
 
