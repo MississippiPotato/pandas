@@ -42,12 +42,12 @@ flowchart LR
 | 层级 | 实际证据与边界 |
 |---|---|
 | 引擎 / 历史 | `npm test`：39 个 Node 测试，覆盖严格导入、null/0/false、稳定排序、空组、透视、关联扩张、UTC、回放、原子编辑与安全表达式；属于算法和状态验证 |
-| 独立 pandas | `npm run test:pandas`：固定 pandas 2.3.3 / NumPy 2.2.6；生成真正可运行脚本，离线 Python 独立执行，逐字段/逐行比较，数值容差 1e-9。新增边界用例另行执行，完整集由发布 CI 再跑 |
+| 独立 pandas | `npm run test:pandas`：固定 pandas 2.3.3 / NumPy 2.2.6；生成真正可运行脚本，离线 Python 独立执行，逐字段/逐行比较，数值容差 1e-9。完整 45 个案例已由发布 CI 通过，包含严格转换与混合类型表达式边界 |
 | NBA 数据 | `npm run data:validate`：120 项断言，含 81 项官方 PDF 人工录入预期值的独立数值对照；检查 SHA、键、范围、比分与投篮守恒。3 场抽查不是全量错误率估计 |
 | 通用业务链 | Chrome：12 行非 NBA CSV → 指定填充 → 去重 11 行 → 布尔筛选 8 行 → 两键/两指标分组 6 行 → 透视 3 行；核对独立合计 400 / 190；实际下载 CSV、SVG、PNG、Python、项目包；撤销/重做/IndexedDB 恢复 |
 | 操作面板 | Chrome：24 个面板逐一配置、预览、应用；无聚合 pivot 对重复键明确拒绝。另验证相关矩阵转散点、缺失图进入清洗、图库使用当前表；共 27 项检查 |
 | NBA 联动 | Chrome：4,784 条实际出场、438 条球队记录、39,092 次投篮；真实鼠标刷选、选区换语言、球队 LAL 13 场、区域命中率、空间筛选传入 Studio 与撤销，共 18 项检查 |
-| Excel | Chrome：两个非空工作表切换，空白工作表跳过；保留 `001`、数值 0、布尔 false、ISO 日期时间；读取公式缓存值，不执行公式 |
+| Excel / TSV / JSON / 流程 | Chrome：两个非空工作表切换，空白工作表跳过；保留 `001`、数值 0、布尔 false、ISO 日期时间；读取公式缓存值，不执行公式；TSV/JSON 浏览器保留 0/false/ID，q=.75 算得 9；成功的无聚合 pivot、原始行下钻、历史参数编辑、哈希绑定配置恢复通过；实际导出 Python 独立复现 ID=002 / Value=12 |
 | 布局与主题 | Chrome 1440px 与 390px；页面无横向溢出；模拟深色系统仍为浅色。截图使用实际浏览器视口，未把设计板截图当网站结果 |
 
 本地证据在 `output/verification/` 与 `output/playwright/`，不进入网站部署。可重复的 CLI 函数脚本为 `scripts/final-commerce.pw.js`、`final-operations.pw.js`、`final-nba.pw.js`、`final-performance.pw.js`；前两者分别从指定导入对话框开始，操作步骤和数据样例保存在仓库中。完整浏览器流程需要运行 Vite 并通过 Playwright CLI 打开 Chrome。

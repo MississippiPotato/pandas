@@ -18,6 +18,7 @@ export function renderChart(container,type,data,options={}){
     g.selectAll('.domain').attr('stroke','#d6dee6');g.selectAll('.tick line').attr('stroke','#e4eaf0');
   };
   const tip=(nodes,fn)=>nodes.append('title').text(fn);
+  const legend=(scale,lo,hi,label='',percent=false)=>{const left=W-M.r-175,top=4;for(let i=0;i<25;i++)svg.append('rect').attr('x',left+i*5).attr('y',top).attr('width',5).attr('height',7).attr('fill',scale(lo+(hi-lo)*i/24));svg.append('text').attr('x',left).attr('y',top+18).attr('font-size',8).text(`${format(percent?lo*100:lo,locale,2)}${percent?'%':''}`);svg.append('text').attr('x',left+125).attr('y',top+18).attr('text-anchor','end').attr('font-size',8).text(`${format(percent?hi*100:hi,locale,2)}${percent?'%':''}`);svg.append('text').attr('x',left+132).attr('y',top+7).attr('font-size',8).text(label);};
   if(type==='scatter'||type==='court'){
     const points=data.points.filter(p=>Number.isFinite(p.x)&&Number.isFinite(p.y));if(!points.length){empty();return svg.node();}
     let xd=data.domain??d3.extent(points,p=>p.x),yd=data.extentY??d3.extent(points,p=>p.y);
@@ -40,10 +41,12 @@ export function renderChart(container,type,data,options={}){
     const marks=g.append('g').selectAll('path').data(type==='court'&&options.courtMode&&options.courtMode!=='points'?[]:points).join('path').attr('d',p=>d3.symbol().type(type==='court'&&p.made===false?d3.symbolCross:d3.symbolCircle).size(type==='court'?12:22)())
       .attr('transform',p=>`translate(${x(p.x)},${y(p.y)})`).attr('fill',p=>p.selected?(type==='court'?(p.made?'#198d7f':'#ce9770'):colorKeys.length<=6?color(p.color):'#168b80'):'#c5d1dc').attr('opacity',p=>p.selected?.66:.22);
     tip(marks,p=>`${p.label??''}\n${data.fields.x?.name}: ${p.x}\n${data.fields.y?.name}: ${p.y}`);
+    if(data.pointSample&&!(type==='court'&&options.courtMode&&options.courtMode!=='points'))svg.append('text').attr('class','sampling-caption').attr('x',W-M.r).attr('y',12).attr('text-anchor','end').attr('font-size',9).text(zh?`显示抽样 ${points.length} / ${data.totalRows} 行 · 统计使用全量`:`Display sample ${points.length} / ${data.totalRows} rows · full-data statistics`);
     if(type==='court'&&options.courtMode&&options.courtMode!=='points'){
       const rate=options.courtMode==='rate',scale=rate?d3.scaleSequential([0,1],d3.interpolateYlGnBu):d3.scaleSequential([0,d3.max(data.regions,d=>d.count)||1],d3.interpolateYlGnBu);
       const rects=g.append('g').selectAll('rect').data(data.regions).join('rect').attr('x',d=>x(Math.max(-250,d.x0))).attr('y',d=>y(d.y1)).attr('width',d=>Math.max(2,x(Math.min(250,d.x1))-x(Math.max(-250,d.x0)))).attr('height',d=>y(d.y0)-y(d.y1)).attr('fill',d=>scale(rate?d.pct:d.count)).attr('opacity',.8).attr('stroke','#fff').attr('stroke-width',.5);
       tip(rects,d=>`n=${d.count} · ${zh?'命中':'made'}=${d.made} · FG%=${format(d.pct*100,locale,1)}%`);
+      legend(scale,0,rate?1:d3.max(data.regions,d=>d.count)||1,rate?'FG%':'n',rate);
       if(options.onSelection)focus(rects,d=>options.onSelection('region',{op:'and',args:[{op:'between',field:data.fields.x.id,min:d.x0,max:d.x1,inclusive:'left'},{op:'between',field:data.fields.y.id,min:d.y0,max:d.y1,inclusive:'left'}]}));
     }
     const brush=d3.brush().extent([[left,top],[right,bottom]]).on('end',event=>{if(!event.sourceEvent||!event.selection||!options.onSelection)return;
@@ -88,6 +91,7 @@ export function renderChart(container,type,data,options={}){
     if(!items.length){empty();return svg.node();}const xs=[...new Set(items.map(d=>corr?d.x:d.label))],ys=[...new Set(items.map(d=>corr?d.y:String(d.key??'∅')))];
     const x=d3.scaleBand().domain(xs).range([140,W-M.r]).padding(.035),y=d3.scaleBand().domain(ys).range([M.t,H-70]).padding(.035);
     const color=corr?d3.scaleDiverging([-1,0,1],d3.interpolateBrBG):d3.scaleSequential(d3.extent(items.filter(d=>d.value!==null),d=>d.value),d3.interpolateGnBu);
+    const domain=corr?[-1,1]:d3.extent(items.filter(d=>d.value!==null),d=>d.value);if(domain[0]!==undefined)legend(color,domain[0],domain[1],corr?'r':'');
     const rects=g.selectAll('rect.cell').data(items).join('rect').attr('class','cell').attr('x',d=>x(corr?d.x:d.label)).attr('y',d=>y(corr?d.y:String(d.key??'∅'))).attr('width',x.bandwidth()).attr('height',y.bandwidth()).attr('rx',2).attr('fill',d=>d.value===null?'#edf1f5':color(d.value));
     tip(rects,d=>`${corr?`${d.x} × ${d.y}`:`${d.key} × ${d.label}`}: ${format(d.value,locale,3)}${corr?` / n=${d.n}`:''}`);
     if(corr&&options.onPair)focus(rects,d=>options.onPair(d.x,d.y));
@@ -100,6 +104,7 @@ export function renderChart(container,type,data,options={}){
     const x=d3.scaleBand().domain(d3.range(sample.length)).range([155,W-M.r]),y=d3.scaleBand().domain(cols.map(c=>c.id)).range([M.t,H-M.b]);
     const cells=cols.flatMap((c,j)=>sample.map((r,i)=>({c,i,missing:r[j]})));
     const rects=g.selectAll('rect').data(cells).join('rect').attr('x',d=>x(d.i)).attr('y',d=>y(d.c.id)).attr('width',Math.max(1,x.bandwidth()-.5)).attr('height',Math.max(1,y.bandwidth()-.5)).attr('fill',d=>d.missing?'#d28b4f':'#e3eee9');
+    tip(rects,d=>`${d.c.name} · ${d.i+1}: ${d.missing?(zh?'缺失':'missing'):(zh?'有效':'valid')}`);
     if(options.onField)focus(rects,d=>options.onField(d.c.id));
     for(const c of cols)svg.append('text').attr('x',145).attr('y',y(c.id)+y.bandwidth()/2+4).attr('text-anchor','end').text(c.name.slice(0,22));
     svg.append('text').attr('x',155).attr('y',H-10).text(zh?'前80条记录：橙色为缺失，点击进入清洗':'First 80 rows: orange is missing. Click to clean.');
