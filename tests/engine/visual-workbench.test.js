@@ -10,18 +10,29 @@ import {operationPreview} from '../../src/core/operation-preview.js';
 import {rows} from '../../src/core/dataset.js';
 const load=text=>importText(text,{id:'manual',format:'csv'}).then(r=>r.table);
 test('identifier roles retain exact values and are excluded from numeric suggestions and statistics',async()=>{
-  const table=await load('game_id,sensor,amount\n001,1001,10\n002,1002,20\n003,1003,30\n');
+  const table=await load('game_id,sensorId,amount\n001,1001,10\n002,1002,20\n003,1003,30\n');
   assert.equal(table.columns[0].semantic,'key');assert.equal(table.columns[1].semantic,'key');
-  assert.equal(rows(table)[0].game_id,'001');assert.equal(rows(table)[0].sensor,1001);
+  assert.equal(rows(table)[0].game_id,'001');assert.equal(rows(table)[0].sensorId,1001);
   assert.equal(profile(table).columns[1].mean,undefined);
-  assert.equal(chartQuery(table,{x:'sensor',correlation:true}).fields.x.name,'amount');
-  assert.throws(()=>correlation(table,['sensor','amount']),{code:'NUMERIC_REQUIRED'});
-  assert.throws(()=>execute(table,{type:'group',params:{keys:['game_id'],metrics:[{field:'sensor',fn:'mean',as:'bad'}]}}),{code:'NUMERIC_REQUIRED'});
-  assert.throws(()=>execute(table,{type:'fillna',params:{field:'sensor',method:'mean'}}),{code:'NUMERIC_REQUIRED'});
-  const count=execute(table,{type:'group',params:{keys:['game_id'],metrics:[{field:'sensor',fn:'nunique',as:'ids'}]}}).table;
+  assert.equal(chartQuery(table,{x:'sensorId',correlation:true}).fields.x.name,'amount');
+  assert.throws(()=>correlation(table,['sensorId','amount']),{code:'NUMERIC_REQUIRED'});
+  assert.throws(()=>execute(table,{type:'group',params:{keys:['game_id'],metrics:[{field:'sensorId',fn:'mean',as:'bad'}]}}),{code:'NUMERIC_REQUIRED'});
+  assert.throws(()=>execute(table,{type:'fillna',params:{field:'sensorId',method:'mean'}}),{code:'NUMERIC_REQUIRED'});
+  const count=execute(table,{type:'group',params:{keys:['game_id'],metrics:[{field:'sensorId',fn:'nunique',as:'ids'}]}}).table;
   assert.deepEqual(rows(count).map(r=>r.ids),[1,1,1]);
-  const cast=execute(table,{type:'cast',params:{field:'sensor',type:'number',semantic:'value'}}).table;
+  const cast=execute(table,{type:'cast',params:{field:'sensorId',type:'number',semantic:'value'}}).table;
   assert.equal(profile(cast).columns[1].mean,1002);
+});
+test('ordinary unique amounts and Paid stay numeric rather than becoming identifiers',async()=>{
+  const table=await load('Paid,Revenue,customerId\n1200,1500,1\n1800,2500,2\n2400,3500,3');
+  assert.deepEqual(table.columns.map(c=>c.semantic),['value','value','key']);
+  assert.equal(profile(table).columns[0].mean,1800);assert.equal(profile(table).columns[1].mean,2500);
+});
+test('custom import skips a title row, uses explicit DMY dates and preserves ID zeros',async()=>{
+  const table=(await importText('Report\nRegion;OrderDate;Paid;order_id\nEast;03/11/2025;1200;001\nWest;01/11/2025;;002',{
+    format:'csv',delimiter:';',headerRow:2,types:{OrderDate:'date'},dateFormats:{OrderDate:'dmy'}
+  })).table;
+  assert.deepEqual(rows(table),[{Region:'East',OrderDate:'2025-11-03',Paid:1200,order_id:'001'},{Region:'West',OrderDate:'2025-11-01',Paid:null,order_id:'002'}]);
 });
 test('visual summaries use full data, exclude null from uniqueness, and cache immutable versions',async()=>{
   const table=await load('group,value\nA,1\nA,2\nB,\n,4\n');

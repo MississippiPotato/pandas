@@ -135,6 +135,10 @@ export function toPandas(inputs, spec, outputTable, { variables = ['df', 'right'
       const col = `${output}[${py(n(p.field))}]`, value = p.method === 'constant' || (p.method === 'mode' && p.value !== undefined) ? py(p.value)
         : p.method === 'mode' ? `${df}[${py(n(p.field))}].mode().iloc[0]` : `${df}[${py(n(p.field))}].${p.method}()`;
       const type = outputTable.columns.find(c => c.name === n(p.field)).type;
+      if (['date','datetime'].includes(type)) {
+        const fill = p.method === 'constant' || p.value !== undefined ? `pd.to_datetime(${py(p.value)}, utc=True)` : value;
+        return `${output} = ${df}.copy()\n${col} = ${col}.fillna(${fill})`;
+      }
       return `${output} = ${df}.copy()\n${col} = ${col}.astype(${py(type === 'number' ? 'Float64' : type === 'integer' ? 'Int64' : type === 'boolean' ? 'boolean' : 'string')}).fillna(${value})`;
     }
     case 'dedup': return assign(`${df}.drop_duplicates(subset=${py((p.subset ?? table.columns.map(c => c.id)).map(n))}, keep=${py(p.keep ?? 'first')})`);

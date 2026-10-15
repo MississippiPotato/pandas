@@ -1,7 +1,7 @@
 export const examples={
   nba_missing:{name:['NBA 球员逐场 · 缺失练习','NBA Player Games · Missingness Exercise'],note:['主题练习副本：4,784 条真实出场，固定规则移除 241 个命中率、357 个分钟、128 个得分值；不代表官方数据缺失。原始值与移除清单可对照。','Theme exercise: 4,784 real appearances. A fixed rule removes 241 FG%, 357 minutes and 128 points values; this is not official missingness. Original values and the removal audit remain available.']},
   nba_games:{name:['NBA 球员逐场 · 原始值','NBA Player Games · Original Values'],note:['2025 年 11 月真实出场；已关联姓名、球队与对手，won 由球队比分推导。保留原始值；position 是来源记录的首发位置，空白表示未记录。','Real played appearances in November 2025, with names, teams and opponents joined. won is derived from team scores. Values are preserved; position is the recorded starting position, blank when unrecorded.']},
-  nba_players:{name:['NBA 球员月度表现宽表','NBA Player Monthly Stats'],note:['2025 年 11 月实际出场记录；场均数据，命中率按总命中/总出手计算；球队为最后观测球队。','Played appearances in November 2025; per-game averages and total FGM/FGA. Team is the last observed team.']},
+  nba_players:{name:['NBA 球员月度表现宽表','NBA Player Monthly Stats'],note:['2025 年 11 月实际出场记录；场均数据，命中率按总命中/总出手计算；球队为最后观测球队。','Played appearances in November 2025; per-game averages. FG% is total field goals made divided by total attempts. Team is the last observed team.']},
   nba_teams:{name:['NBA 球队与城市','NBA Teams & Cities'],note:['30 支球队的可读关联表；不含未经核验的估值或球馆数据。','Readable lookup for 30 teams; no unverified valuations or arena data.']},
   titanic:{name:['泰坦尼克号乘客生还数据','Titanic Passenger Survival'],note:['seaborn / Kaggle 的 891 条记录，保留自然缺失；乘客编号为顺序行标识，原来源未含姓名。','891 seaborn / Kaggle records with natural missingness. Passenger IDs are row identifiers; names are absent from this source.']}
 };

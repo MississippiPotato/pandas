@@ -49,6 +49,11 @@ add('qcut all equal values yields missing bins',[{x:3},{x:3},{x:null}],[{type:'q
 add('derived mixed branch normalizes output text',[{x:0},{x:2},{x:null}],[{type:'derive',params:{name:'label',expression:{type:'call',fn:'if',args:[{type:'binary',op:'>',left:{type:'field',field:'x'},right:{type:'literal',value:1}},{type:'literal',value:'High'},{type:'field',field:'x'}]}}}],[{name:'x',type:'number'}]);
 add('identifier role keeps leading zeros in grouping counts',[{id:'001',value:2},{id:'001',value:null},{id:'002',value:5}],[{type:'group',params:{keys:['id'],metrics:[{field:'id',fn:'count',as:'n'},{field:'value',fn:'sum',as:'total'}]}}],[{name:'id',type:'string',semantic:'key'},{name:'value',type:'number'}]);
 add('manual identifier conversion enables explicit numeric means',[{id:1001,g:'A'},{id:1003,g:'A'}],[{type:'cast',params:{field:'id',type:'number',semantic:'value'}},{type:'group',params:{keys:['g'],metrics:[{field:'id',fn:'mean',as:'explicit_mean'}]}}],[{name:'id',type:'integer',semantic:'key'},{name:'g',type:'string'}]);
+const fillDates=[{d:'2025-11-01',value:2},{d:null,value:3},{d:'2025-11-01',value:4}];
+const fillDateSchema=[{name:'d',type:'date'},{name:'value',type:'number'}];
+add('date-fill constant then date grouping',fillDates,[{type:'fillna',params:{field:'d',method:'constant',value:'2025-11-02'}},{type:'date_part',params:{field:'d',part:'month',as:'month'}}],fillDateSchema);
+add('date-fill mode then resampling',fillDates,[{type:'fillna',params:{field:'d',method:'mode'}},{type:'resample',params:{date:'d',field:'value',rule:'D',fn:'sum',as:'total'}}],fillDateSchema);
+add('date-fill datetime constant then resampling',[{d:'2025-11-01T13:00:00.000Z',value:2},{d:null,value:3}],[{type:'fillna',params:{field:'d',method:'constant',value:'2025-11-02T12:00:00.000Z'}},{type:'resample',params:{date:'d',field:'value',rule:'D',fn:'sum',as:'total'}}],[{name:'d',type:'datetime'},{name:'value',type:'number'}]);
 const output = new URL('../output/verification/',import.meta.url); await mkdir(output,{recursive:true});
 const results=[];
 const selected=process.env.PANDAS_CASE?cases.filter(c=>c.name.includes(process.env.PANDAS_CASE)):cases;

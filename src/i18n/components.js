@@ -108,8 +108,8 @@ export const componentMessages={
     "Let questions guide you"
   ],
   "component028": [
-    "刷选得分与助攻，观察哪些球员记录落入选区。统计基于实际出场记录；场均榜单在总览中限定至少 5 场。",
-    "Brush points and assists to compare played appearances. The overview leaderboard requires at least five appearances."
+    "刷选得分与助攻，观察哪些球员记录落入选区。统计基于实际出场记录；“跟着分析”路线可配置最低出场次数，再比较球员。",
+    "Brush points and assists to compare played appearances. In Guided analysis, set a minimum appearance count before comparing players."
   ],
   "component029": [
     "球队逐场记录可以按比赛日聚合。选择球队后，查看得分走势与波动，再把条件送入工作台继续分析。",

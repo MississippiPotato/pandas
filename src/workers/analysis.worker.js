@@ -7,6 +7,8 @@ import {execute} from '../core/operation-registry.js';
 import {rows,createTable,visibleIds,columnValues} from '../core/dataset.js';
 import {filter,duplicated} from '../core/operations/cleaning.js';
 import {operationPreview} from '../core/operation-preview.js';
+import {visualDiff} from '../core/visual-summary.js';
+import {toPandas} from '../core/pandas-code.js';
 const session = new Session();
 async function handle({ data: { requestId, action, payload = {} } }) {
   try {
@@ -32,6 +34,14 @@ async function handle({ data: { requestId, action, payload = {} } }) {
       }
       case 'select': session.select(payload.id); result = session.snapshot(); break;
       case 'preview': { const inputs=(payload.inputs??[session.activeId]).map(id=>session.table(id));result=operationPreview(inputs,payload.spec,session.preview(payload.spec,payload.inputs));break; }
+      case 'previewSequence': {
+        const input=session.table(payload.id??session.activeId),steps=[];let current=input;
+        for(const spec of payload.specs){const executed=execute(current,spec);steps.push({spec,report:executed.report,code:toPandas([current],spec,executed.table,{variables:['df'],output:'df'})});current=executed.table;}
+        const viewed=payload.selection?filter(current,{predicate:payload.selection}):current;
+        result={rows:current.index.length,columns:current.columns,profile:profile(current),beforeProfile:profile(input),records:rows(viewed,0,payload.limit??40),steps,
+          diff:visualDiff(input,current,payload.specs[0])};
+        break;
+      }
       case 'commit': session.commit(payload.spec, payload.inputs); result = session.snapshot(); break;
       case 'edit': session.edit(payload.id, payload.spec); result = session.snapshot(); break;
       case 'undo': session.undo(); result = session.snapshot(); break;

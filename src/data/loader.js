@@ -8,14 +8,16 @@ export async function sha256(text) {
   return [...new Uint8Array(await crypto.subtle.digest('SHA-256', bytes))].map(n => n.toString(16).padStart(2, '0')).join('');
 }
 // Strict state machine: stop malformed/oversized input before materializing a whole table.
-export function parseDelimited(text, delimiter = ',', limits = LIMITS) {
+export function parseDelimited(text, delimiter = ',', limits = LIMITS, layout = {}) {
+  const headerRow=Number(layout.headerRow??1);
+  ensure(Number.isInteger(headerRow)&&headerRow>=1&&headerRow<=1000,'INVALID_HEADER');
   ensure(delimiter.length === 1 && !['"', '\r', '\n'].includes(delimiter), 'INVALID_DELIMITER');
   text = text.replace(/^\uFEFF/, '');
   const result = []; let row = [], value = '', state = 'plain', line = 1;
   function pushValue() { row.push(value); value = ''; ensure(row.length <= limits.columns, 'COLUMN_LIMIT', { line }); }
   function pushRow() {
     pushValue(); result.push(row); row = [];
-    ensure(result.length <= limits.rows + 1 && result.length * result[0].length <= limits.cells + result[0].length, 'ROW_LIMIT', { line });
+    ensure(result.length <= limits.rows + headerRow && result.length * result[0].length <= limits.cells + headerRow*limits.columns, 'ROW_LIMIT', { line });
   }
   for (let i = 0; i < text.length; i++) {
     const ch = text[i];
@@ -33,9 +35,10 @@ export function parseDelimited(text, delimiter = ',', limits = LIMITS) {
   ensure(state !== 'quoted', 'CSV_UNCLOSED_QUOTE', { line });
   if (value.length || row.length || state === 'closed') pushRow();
   ensure(result.length > 0, 'EMPTY_FILE');
-  const names = result.shift();
+  result.splice(0,headerRow-1);ensure(result.length>0,'EMPTY_FILE');
+  const names = layout.hasHeader===false?result[0].map((_,i)=>`column_${i+1}`):result.shift();
   ensure(names.every(n => n.trim().length) && new Set(names).size === names.length, 'INVALID_HEADER');
-  for (let i = 0; i < result.length; i++) ensure(result[i].length === names.length, 'CSV_WIDTH', { row: i + 2, expected: names.length, actual: result[i].length });
+  for (let i = 0; i < result.length; i++) ensure(result[i].length === names.length, 'CSV_WIDTH', { row: i + headerRow + (layout.hasHeader===false?0:1), expected: names.length, actual: result[i].length });
   return { names, records: result.map(r => Object.fromEntries(names.map((name, i) => [name, r[i]]))) };
 }
 export function parseInput(text, options = {}) {
@@ -47,7 +50,7 @@ export function parseInput(text, options = {}) {
     ensure(Array.isArray(parsed) && parsed.every(r => r && typeof r === 'object' && !Array.isArray(r)), 'JSON_RECORDS');
     records = parsed; names = [...new Set(records.flatMap(r => Object.keys(r)))];
     ensure(names.every(n => n.trim()), 'INVALID_HEADER');
-  } else ({ names, records } = parseDelimited(text, options.delimiter ?? (options.format === 'tsv' ? '\t' : ','), limits));
+  } else ({ names, records } = parseDelimited(text, options.delimiter ?? (options.format === 'tsv' ? '\t' : ','), limits, options));
   ensure(records.length <= limits.rows && names.length <= limits.columns && records.length * names.length <= limits.cells, 'TABLE_LIMIT');
   ensure(names.length > 0, 'EMPTY_SCHEMA');
   for (const [i, record] of records.entries()) for (const name of names) {
@@ -65,13 +68,23 @@ export function parseInput(text, options = {}) {
 }
 export function prepareImport(text, options = {}) {
   const parsed = parseInput(text, options);
-  const schema = parsed.names.map(name => ({ name, type: options.types?.[name] ?? inferType(name, parsed.records.map(r => r[name])) }));
-  schema.forEach(c=>{c.semantic=options.semantics?.[c.name]??inferSemantic(c.name,parsed.records.map(r=>r[c.name]),c.type);c.label=options.labels?.[c.name];});
+  const option=(map,name)=>map&&Object.hasOwn(map,name)?map[name]:undefined;
+  const schema = parsed.names.map(name => ({ name, type: option(options.types,name) ?? inferType(name, parsed.records.map(r => r[name])) }));
+  schema.forEach(c=>{c.semantic=option(options.semantics,c.name)??inferSemantic(c.name,parsed.records.map(r=>r[c.name]),c.type);c.label=option(options.labels,c.name);});
   const errors = []; const records = parsed.records.map((r, row) => Object.fromEntries(schema.map(c => {
-    try { return [c.name, convert(r[c.name], c.type)]; }
+    try { return [c.name, convert(importDate(r[c.name],option(options.dateFormats,c.name),c.type), c.type)]; }
     catch (error) { errors.push({ row: row + 1, field: c.name, value: r[c.name], code: error.code }); return [c.name, null]; }
   })));
   return { schema, records, errors, rowCount: records.length, preview: records.slice(0, 20) };
+}
+function importDate(value,format,type){
+  if(value===null||!format||format==='iso'||!['date','datetime'].includes(type))return value;
+  const pattern=format==='ymd'?/^(\d{4})\/(\d{1,2})\/(\d{1,2})$/:/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/;
+  const match=String(value).match(pattern);ensure(match&&['ymd','dmy','mdy'].includes(format),'INVALID_VALUE',{value,type});
+  const [,a,b,c]=match,[year,month,day]=format==='ymd'?[a,b,c]:format==='dmy'?[c,b,a]:[c,a,b];
+  const iso=`${year}-${month.padStart(2,'0')}-${day.padStart(2,'0')}`;
+  // Conversion checks the actual calendar date, including leap years.
+  convert(iso,'date');return type==='datetime'?`${iso}T00:00:00.000Z`:iso;
 }
 export async function importText(text, options = {}) {
   const prepared = prepareImport(text, options);
