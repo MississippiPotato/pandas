@@ -115,3 +115,14 @@ flowchart LR
 - 默认投篮点图显示 4,898 个确定性样本，6 次超半场投篮全部在显示样本中；完整网格计数为 39,092，y 范围保持 −51…610。
 
 本机最终证据：`output/verification/public-browser.log`、`public-excel.log`、`public-unsafe-json.log`、`github-ci-final.log`、`browser-evidence.json`，以及 `output/playwright/public-*.png`。这些证据不作为静态站点运行依赖。
+
+## pandas 改造发布验收（2026-10-15）
+
+用户在本地审查之后明确授权推送与部署。本轮运行版本为 **`76d6ffc10856edd3e6c9e7eb4f57484dfb709ea2`**；后续仅更新本验收记录，不改变运行产物。
+
+- [本轮 GitHub Actions](https://github.com/MississippiPotato/pandas/actions/runs/38721130159)：build / deploy 均为 **success**。47 项引擎/历史测试、45 组固定版本真实 pandas 对照、120 项 NBA 数据断言通过，按 `/pandas/` 基路径构建。
+- [线上首页](https://mississippipotato.github.io/pandas/#/overview) HTTP **200**，实际加载新版 `index-25aWRpqM.js` 与 `analysis.worker-c4ElJvit.js`，与本地生产构建相符。
+- 公网 Chrome **10 项检查通过**：pandas 品牌、六类任务、生产 Worker 加载默认 5,698 行、24 个操作入口与直接可见方法、分组样本数、预览隔离、动态代码、英文预览、390px 与固定浅色。
+- 按 `played` 分组的输入样本数为 **4,784 / 914**，与两行聚合结果分别显示，未把结果行数 1 当输入 n；配置尚未确认时，当前表仍为 5,698 行。中英切换后统计与配置保持一致。
+- 发布包只包含 `dist/` 内的 **14 个运行文件**：页面、图标、许可证、构建资源和六张 NBA CSV/清单。调研原始文件、文档、测试数据与本机项目未作为 Pages 运行文件发布。
+- 本轮证据保存在 `output/verification/pandas-release-check.log`、`pandas-published-ci.log`、`pandas-published-browser.log`；实际截图为 `output/playwright/pandas-published-overview.png`、`pandas-published-studio-mobile.png`。本机证据不属于网站运行依赖。
