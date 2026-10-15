@@ -68,4 +68,15 @@ flowchart LR
 
 发布工作流：引擎测试 → 独立 pandas → 数据核验 → Vite 构建 → 上传 `dist` → GitHub Pages。原始下载、研究全文、环境文件、本机项目与浏览器输出均不部署。
 
-最终提交、Actions 结果、公网 HTTP 与公网浏览器检查将在完成后写入本节。
+- 运行版本：`c3953695f9b5f10f4603b6e3ad9f05bd50eff242`；后续若仅更新验收文档，不改变运行产物。
+- [最终 Actions](https://github.com/MississippiPotato/pandas/actions/runs/38679735885)：build / deploy 均为 success；41 项引擎测试、45 个 pandas 独立对照、120 项数据断言通过。
+- 公网首页 HTTP 200；加载 `index-B0M_vuTb.js` 与 `analysis.worker-Oa2Mqrt8.js`，六张实际 CSV 和清单均成功加载。浏览器记录未发现页面脚本异常或站内资源 HTTP 错误。
+- Chrome 公网复查 11 项通过：真实总览、生产 Worker、39,092 次投篮延迟加载、真实坐标锁定、SVG 内抽样说明、全量网格、区域选择/进入 Studio、撤销、390px 无溢出、系统深色偏好下固定浅色；其中区域选择得到 389 条真实记录。
+- 公网 Excel 的独立解析 chunk 正常加载；两个工作表可读，0 / false / 001 / ISO 日期保留。非法 JSON 大整数明确显示字段 ID / 行 1，并保留已有 2 条结果，未静默改写标识符。
+- 公网非 NBA CSV 众数填充通过：12 条记录中缺失 Revenue 实际填为 200，其他字段的缺失仍保留 1 处。
+- 实际浏览器导出的 Python 文件另在本机独立执行，精确复现 ID=002 / Value=12 / Active=true。
+- 14 个运行文件，约 9.2 MB；`/docs/DELIVERY.md`、`/research/evidence/raw/shots_2026.csv` 与 `/src/main.js` 在 Pages 域均为 404，证明部署包只含运行资源。仓库源码与网站资源分开。
+- 六张已提交 CSV 的 Git blob 字节 SHA 与清单逐一相符；原始任务书与深度调研全文的 SHA 与 Phase 0 一致，未改写。
+- 默认投篮点图显示 4,898 个确定性样本，6 次超半场投篮全部在显示样本中；完整网格计数为 39,092，y 范围保持 −51…610。
+
+本机最终证据：`output/verification/public-browser.log`、`public-excel.log`、`public-unsafe-json.log`、`github-ci-final.log`、`browser-evidence.json`，以及 `output/playwright/public-*.png`。这些证据不作为静态站点运行依赖。

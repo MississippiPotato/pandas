@@ -20,7 +20,7 @@
 | CL01 dropna | P0 | subset 多选、any/all，D3 预览与行数变化 | axis=0；空值判断不强制 bool；字段删除覆盖列方向需求 | E、P、B-O |
 | CL02 fillna constant | P0 | 点缺失字段后指定类型常量，前后分布 | 只替换 null，类型不相容拒绝 | E、P、B-C |
 | CL03 fillna mean/median | P0 | 处理方法、前后缺失数与分布 | 全量非空值统计；整数必要时升为数值；全空无值报错 | E、P、B-O |
-| CL04 fillna mode | P0 | 显示字段频次，方法 mode，并列时输入明确候选 | 不静默选并列众数；全部缺失需指定常量 | E、代码生成、共用预览入口 |
+| CL04 fillna mode | P0 | 显示字段频次，方法 mode，并列时输入明确候选 | 不静默选并列众数；全部缺失需指定常量 | E、代码生成、公网独立众数实际填充 |
 | CL05 drop_duplicates | P0 | subset / keep，预览后提交 | pandas 三种 keep；保留稳定原始 row ID | E、P、B-C、B-O |
 | CL06 astype/to_numeric | P0 | 类型转换、raise/coerce、invalid 计数 | 严格十进制与安全整数；不会将 bool 数字化或将 1.2 截断为整数 | E、P、B-O |
 | CL07 to_datetime | P0 | 日期/日期时间类型选择和失败反馈 | 只接受明确 ISO / UTC，不猜地区格式；Python 辅助转换公开 | E、P、B-F |
